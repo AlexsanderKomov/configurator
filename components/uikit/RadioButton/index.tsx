@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import { IRadioButton } from "./interface";
 
-function RadioBtn({ name, id }) {
+function RadioBtn(props: IRadioButton) {
+  const { id, label } = props;
+
   return (
     <div className="config flex justify-center items-center">
       <label className="mr-2" htmlFor={id}>
-        {name}
+        {label}
       </label>
-      <input type="radio" name="config" id={id} />
+      <input type="radio" {...props} />
     </div>
   );
 }
