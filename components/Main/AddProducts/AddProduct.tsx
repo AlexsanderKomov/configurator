@@ -1,14 +1,14 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import TypeProductGroupSkud from "./TypeProductGroupSkud";
 import TypeProductGroupAps from "./TypeProductGroupAps";
 import TypeProductGroupVideo from "./TypeProductGroupVideo";
+import CardProduct from "./CardProduct";
 
 function AddProduct() {
   const [hide, setHide] = React.useState(false);
   const [selectedOption, setSelectedOption] = React.useState("skirt"); // Установлено значение по умолчанию для выбранного варианта
   const [hideType, setHideType] = React.useState(true); // Установлено значение по умолчанию для выпадающего списка
   const [hideTypeProduct, setHideTypeProduct] = React.useState(false); // Установлено значение по умолчанию для выпадающего списка
-  const [hideCard, setHideCard] = React.useState(false); // Установлено значение по умолчанию для карточки продукта
 
   const handleClickHide = () => {
     setHide(!hide);
@@ -22,11 +22,10 @@ function AddProduct() {
   const handleClickBack = () => {
     setHideType(true);
     setSelectedOption("skirt"); // Сброс выбранного значения при нажатии на кнопку "Назад"
-    setHideCard(false);
     setHideTypeProduct(false);
   };
 
-  const handleSelectChange = (event) => {
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value); // Обновление выбранного значения при изменении выбора в выпадающем списке
   };
 
@@ -56,6 +55,7 @@ function AddProduct() {
               <button onClick={handleClickType}>Дальше</button>
             </>
           )}
+          <CardProduct />
           {hideTypeProduct && selectedOption === "skirt" && (
             <TypeProductGroupSkud />
           )}
@@ -65,6 +65,7 @@ function AddProduct() {
           {hideTypeProduct && selectedOption === "videoSurveillance" && (
             <TypeProductGroupVideo />
           )}
+
           {!hideType && <button onClick={handleClickBack}>Назад</button>}
         </div>
       )}

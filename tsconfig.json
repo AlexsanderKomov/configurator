@@ -29,7 +29,7 @@
     ".next/types/**/*.ts",
     "components/Main/Main.tsx",
     "components/Main/RadioBtn.jsx",
-    "components/Main/AddProducts/AddProduct.jsx",
+    "components/Main/AddProducts/AddProduct.tsx",
     "components/CardProductForm.jsx"
   ],
   "exclude": ["node_modules"]

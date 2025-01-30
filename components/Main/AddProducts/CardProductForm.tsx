@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent, ChangeEvent, useEffect } from "react";
 import {
   optionsDevice,
   optionsManufacturer,
@@ -18,14 +18,20 @@ function CardProductForm() {
     wifi: false,
   });
 
-  const onSubmit = (event) => {
+  useEffect(() => {
+    console.log(optionsDevice);
+  }, []);
+
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Здесь вы можете обработать данные формы, например, отправить их на сервер
     console.log(formData);
   };
 
-  const handleInputChange = (event) => {
-    let { name, value } = event.target;
+  const handleInputChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
 
     setFormData({
       ...formData,
@@ -36,57 +42,56 @@ function CardProductForm() {
   return (
     <form onSubmit={onSubmit} className="flex flex-col">
       <SelectCardProduct
-        descr={Object.keys(formData)[0]}
+        descr={formData.device}
         setFormData={setFormData}
         formData={formData}
         options={optionsDevice}
       />
       <div className="mb-5">
-        <label htmlFor={Object.keys(formData)[1]}>Название:</label>
+        <label htmlFor={formData.device}>Название:</label>
         <input
           type="text"
-          id={Object.keys(formData)[1]}
-          name={Object.keys(formData)[1]}
+          id={formData.device}
+          name={formData.device}
           value={formData.title}
           onChange={handleInputChange}
-          required
         />
       </div>
       <SelectCardProduct
-        descr={Object.keys(formData)[2]}
+        descr={formData.device}
         setFormData={setFormData}
         formData={formData}
         options={optionsManufacturer}
       />
       <div className="mb-5">
-        <label htmlFor={Object.keys(formData)[3]}>Изображение:</label>
+        <label htmlFor={formData.device}>Изображение:</label>
         <input
           type="file"
-          id={Object.keys(formData)[3]}
-          name={Object.keys(formData)[3]}
+          id={formData.device}
+          name={formData.device}
           value={formData.image}
           onChange={handleInputChange}
         />
       </div>
       {formData.device !== "callingPanel" && (
         <SelectCardProduct
-          descr={Object.keys(formData)[4]}
+          descr={formData.device}
           setFormData={setFormData}
           formData={formData}
           options={optionsDisplay}
         />
       )}
       <div className="mb-5">
-        <label htmlFor={Object.keys(formData)[5]}>Описание:</label>
+        <label htmlFor={formData.device}>Описание:</label>
         <textarea
-          id={Object.keys(formData)[5]}
-          name={Object.keys(formData)[5]}
+          id={formData.device}
+          name={formData.device}
           value={formData.description}
           onChange={handleInputChange}
         />
       </div>
       <SelectCardProduct
-        descr={Object.keys(formData)[6]}
+        descr={formData.device}
         setFormData={setFormData}
         formData={formData}
         options={optionsWifi}

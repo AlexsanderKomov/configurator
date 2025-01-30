@@ -1,14 +1,21 @@
 "use client";
 
+import { IHandleSelectChange, ISelectCardProductProps } from "@/interfase";
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 
-function SelectCardProduct({ options, descr, setFormData, formData }) {
+function SelectCardProduct({
+  options,
+  descr,
+}: // setFormData,
+// formData,
+ISelectCardProductProps) {
   const [description, setDescription] = useState("");
   const [placeholder, setPlaceholder] = useState("");
 
   // Set placeholder and description based on descr
   useEffect(() => {
+    console.log(options);
     switch (descr) {
       case "device":
         setDescription("Тип оборудования:");
@@ -26,17 +33,15 @@ function SelectCardProduct({ options, descr, setFormData, formData }) {
         setDescription("Наличик Wi-fi:");
         break;
     }
-  });
+  }, [descr]);
 
-  const handleInputChange = (event) => {
-    let { name, value } = event;
+  const handleSelectChange = (value: IHandleSelectChange) => {
+    console.log(value);
 
-    name = descr; // Update name based on descr
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    // setFormData({
+    //   ...formData,
+    //   [descr]: value,
+    // });
   };
 
   return (
@@ -48,7 +53,7 @@ function SelectCardProduct({ options, descr, setFormData, formData }) {
         inputId={descr}
         className="w-64"
         defaultValue={descr === "wifi" ? options[0] : ""}
-        onChange={handleInputChange}
+        onChange={handleSelectChange}
         options={options}
         placeholder={placeholder}
         required

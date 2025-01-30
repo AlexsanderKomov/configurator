@@ -1,9 +1,16 @@
-export const optionsDevice = [
+import {
+  IOptionsDevice,
+  IOptionsManufacturer,
+  IOptionsDisplay,
+  IOptionsWifi,
+} from "./interfase";
+
+export const optionsDevice: IOptionsDevice[] = [
   { value: "callingPanel", label: "Вызывная панель" },
   { value: "monitor", label: "Монитор" },
 ];
 
-export const optionsManufacturer = [
+export const optionsManufacturer: IOptionsManufacturer[] = [
   {
     value: "falconEye",
     label: "Falcon Eye",
@@ -18,7 +25,7 @@ export const optionsManufacturer = [
   },
 ];
 
-export const optionsDisplay = [
+export const optionsDisplay: IOptionsDisplay[] = [
   {
     value: 4,
     label: "4 дюйма",
@@ -33,7 +40,7 @@ export const optionsDisplay = [
   },
 ];
 
-export const optionsWifi = [
+export const optionsWifi: IOptionsWifi[] = [
   {
     value: false,
     label: "Нет",

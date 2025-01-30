@@ -1,7 +1,7 @@
 import React from "react";
 import CardProductForm from "./CardProductForm";
 
-function CardProduct({ type }) {
+function CardProduct() {
   return (
     <div className="card w-full border rounded-lg ">
       <div className="card-body">
