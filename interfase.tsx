@@ -40,6 +40,10 @@ export interface ISelectCardProductProps {
 }
 
 export interface IHandleSelectChange {
-  readonly value: number | string | boolean | null;
-  readonly label: string;
+  readonly value: number | string | boolean;
+}
+
+export interface IRadioBtnProps {
+  name: string;
+  id: string;
 }

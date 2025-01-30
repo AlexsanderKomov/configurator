@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
-function RadioBtn({ name, id }) {
+import { IRadioBtnProps } from "@/interfase";
+
+function RadioBtn({ name, id }: IRadioBtnProps) {
   return (
     <div className="config flex justify-center items-center">
       <label className="mr-2" htmlFor={id}>

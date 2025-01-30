@@ -28,7 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "components/Main/Main.tsx",
-    "components/Main/RadioBtn.jsx",
+    "components/Main/RadioBtn.tsx",
     "components/Main/AddProducts/AddProduct.tsx",
     "components/CardProductForm.jsx"
   ],

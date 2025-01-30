@@ -7,15 +7,14 @@ import Select from "react-select";
 function SelectCardProduct({
   options,
   descr,
-}: // setFormData,
-// formData,
-ISelectCardProductProps) {
+  setFormData,
+  formData,
+}: ISelectCardProductProps) {
   const [description, setDescription] = useState("");
   const [placeholder, setPlaceholder] = useState("");
 
   // Set placeholder and description based on descr
   useEffect(() => {
-    console.log(options);
     switch (descr) {
       case "device":
         setDescription("Тип оборудования:");
@@ -35,13 +34,13 @@ ISelectCardProductProps) {
     }
   }, [descr]);
 
-  const handleSelectChange = (value: IHandleSelectChange) => {
-    console.log(value);
+  const handleSelectChange = (event: IHandleSelectChange) => {
+    const { value } = event;
 
-    // setFormData({
-    //   ...formData,
-    //   [descr]: value,
-    // });
+    setFormData({
+      ...formData,
+      [descr]: value,
+    });
   };
 
   return (
@@ -52,11 +51,11 @@ ISelectCardProductProps) {
       <Select
         inputId={descr}
         className="w-64"
-        defaultValue={descr === "wifi" ? options[0] : ""}
-        onChange={handleSelectChange}
-        options={options}
+        defaultValue={descr === "wifi" ? options[0] : false}
         placeholder={placeholder}
+        options={options}
         required
+        onChange={handleSelectChange}
       />
     </div>
   );
