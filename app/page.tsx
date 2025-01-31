@@ -1,11 +1,9 @@
-import { Header, Main, Footer } from "@/components";
+import { Main } from "@/components";
 
 export default function Home() {
   return (
     <>
-      <Header />
       <Main />
-      <Footer />
     </>
   );
 }
