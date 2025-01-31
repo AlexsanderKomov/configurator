@@ -6,7 +6,7 @@ import RadioButtonsGroup from "@/components/uikit/RadioButtonGroup";
 import { RADIO_OPTIONS } from "./constants";
 
 function Appartments() {
-  const methods = useForm({ defaultValues: { apartments: "other" } });
+  const methods = useForm({ defaultValues: { apartments: "privateHouse" } });
 
   return (
     <FormProvider {...methods}>
