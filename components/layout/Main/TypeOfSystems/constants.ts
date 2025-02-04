@@ -1,3 +1,4 @@
+/** Выбор типа системы */
 export const CHOISE_OF_THE_SYSTEM = [
   {
     id: 1,

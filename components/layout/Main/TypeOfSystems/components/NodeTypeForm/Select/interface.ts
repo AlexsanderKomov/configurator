@@ -3,7 +3,7 @@ import {
   IManufacturer,
   IScreenSize,
   IWifi,
-} from "@/app/shared/interfaces/selectOption";
+} from "@/shared/interfaces/selectOption";
 
 export interface IFormData {
   device: string;

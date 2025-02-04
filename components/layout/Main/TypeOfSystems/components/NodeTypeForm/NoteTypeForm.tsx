@@ -1,13 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import SelectCardProduct from "./SelectCardProduct";
+import Select from "./Select";
 
-import { SCREEN_SIZES } from "@/app/shared/constants/select_options/screen_sizes";
-import { WIFI } from "@/app/shared/constants/select_options/wifi";
-import { DEVICES } from "@/app/shared/constants/select_options/devices";
-import { MANUFACTURERS } from "@/app/shared/constants/select_options/manufacturer";
+import { SCREEN_SIZES } from "@/shared/constants/select_options/screen_sizes";
+import { WIFI } from "@/shared/constants/select_options/wifi";
+import { DEVICES } from "@/shared/constants/select_options/devices";
+import { MANUFACTURERS } from "@/shared/constants/select_options/manufacturer";
 
-function CardProductForm() {
+/** Форма типа узла */
+function NodeTypeForm() {
   const [formData, setFormData] = useState({
     device: "",
     title: "",
@@ -37,7 +38,7 @@ function CardProductForm() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col">
-      <SelectCardProduct
+      <Select
         descr={Object.keys(formData)[0]}
         setFormData={setFormData}
         formData={formData}
@@ -54,7 +55,7 @@ function CardProductForm() {
           required
         />
       </div>
-      <SelectCardProduct
+      <Select
         descr={Object.keys(formData)[2]}
         setFormData={setFormData}
         formData={formData}
@@ -71,7 +72,7 @@ function CardProductForm() {
         />
       </div>
       {formData.device !== "callingPanel" && (
-        <SelectCardProduct
+        <Select
           descr={Object.keys(formData)[4]}
           setFormData={setFormData}
           formData={formData}
@@ -87,7 +88,7 @@ function CardProductForm() {
           onChange={handleInputChange}
         />
       </div>
-      <SelectCardProduct
+      <Select
         descr={Object.keys(formData)[6]}
         setFormData={setFormData}
         formData={formData}
@@ -98,4 +99,4 @@ function CardProductForm() {
   );
 }
 
-export default CardProductForm;
+export default NodeTypeForm;

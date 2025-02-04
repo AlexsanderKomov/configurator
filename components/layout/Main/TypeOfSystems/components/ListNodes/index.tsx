@@ -1,6 +1,7 @@
-import React from "react";
 import { TYPE_OF_SISTEM } from "./constsnts";
-function TypeProductGroup({ type }: { type: string }) {
+
+/** Список типов узлов */
+function ListNodes({ type }: { type: string }) {
   return (
     <ul className="flex gap-x-5">
       {TYPE_OF_SISTEM.map((item) => {
@@ -20,4 +21,4 @@ function TypeProductGroup({ type }: { type: string }) {
   );
 }
 
-export default TypeProductGroup;
+export default ListNodes;

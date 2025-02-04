@@ -4,18 +4,12 @@ import React, { useState, useEffect } from "react";
 import Select, { SingleValue } from "react-select";
 
 import { ISelectCardProductProps } from "./interface";
-import {
-  IDevice,
-  IScreenSize,
-  IWifi,
-} from "@/app/shared/interfaces/selectOption";
+import { IDevice, IScreenSize, IWifi } from "@/shared/interfaces/selectOption";
 
-function SelectCardProduct({
-  options,
-  descr,
-  setFormData,
-  formData,
-}: ISelectCardProductProps) {
+/** Селект */
+function SelectUI(props: ISelectCardProductProps) {
+  const { options, descr, setFormData, formData } = props;
+
   const [description, setDescription] = useState("");
   const [placeholder, setPlaceholder] = useState("");
 
@@ -67,4 +61,4 @@ function SelectCardProduct({
   );
 }
 
-export default SelectCardProduct;
+export default SelectUI;
