@@ -1,8 +1,14 @@
 "use client";
 
-import { IHandleSelectChange, ISelectCardProductProps } from "@/interfase";
 import React, { useState, useEffect } from "react";
-import Select from "react-select";
+import Select, { SingleValue } from "react-select";
+
+import { ISelectCardProductProps } from "./interface";
+import {
+  IDevice,
+  IScreenSize,
+  IWifi,
+} from "@/app/shared/interfaces/selectOption";
 
 function SelectCardProduct({
   options,
@@ -34,12 +40,12 @@ function SelectCardProduct({
     }
   }, [descr]);
 
-  const handleSelectChange = (event: IHandleSelectChange) => {
-    const { value } = event;
-
+  const handleSelectChange = (
+    newValue: SingleValue<boolean | IDevice | IScreenSize | IWifi>
+  ) => {
     setFormData({
       ...formData,
-      [descr]: value,
+      [descr]: (newValue as IScreenSize)?.value,
     });
   };
 
