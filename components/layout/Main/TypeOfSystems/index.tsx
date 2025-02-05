@@ -1,11 +1,12 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 import TypeOfNodes from "./components/ListNodes";
 
 import { CHOISE_OF_THE_SYSTEM } from "./constants";
 import { Stage } from "./enums";
+import { useTypeStore } from "@/lib/store";
 
 /* Типы систем видеонаблюдения */
 function TypeOfSystems() {
@@ -16,8 +17,15 @@ function TypeOfSystems() {
   // Этап по которому мы проходим до нужного нам блока
   const [stage, setStage] = useState<Stage>(1);
 
+  const updateTypeSystem = useTypeStore((state) => state.updateTypeSystem);
+  const typeSystem = useTypeStore((state) => state.typeSystem);
+  // const typeSystem = useTypeStore((state) => state.typeSystem);
+
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value); // Обновление выбранного значения при изменении выбора в выпадающем списке
+    updateTypeSystem(event.target.value, event.target.innerHTML);
+    console.log(event.target.outerHTML);
+    console.log(typeSystem);
   };
 
   return (

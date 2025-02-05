@@ -1,9 +1,28 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { create, StateCreator } from "zustand";
 
-export const makeStore = () => configureStore({ reducer: {} });
+interface TypeSlice {
+  type: string;
+  updateType: (newType: string) => void;
+}
 
-export type AppStore = ReturnType<typeof makeStore>;
+interface TypeSystemSlice {
+  typeSystem: { type: string; label: string };
+  updateTypeSystem: (type: string, label: string) => void;
+}
 
-export type RootState = ReturnType<typeof makeStore>;
+const createTypeSlice: StateCreator<TypeSlice> = (set) => ({
+  type: "monitor",
+  updateType: (newType) => set({ type: newType }),
+});
 
-export type AppDispatch = AppStore["dispatch"];
+const createTypeSystemSlice: StateCreator<TypeSystemSlice> = (set) => ({
+  typeSystem: { type: "skirt", label: "СКУД" },
+  updateTypeSystem: (type, label) => set({ typeSystem: { type, label } }),
+});
+
+export const useTypeStore = create<TypeSlice & TypeSystemSlice>()(
+  (...state) => ({
+    ...createTypeSlice(...state),
+    ...createTypeSystemSlice(...state),
+  })
+);
