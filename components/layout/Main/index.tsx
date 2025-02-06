@@ -1,6 +1,6 @@
 "use client";
 
-import Appartments from "./Apartments";
+// import Appartments from "./Apartments";
 import TypeOfSystems from "./TypeOfSystems";
 
 function Main() {
@@ -9,7 +9,7 @@ function Main() {
       <h2 className="mb-5">Конфигуратор СКУД</h2>
 
       <TypeOfSystems />
-      <Appartments />
+      {/* <Appartments /> */}
     </main>
   );
 }

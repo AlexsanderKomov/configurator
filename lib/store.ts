@@ -1,28 +1,28 @@
 import { create, StateCreator } from "zustand";
 
-interface TypeSlice {
-  type: string;
-  updateType: (newType: string) => void;
-}
-
 interface TypeSystemSlice {
-  typeSystem: { type: string; label: string };
-  updateTypeSystem: (type: string, label: string) => void;
+  typeSystem: string;
+  updateTypeSystem: (newTtypeSistem: string) => void;
 }
 
-const createTypeSlice: StateCreator<TypeSlice> = (set) => ({
-  type: "monitor",
-  updateType: (newType) => set({ type: newType }),
-});
+interface StageSlice {
+  stage: number;
+  updateStage: (newStage: number) => void;
+}
 
 const createTypeSystemSlice: StateCreator<TypeSystemSlice> = (set) => ({
-  typeSystem: { type: "skirt", label: "СКУД" },
-  updateTypeSystem: (type, label) => set({ typeSystem: { type, label } }),
+  typeSystem: "skirt",
+  updateTypeSystem: (newTtypeSistem) => set({ typeSystem: newTtypeSistem }),
 });
 
-export const useTypeStore = create<TypeSlice & TypeSystemSlice>()(
+const createStageSlice: StateCreator<StageSlice> = (set) => ({
+  stage: 1,
+  updateStage: (newStage) => set({ stage: newStage }),
+});
+
+export const useTypeStore = create<TypeSystemSlice & StageSlice>()(
   (...state) => ({
-    ...createTypeSlice(...state),
     ...createTypeSystemSlice(...state),
+    ...createStageSlice(...state),
   })
 );
