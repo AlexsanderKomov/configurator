@@ -35,8 +35,6 @@ function TypeOfSystems() {
             >
               {CHOISE_OF_THE_SYSTEM.map((choise, index) => {
                 const key = `choise_${choise.type}_${choise?.id || index + 1}`;
-                if (choise.type === typeSystem) {
-                }
 
                 return (
                   <option key={key} value={choise.type}>

@@ -1,4 +1,4 @@
-import { IManufacturer } from "../../interfaces/selectOption";
+import { IManufacturer } from "../../interfaces/selectOptionGeneral";
 
 export const MANUFACTURERS: IManufacturer[] = [
   {
