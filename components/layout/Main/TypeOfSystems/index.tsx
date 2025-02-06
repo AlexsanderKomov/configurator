@@ -6,18 +6,21 @@ import TypeOfNodes from "./components/ListNodes";
 
 import { CHOISE_OF_THE_SYSTEM } from "./constants";
 import { Stage } from "./enums";
+import { useTypeStore } from "@/lib/store";
 
 /* Типы систем видеонаблюдения */
 function TypeOfSystems() {
   // Состояние отображения селекта
   const [viewSelect, setViewSelect] = useState(false);
-  // Установлено значение по умолчанию для выбранного варианта
-  const [selectedOption, setSelectedOption] = useState("skirt");
   // Этап по которому мы проходим до нужного нам блока
-  const [stage, setStage] = useState<Stage>(1);
+  const stage = useTypeStore((state) => state.stage);
+  const updateStage = useTypeStore((state) => state.updateStage);
+
+  const typeSystem = useTypeStore((state) => state.typeSystem);
+  const updateTypeSystem = useTypeStore((state) => state.updateTypeSystem);
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(event.target.value); // Обновление выбранного значения при изменении выбора в выпадающем списке
+    updateTypeSystem(event.target.value); // Обновление выбранного значения при изменении выбора в выпадающем списке
   };
 
   return (
@@ -25,9 +28,15 @@ function TypeOfSystems() {
       {viewSelect ? (
         <div className="flex flex-col items-center gap-y-5">
           {stage === Stage.one && (
-            <select id="typeSystem" onChange={handleSelectChange}>
+            <select
+              id="typeSystem"
+              onChange={handleSelectChange}
+              defaultValue={typeSystem}
+            >
               {CHOISE_OF_THE_SYSTEM.map((choise, index) => {
                 const key = `choise_${choise.type}_${choise?.id || index + 1}`;
+                if (choise.type === typeSystem) {
+                }
 
                 return (
                   <option key={key} value={choise.type}>
@@ -37,15 +46,21 @@ function TypeOfSystems() {
               })}
             </select>
           )}
-          {stage === Stage.two && <TypeOfNodes type={selectedOption} />}
+          {stage === Stage.two && <TypeOfNodes type={typeSystem} />}
           {stage === Stage.one && (
-            <button onClick={() => setStage(2)}>Дальше</button>
+            <button
+              onClick={() => {
+                updateStage(2);
+                console.log(typeSystem);
+              }}
+            >
+              Дальше
+            </button>
           )}
           {stage === Stage.two && (
             <button
               onClick={() => {
-                setStage((prevStage) => --prevStage);
-                setSelectedOption("skirt");
+                updateStage(1);
               }}
             >
               Назад
