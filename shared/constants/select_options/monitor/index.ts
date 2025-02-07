@@ -1,5 +1,5 @@
 export interface IMonitor {
-  manufacturer: IManufacturer[];
+  manufacturer: IManufacturer;
   screenSizes: IScreenSize[];
   wiFi: IWiFi[];
   recordPhoto: IRecordPhoto[];
@@ -23,10 +23,22 @@ export interface IMonitor {
   temperature: ITemperature[];
 }
 
-// Производитель
-interface IManufacturer {
+// интерфейс для опций типа строчка
+interface IOptionString {
   value: string;
   label: string;
+}
+
+// интерфейс для опций типа число
+interface IOptionString {
+  value: string;
+  label: string;
+}
+
+// Производитель
+interface IManufacturer {
+  manufacturer: string;
+  option: IOptionString[];
 }
 //Размер экрана
 interface IScreenSize {

@@ -1,18 +1,7 @@
-import { IScreenSize, IWifi } from "@/shared/interfaces/selectOptionMonitor";
-
-export interface IFormData {
-  device: string;
-  title: string;
-  manufacturer: string;
-  image: string;
-  display: string;
-  description: string;
-  wifi: boolean;
-}
+import { ICallingPanel } from "@/shared/constants/select_options/calling_panel/interface";
+import { IMonitor } from "@/shared/constants/select_options/monitor";
 
 export interface ISelectCardProductProps {
-  readonly options: IScreenSize[] | IWifi[];
+  options: ICallingPanel | IMonitor;
   readonly descr: string;
-  setFormData: React.Dispatch<React.SetStateAction<IFormData>>;
-  formData: IFormData;
 }

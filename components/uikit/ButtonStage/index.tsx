@@ -1,4 +1,3 @@
-import React from "react";
 import { IButtonStage } from "./interface";
 import { useTypeStore } from "@/components/layout/Main/TypeOfSystems/store";
 

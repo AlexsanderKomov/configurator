@@ -1,6 +1,6 @@
-import { ICallingPanel } from "../../../interfaces/selectOptionCallingPanel";
+import { ICallingPanel } from "@/shared/constants/select_options/calling_panel/interface";
 
-export const CALLINGPANEL: ICallingPanel = {
+export const CALLING_PANEL: ICallingPanel = {
   manufacturer: [
     {
       value: "falconEye",

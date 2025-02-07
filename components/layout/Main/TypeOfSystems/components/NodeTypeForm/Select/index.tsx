@@ -1,62 +1,36 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Select, { SingleValue } from "react-select";
+import React, { useEffect } from "react";
+import Select from "react-select";
 
 import { ISelectCardProductProps } from "./interface";
-import { IScreenSize, IWifi } from "@/shared/interfaces/selectOptionMonitor";
 
 /** Селект */
 function SelectUI(props: ISelectCardProductProps) {
-  const { options, descr, setFormData, formData } = props;
-
-  const [description, setDescription] = useState("");
-  const [placeholder, setPlaceholder] = useState("");
-
-  // Set placeholder and description based on descr
+  const { options, descr } = props;
   useEffect(() => {
-    switch (descr) {
-      case "device":
-        setDescription("Тип оборудования:");
-        setPlaceholder("Выберите оборудование");
-        break;
-      case "manufacturer":
-        setDescription("Производитель:");
-        setPlaceholder("Выберите производителя");
-        break;
-      case "display":
-        setDescription("Размер дисплея:");
-        setPlaceholder("Выберите размер экрана");
-        break;
-      case "wifi":
-        setDescription("Наличик Wi-fi:");
-        break;
-    }
-  }, [descr]);
-
-  const handleSelectChange = (
-    newValue: SingleValue<boolean | IScreenSize | IWifi>
-  ) => {
-    setFormData({
-      ...formData,
-      [descr]: (newValue as IScreenSize)?.value,
-    });
-  };
+    console.log(options.manufacturer.manufacturer);
+  }, []);
 
   return (
     <div className="mb-5">
-      <label htmlFor={descr} className="mr-3">
-        {description}
-      </label>
-      <Select
-        inputId={descr}
-        className="w-64"
-        defaultValue={descr === "wifi" ? options[0] : false}
-        placeholder={placeholder}
-        options={options}
-        required
-        onChange={handleSelectChange}
-      />
+      {/* {Object.values(options).map((option, index) => {
+        const key = `type_${options}_${index}`;
+        return (
+          <div key={key} className="flex flex-col">
+            {option.map((name) => {
+              const key = `note_${name.value}_${index}`;
+              console.log(option);
+              return (
+                <div key={key}>
+                  <label>{option}</label>
+                  <Select options={123} placeholder="Выберите значение" />
+                </div>
+              );
+            })}
+          </div>
+        );
+      })} */}
     </div>
   );
 }

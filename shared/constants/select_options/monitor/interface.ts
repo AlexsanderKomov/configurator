@@ -1,20 +1,23 @@
-import { IMonitor } from "../../../interfaces/selectOptionMonitor";
+import { IMonitor } from "@/shared/constants/select_options/monitor";
 
 export const MONITOR: IMonitor = {
-  manufacturer: [
-    {
-      value: "falconEye",
-      label: "Falcon Eye",
-    },
-    {
-      value: "beward",
-      label: "BEWARD",
-    },
-    {
-      value: "dahua",
-      label: "Dahua",
-    },
-  ],
+  manufacturer: {
+    manufacturer: "Производитель",
+    option: [
+      {
+        value: "falconEye",
+        label: "Falcon Eye",
+      },
+      {
+        value: "beward",
+        label: "BEWARD",
+      },
+      {
+        value: "dahua",
+        label: "Dahua",
+      },
+    ],
+  },
   screenSizes: [
     {
       value: 4,

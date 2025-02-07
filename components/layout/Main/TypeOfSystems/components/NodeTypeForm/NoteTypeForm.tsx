@@ -1,7 +1,9 @@
 import { FormEvent } from "react";
 import ButtonStage from "@/components/uikit/ButtonStage";
 import { useTypeStore } from "../../store";
-import { CALLINGPANEL, MONITOR } from "@/shared/constants";
+import { CALLING_PANEL } from "@/shared/constants/select_options/calling_panel";
+import { MONITOR } from "@/shared/constants/select_options/monitor";
+import SelectUI from "./Select";
 
 /** Форма типа узла */
 function NodeTypeForm() {
@@ -11,8 +13,9 @@ function NodeTypeForm() {
   if (typeNode === "monitor") {
     nodeProperties = MONITOR;
   } else if (typeNode === "callingPanel") {
-    nodeProperties = CALLINGPANEL;
+    nodeProperties = CALLING_PANEL;
   }
+
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Здесь вы можете обработать данные формы, например, отправить их на сервер
@@ -21,7 +24,9 @@ function NodeTypeForm() {
   return (
     <>
       <form onSubmit={onSubmit} className="flex flex-col">
-        <div className="mb-5">{`Здесь будет форма заполнения продукта ${nodeProperties} ${typeNode}`}</div>
+        <div className="mb-5">
+          <SelectUI options={nodeProperties} descr={typeNode} />
+        </div>
         <button type="submit">Отправить</button>
         <ButtonStage step="Назад" stage={2} />
       </form>
