@@ -13,7 +13,11 @@ function ListNodes({ type }: { type: string }) {
 
             return (
               <li key={key}>
-                <ButtonStage step={option.label} stage={3} />
+                <ButtonStage
+                  step={option.label}
+                  stage={3}
+                  typeNode={option.value}
+                />
               </li>
             );
           });

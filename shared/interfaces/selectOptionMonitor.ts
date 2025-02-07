@@ -1,6 +1,7 @@
 export interface IMonitor {
+  manufacturer: IManufacturer[];
   screenSizes: IScreenSize[];
-  wiFi: IWifi[];
+  wiFi: IWiFi[];
   recordPhoto: IRecordPhoto[];
   writingVideo: IWritingVideo[];
   supportSDCard: ISupportSDCard[];
@@ -21,14 +22,19 @@ export interface IMonitor {
   consumption: IConsumption[];
   temperature: ITemperature[];
 }
-//Размер экрана
 
+// Производитель
+interface IManufacturer {
+  value: string;
+  label: string;
+}
+//Размер экрана
 interface IScreenSize {
   value: number;
   label: string;
 }
 //Wi-fi
-interface IWifi {
+interface IWiFi {
   value: boolean;
   label: string;
 }

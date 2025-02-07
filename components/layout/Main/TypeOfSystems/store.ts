@@ -10,6 +10,11 @@ interface IStageSlice {
   updateStage: (newStage: number) => void;
 }
 
+export interface ITypeNodeSlice {
+  typeNode: string;
+  updateTypeNode: (newTypeNode: string) => void;
+}
+
 const createTypeSystemSlice: StateCreator<ITypeSystemSlice> = (set) => ({
   typeSystem: "skirt",
   updateTypeSystem: (newTypeSistem) => set({ typeSystem: newTypeSistem }),
@@ -20,9 +25,15 @@ const createStageSlice: StateCreator<IStageSlice> = (set) => ({
   updateStage: (newStage) => set({ stage: newStage }),
 });
 
-export const useTypeStore = create<ITypeSystemSlice & IStageSlice>()(
-  (...state) => ({
-    ...createTypeSystemSlice(...state),
-    ...createStageSlice(...state),
-  })
-);
+const createTypeNodeSlice: StateCreator<ITypeNodeSlice> = (set) => ({
+  typeNode: "",
+  updateTypeNode: (newTypeNode) => set({ typeNode: newTypeNode }),
+});
+
+export const useTypeStore = create<
+  ITypeSystemSlice & IStageSlice & ITypeNodeSlice
+>()((...state) => ({
+  ...createTypeSystemSlice(...state),
+  ...createStageSlice(...state),
+  ...createTypeNodeSlice(...state),
+}));

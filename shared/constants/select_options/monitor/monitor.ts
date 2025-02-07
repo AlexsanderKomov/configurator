@@ -1,6 +1,20 @@
 import { IMonitor } from "../../../interfaces/selectOptionMonitor";
 
 export const MONITOR: IMonitor = {
+  manufacturer: [
+    {
+      value: "falconEye",
+      label: "Falcon Eye",
+    },
+    {
+      value: "beward",
+      label: "BEWARD",
+    },
+    {
+      value: "dahua",
+      label: "Dahua",
+    },
+  ],
   screenSizes: [
     {
       value: 4,
