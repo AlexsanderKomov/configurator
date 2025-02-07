@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Select, { SingleValue } from "react-select";
 
 import { ISelectCardProductProps } from "./interface";
-import { IDevice, IScreenSize, IWifi } from "@/shared/interfaces/selectOption";
+import { IScreenSize, IWifi } from "@/shared/interfaces/selectOptionMonitor";
 
 /** Селект */
 function SelectUI(props: ISelectCardProductProps) {
@@ -35,7 +35,7 @@ function SelectUI(props: ISelectCardProductProps) {
   }, [descr]);
 
   const handleSelectChange = (
-    newValue: SingleValue<boolean | IDevice | IScreenSize | IWifi>
+    newValue: SingleValue<boolean | IScreenSize | IWifi>
   ) => {
     setFormData({
       ...formData,

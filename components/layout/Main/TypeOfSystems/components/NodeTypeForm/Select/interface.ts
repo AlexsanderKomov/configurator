@@ -1,9 +1,4 @@
-import {
-  IDevice,
-  IManufacturer,
-  IScreenSize,
-  IWifi,
-} from "@/shared/interfaces/selectOption";
+import { IScreenSize, IWifi } from "@/shared/interfaces/selectOptionMonitor";
 
 export interface IFormData {
   device: string;
@@ -16,7 +11,7 @@ export interface IFormData {
 }
 
 export interface ISelectCardProductProps {
-  readonly options: IDevice[] | IManufacturer[] | IScreenSize[] | IWifi[];
+  readonly options: IScreenSize[] | IWifi[];
   readonly descr: string;
   setFormData: React.Dispatch<React.SetStateAction<IFormData>>;
   formData: IFormData;

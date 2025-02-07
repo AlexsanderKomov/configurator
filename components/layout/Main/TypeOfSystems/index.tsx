@@ -3,10 +3,11 @@
 import { ChangeEvent, useState } from "react";
 
 import TypeOfNodes from "./components/ListNodes";
-
 import { CHOISE_OF_THE_SYSTEM } from "./constants";
 import { Stage } from "./enums";
-import { useTypeStore } from "@/lib/store";
+import { useTypeStore } from "./store";
+import NodeTypeForm from "./components/NodeTypeForm/NoteTypeForm";
+import ButtonStage from "@/components/uikit/ButtonStage";
 
 /* Типы систем видеонаблюдения */
 function TypeOfSystems() {
@@ -14,7 +15,7 @@ function TypeOfSystems() {
   const [viewSelect, setViewSelect] = useState(false);
   // Этап по которому мы проходим до нужного нам блока
   const stage = useTypeStore((state) => state.stage);
-  const updateStage = useTypeStore((state) => state.updateStage);
+  // const updateStage = useTypeStore((state) => state.updateStage);
 
   const typeSystem = useTypeStore((state) => state.typeSystem);
   const updateTypeSystem = useTypeStore((state) => state.updateTypeSystem);
@@ -24,7 +25,7 @@ function TypeOfSystems() {
   };
 
   return (
-    <div className="flex justify-center mb-5 w-full h-auto p-5">
+    <div className="flex justify-center mb-5 h-auto p-5 flex-col">
       {viewSelect ? (
         <div className="flex flex-col items-center gap-y-5">
           {stage === Stage.one && (
@@ -45,25 +46,8 @@ function TypeOfSystems() {
             </select>
           )}
           {stage === Stage.two && <TypeOfNodes type={typeSystem} />}
-          {stage === Stage.one && (
-            <button
-              onClick={() => {
-                updateStage(2);
-                console.log(typeSystem);
-              }}
-            >
-              Дальше
-            </button>
-          )}
-          {stage === Stage.two && (
-            <button
-              onClick={() => {
-                updateStage(1);
-              }}
-            >
-              Назад
-            </button>
-          )}
+          {stage === Stage.one && <ButtonStage step="Дальше" stage={2} />}
+          {stage === Stage.two && <ButtonStage step="Назад" stage={1} />}
         </div>
       ) : (
         <button
@@ -73,6 +57,7 @@ function TypeOfSystems() {
           Добавить продукт
         </button>
       )}
+      {stage === Stage.three && <NodeTypeForm />}
     </div>
   );
 }

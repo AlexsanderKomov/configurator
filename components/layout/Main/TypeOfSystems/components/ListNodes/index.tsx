@@ -1,7 +1,9 @@
+import ButtonStage from "@/components/uikit/ButtonStage";
 import { LIST_NODES } from "./constsnts";
-
 /** Список типов узлов */
 function ListNodes({ type }: { type: string }) {
+  // удалить эту строчку после создания компонента
+
   return (
     <ul className="flex gap-x-5">
       {LIST_NODES.map((item) => {
@@ -11,7 +13,7 @@ function ListNodes({ type }: { type: string }) {
 
             return (
               <li key={key}>
-                <button>{option.label}</button>
+                <ButtonStage step={option.label} stage={3} />
               </li>
             );
           });
