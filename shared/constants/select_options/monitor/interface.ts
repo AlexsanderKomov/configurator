@@ -110,8 +110,8 @@ export interface IMonitor {
     option: [
       {
         value: {
-          min: number;
-          max: number;
+          min: number | null;
+          max: number | null;
         };
         label: string;
       }

@@ -329,8 +329,8 @@ export const MONITOR: IMonitor = {
     option: [
       {
         value: {
-          min: 0,
-          max: 0,
+          min: null,
+          max: null,
         },
         label: "",
       },

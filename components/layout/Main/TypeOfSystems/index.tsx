@@ -6,7 +6,7 @@ import TypeOfNodes from "./components/ListNodes";
 import { CHOISE_OF_THE_SYSTEM } from "./constants";
 import { Stage } from "./enums";
 import { useTypeStore } from "./store";
-import NodeTypeForm from "./components/NodeTypeForm/NoteTypeForm";
+import NodeTypeForm from "./components/NodeTypeForm";
 import ButtonStage from "@/components/uikit/ButtonStage";
 
 /* Типы систем видеонаблюдения */

@@ -24,9 +24,7 @@ function NodeTypeForm() {
   return (
     <>
       <form onSubmit={onSubmit} className="flex flex-col">
-        <div className="mb-5">
-          <SelectUI options={nodeProperties} descr={typeNode} />
-        </div>
+        <SelectUI options={nodeProperties} />
         <button type="submit">Отправить</button>
         <ButtonStage step="Назад" stage={2} />
       </form>

@@ -1,24 +1,37 @@
 "use client";
 
-import { useEffect } from "react";
 // import Select from "react-select";
-import { findNestedObjects } from "@/lib/findNestedObjects";
+import { findTheOptionName } from "@/lib/findTheOptionName";
 import { ISelectCardProductProps } from "./interface";
+import Select from "react-select";
 
 /** Селект */
-function SelectUI(props: ISelectCardProductProps) {
-  const { options } = props;
+function SelectUI({ options }: ISelectCardProductProps) {
+  const [nameOption, option] = findTheOptionName(options);
 
-  useEffect(() => {
-    findNestedObjects(options);
-  }, []);
+  console.log(nameOption);
 
   return (
-    <div>
-      {/* {findNestedObjects(options).map((item, index) => (
-        <div key={index}>{item}</div>
-      ))} */}
-    </div>
+    <ul className="mb-5">
+      {nameOption.map((name, index) => {
+        const key = `name_option_${index}`;
+        console.log(name);
+        return (
+          <li key={key}>
+            <label htmlFor={name}>{name}</label>
+            {option[index][0].value === null ? (
+              <input id={name} type="text" />
+            ) : (
+              <Select
+                defaultValue={option[index][0].label}
+                options={option[index]}
+                required
+              />
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
