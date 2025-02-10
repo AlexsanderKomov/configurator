@@ -4,15 +4,15 @@ import { useTypeStore } from "../../store";
 import { CALLING_PANEL } from "@/shared/constants/select_options/calling_panel";
 import { MONITOR } from "@/shared/constants/select_options/monitor";
 import SelectUI from "./Select";
+import { INodeProperties } from "./interface";
+// import { INodeProperties } from "./interface";
 
 /** Форма типа узла */
 function NodeTypeForm() {
+  let nodeProperties: INodeProperties = MONITOR;
   const typeNode = useTypeStore((store) => store.typeNode);
-  let nodeProperties = null; // Здесь будут храниться свойства узла
 
-  if (typeNode === "monitor") {
-    nodeProperties = MONITOR;
-  } else if (typeNode === "callingPanel") {
+  if (typeNode === "callingPanel") {
     nodeProperties = CALLING_PANEL;
   }
 

@@ -1,150 +1,126 @@
 export interface IMonitor {
-  manufacturer: IManufacturer;
-  screenSizes: IScreenSize[];
-  wiFi: IWiFi[];
-  recordPhoto: IRecordPhoto[];
-  writingVideo: IWritingVideo[];
-  supportSDCard: ISupportSDCard[];
-  touchScreen: ITouchScreen[];
-  managementButtons: IManagementButtons[];
-  movementDetectorRecord: IMovementDetectorRecord[];
-  theFunctionOfTheSquare: ITheFunctionOfTheSquare[];
-  typeOfIntercom: ITypeOfIntercom[];
-  theNumberOfMonitorsInTheMaxSystem: ITheNumberOfMonitorsInTheMaxSystem[];
-  theNumberOfVideoCamerasInTheMaxSystem: ITheNumberOfVideoCamerasInTheMaxSystem[];
-  theNumberOfCallingPanelsInTheMaxSystem: ITheNumberOfCallingPanelsInTheMaxSystem[];
-  supportFullHD: ISupportFullHD[];
-  conjugationWithAnAccessIntercom: IConjugationWithAnAccessIntercom[];
-  thePresenceOfHOOKExit: IThePresenceOfHOOKExit[];
-  loadingYourMelodyToCall: ILoadingYourMelodyToCall[];
-  videoSignalFormat: IVideoSignalFormat[];
-  power: IPower[];
-  consumption: IConsumption[];
-  temperature: ITemperature[];
-}
-
-// интерфейс для опций типа строчка
-interface IOptionString {
-  value: string;
-  label: string;
-}
-
-// интерфейс для опций типа число
-interface IOptionString {
-  value: string;
-  label: string;
-}
-
-// Производитель
-interface IManufacturer {
-  manufacturer: string | undefined;
-  option: IOptionString[];
-}
-//Размер экрана
-interface IScreenSize {
-  value: number;
-  label: string;
-}
-//Wi-fi
-interface IWiFi {
-  value: boolean;
-  label: string;
-}
-//запись фото
-interface IRecordPhoto {
-  value: boolean;
-  label: string;
-}
-//запись видео
-interface IWritingVideo {
-  value: boolean;
-  label: string;
-}
-//поддержка SD-карты
-interface ISupportSDCard {
-  value: boolean | number;
-  label: string;
-}
-// Сенсорный экран
-interface ITouchScreen {
-  value: boolean;
-  label: string;
-}
-// кнопки управления
-interface IManagementButtons {
-  value: string;
-  label: string;
-}
-// запись по детектору движения
-interface IMovementDetectorRecord {
-  value: boolean;
-  label: string;
-}
-// функция квадратора
-interface ITheFunctionOfTheSquare {
-  value: boolean;
-  label: string;
-}
-// тип интерфейса
-interface ITypeOfIntercom {
-  value: string;
-  label: string;
-}
-// макс количество мониторов в системе
-interface ITheNumberOfMonitorsInTheMaxSystem {
-  value: number;
-  label: string;
-}
-// макс количество видеокамер в системе
-interface ITheNumberOfVideoCamerasInTheMaxSystem {
-  value: number;
-  label: string;
-}
-// макс количество вызывных панелей в системе
-interface ITheNumberOfCallingPanelsInTheMaxSystem {
-  value: number;
-  label: string;
-}
-// поддержка Full HD
-interface ISupportFullHD {
-  value: boolean;
-  label: string;
-}
-// Возможность сопряжения с подъездным домофоном
-interface IConjugationWithAnAccessIntercom {
-  value: boolean;
-  label: string;
-}
-// Наличие HOOK выхода
-interface IThePresenceOfHOOKExit {
-  value: boolean;
-  label: string;
-}
-// Загрузка своей мелодии на звонок
-interface ILoadingYourMelodyToCall {
-  value: boolean;
-  label: string;
-}
-// Формат видеосигнала
-interface IVideoSignalFormat {
-  value: string;
-  label: string;
-}
-// питание
-interface IPower {
-  value: string;
-  label: string;
-}
-// потребление
-interface IConsumption {
-  value: string;
-  label: string;
-}
-// рабочая температура
-interface ITemperature {
-  value: {
-    min: number;
-    max: number;
+  // Производитель
+  manufacturer: {
+    manufacturer: string;
+    option: IOption[];
   };
+  //Размер экрана
+  screenSizes: {
+    screenSizes: string;
+    option: IOption[];
+  };
+  //Wi-fi
+  wiFi: {
+    wiFi: string;
+    option: IOption[];
+  };
+  //запись фото
+  recordPhoto: {
+    recordPhoto: string;
+    option: IOption[];
+  };
+  //запись видео
+  writingVideo: {
+    writingVideo: string;
+    option: IOption[];
+  };
+  //поддержка SD-карты
+  supportSDCard: {
+    supportSDCard: string;
+    option: IOption[];
+  };
+  // Сенсорный экран
+  touchScreen: {
+    touchScreen: string;
+    option: IOption[];
+  };
+  // кнопки управления
+  managementButtons: {
+    managementButtons: string;
+    option: IOption[];
+  };
+  // запись по детектору движения
+  movementDetectorRecord: {
+    movementDetectorRecord: string;
+    option: IOption[];
+  };
+  // функция квадратора
+  theFunctionOfTheSquare: {
+    theFunctionOfTheSquare: string;
+    option: IOption[];
+  };
+  // тип интерфейса
+  typeOfIntercom: {
+    typeOfIntercom: string;
+    option: IOption[];
+  };
+  // макс количество мониторов в системе
+  theNumberOfMonitorsInTheMaxSystem: {
+    theNumberOfMonitorsInTheMaxSystem: string;
+    option: IOption[];
+  };
+  // макс количество видеокамер в системе
+  theNumberOfVideoCamerasInTheMaxSystem: {
+    theNumberOfVideoCamerasInTheMaxSystem: string;
+    option: IOption[];
+  };
+  // макс количество вызывных панелей в системе
+  theNumberOfCallingPanelsInTheMaxSystem: {
+    theNumberOfCallingPanelsInTheMaxSystem: string;
+    option: IOption[];
+  };
+  // поддержка Full HD
+  supportFullHD: {
+    supportFullHD: string;
+    option: IOption[];
+  };
+  // Возможность сопряжения с подъездным домофоном
+  conjugationWithAnAccessIntercom: {
+    conjugationWithAnAccessIntercom: string;
+    option: IOption[];
+  };
+  // Наличие HOOK выхода
+  thePresenceOfHOOKExit: {
+    thePresenceOfHOOKExit: string;
+    option: IOption[];
+  };
+  // Загрузка своей мелодии на звонок
+  loadingYourMelodyToCall: {
+    loadingYourMelodyToCall: string;
+    option: IOption[];
+  };
+  // Формат видеосигнала
+  videoSignalFormat: {
+    videoSignalFormat: string;
+    option: IOption[];
+  };
+  // питание
+  power: {
+    power: string;
+    option: IOption[];
+  };
+  // потребление
+  consumption: {
+    consumption: string;
+    option: IOption[];
+  };
+  // рабочая температура
+  temperature: {
+    temperature: string;
+    option: [
+      {
+        value: {
+          min: number;
+          max: number;
+        };
+        label: string;
+      }
+    ];
+  };
+}
+
+// интерфейс для опций
+interface IOption {
+  value: string | number | boolean | null;
   label: string;
 }

@@ -15,7 +15,6 @@ function TypeOfSystems() {
   const [viewSelect, setViewSelect] = useState(false);
   // Этап по которому мы проходим до нужного нам блока
   const stage = useTypeStore((state) => state.stage);
-  // const updateStage = useTypeStore((state) => state.updateStage);
 
   const typeSystem = useTypeStore((state) => state.typeSystem);
   const updateTypeSystem = useTypeStore((state) => state.updateTypeSystem);
