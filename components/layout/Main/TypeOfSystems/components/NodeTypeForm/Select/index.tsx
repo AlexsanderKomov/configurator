@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Select from "react-select";
+// import Select from "react-select";
 
 import { ISelectCardProductProps } from "./interface";
 
