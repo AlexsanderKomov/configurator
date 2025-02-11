@@ -56,6 +56,19 @@ export const CALLING_PANEL: ICallingPanel = {
       },
     ],
   },
+  typeOfIntercom: {
+    typeOfIntercom: "Тип интерфейса",
+    option: [
+      {
+        value: "IP",
+        label: "IP",
+      },
+      {
+        value: "analog",
+        label: "Аналоговый",
+      },
+    ],
+  },
   videoSignalFormat: {
     videoSignalFormat: "Формат видеосигнала",
     option: [

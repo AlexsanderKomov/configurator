@@ -15,7 +15,7 @@ function SelectUI({ options }: ISelectCardProductProps) {
     <ul className="mb-5">
       {nameOption.map((name, index) => {
         const key = `name_option_${index}`;
-        console.log(name);
+        console.log(option[index][0].value);
         return (
           <li key={key}>
             <label htmlFor={name}>{name}</label>
@@ -23,7 +23,7 @@ function SelectUI({ options }: ISelectCardProductProps) {
               <input id={name} type="text" />
             ) : (
               <Select
-                defaultValue={option[index][0].label}
+                defaultValue={option[index][0]}
                 options={option[index]}
                 required
               />

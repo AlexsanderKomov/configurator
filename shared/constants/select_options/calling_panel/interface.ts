@@ -14,6 +14,11 @@ export interface ICallingPanel {
     permission: string;
     option: IOption[];
   };
+  // тип интерфейса
+  typeOfIntercom: {
+    typeOfIntercom: string;
+    option: IOption[];
+  };
   // Формат видеосигнала
   videoSignalFormat: {
     videoSignalFormat: string;
