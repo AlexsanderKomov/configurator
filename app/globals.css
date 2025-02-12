@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #fff;
   --foreground: #171717;
 }
 
@@ -29,5 +29,5 @@ body {
   display: flex;
   width: 100%;
   padding: 15px;
-  background-color: rgb(102, 107, 107);
+  background-color: var(--background);
 }

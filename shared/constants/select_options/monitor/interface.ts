@@ -4,6 +4,16 @@ export interface IMonitor {
     manufacturer: string;
     option: IOption[];
   };
+  // Название
+  name: {
+    name: string;
+    option: IOption[];
+  };
+  // артикул
+  article: {
+    article: string;
+    option: IOption[];
+  };
   //Размер экрана
   screenSizes: {
     screenSizes: string;
@@ -104,18 +114,10 @@ export interface IMonitor {
     consumption: string;
     option: IOption[];
   };
-  // рабочая температура
-  temperature: {
-    temperature: string;
-    option: [
-      {
-        value: {
-          min: number | null;
-          max: number | null;
-        };
-        label: string;
-      }
-    ];
+  // Возможность ставить на улице
+  street: {
+    street: string;
+    option: IOption[];
   };
 }
 

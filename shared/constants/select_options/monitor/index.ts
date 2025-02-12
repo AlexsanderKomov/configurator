@@ -18,6 +18,24 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
+  name: {
+    name: "Название",
+    option: [
+      {
+        value: null,
+        label: "",
+      },
+    ],
+  },
+  article: {
+    article: "Артикул",
+    option: [
+      {
+        value: null,
+        label: "",
+      },
+    ],
+  },
   screenSizes: {
     screenSizes: "Размер экрана",
     option: [
@@ -324,15 +342,16 @@ export const MONITOR: IMonitor = {
     consumption: "Потребление",
     option: [{ value: null, label: "" }],
   },
-  temperature: {
-    temperature: "Рабочая температура",
+  street: {
+    street: "Возможность ставить на улице",
     option: [
       {
-        value: {
-          min: null,
-          max: null,
-        },
-        label: "",
+        value: true,
+        label: "Да",
+      },
+      {
+        value: false,
+        label: "Нет",
       },
     ],
   },

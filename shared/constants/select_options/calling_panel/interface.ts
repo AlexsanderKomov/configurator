@@ -4,6 +4,16 @@ export interface ICallingPanel {
     manufacturer: string;
     option: IOption[];
   };
+  // Название
+  name: {
+    name: string;
+    option: IOption[];
+  };
+  // артикул
+  article: {
+    article: string;
+    option: IOption[];
+  };
   // Число абонентов панели
   theNumberOfSubscribers: {
     theNumberOfSubscribers: string;
@@ -64,18 +74,10 @@ export interface ICallingPanel {
     consumption: string;
     option: IOption[];
   };
-  // Рабочая температура
-  temperature: {
-    temperature: string;
-    option: [
-      {
-        value: {
-          min: number | null;
-          max: number | null;
-        };
-        label: string;
-      }
-    ];
+  // Возможность ставить на улице
+  street: {
+    street: string;
+    option: IOption[];
   };
 }
 
