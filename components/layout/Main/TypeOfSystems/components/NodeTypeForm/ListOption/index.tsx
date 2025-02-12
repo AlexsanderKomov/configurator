@@ -1,24 +1,24 @@
 "use client";
 
-import { findTheOptionName } from "@/lib/findTheOptionName";
+import { getTheOptionName } from "@/lib/getTheOptionName";
 import { ISelectCardProductProps } from "./interface";
-import Select from "react-select";
-import { Controller, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
+import SelectForm from "@/components/uikit/SelectForm";
 
 /** Селект */
-function SelectUI({ options }: ISelectCardProductProps) {
-  const [nameOption, option] = findTheOptionName(options);
+function ListOption({ options }: ISelectCardProductProps) {
+  const [nameOption, option, firstName] = getTheOptionName(options);
 
   const { register } = useFormContext();
 
   return (
     <ul className="mb-5">
-      {nameOption.map((name, index) => {
+      {firstName.map((name, index) => {
         const key = `name_option_${index}`;
 
         return (
           <li key={key}>
-            <label htmlFor={name}>{name}</label>
+            <label htmlFor={name}>{nameOption[index]}</label>
             {typeof option[index][0].value === "object" ? (
               <input
                 id={name}
@@ -27,12 +27,10 @@ function SelectUI({ options }: ISelectCardProductProps) {
                 required
               />
             ) : (
-              <Controller
+              <SelectForm
                 name={name}
                 defaultValue={option[index][0]}
-                render={({ field }) => (
-                  <Select {...field} options={option[index]} required />
-                )}
+                options={option[index]}
               />
             )}
           </li>
@@ -42,4 +40,4 @@ function SelectUI({ options }: ISelectCardProductProps) {
   );
 }
 
-export default SelectUI;
+export default ListOption;
