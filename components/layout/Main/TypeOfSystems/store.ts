@@ -15,6 +15,8 @@ export interface ITypeNodeSlice {
   updateTypeNode: (newTypeNode: string) => void;
 }
 
+type StoreSlise = ITypeSystemSlice & IStageSlice & ITypeNodeSlice;
+
 const createTypeSystemSlice: StateCreator<ITypeSystemSlice> = (set) => ({
   typeSystem: "skirt",
   updateTypeSystem: (newTypeSistem) => set({ typeSystem: newTypeSistem }),
@@ -30,9 +32,7 @@ const createTypeNodeSlice: StateCreator<ITypeNodeSlice> = (set) => ({
   updateTypeNode: (newTypeNode) => set({ typeNode: newTypeNode }),
 });
 
-export const useTypeStore = create<
-  ITypeSystemSlice & IStageSlice & ITypeNodeSlice
->()((...state) => ({
+export const useTypeStore = create<StoreSlise>()((...state) => ({
   ...createTypeSystemSlice(...state),
   ...createStageSlice(...state),
   ...createTypeNodeSlice(...state),

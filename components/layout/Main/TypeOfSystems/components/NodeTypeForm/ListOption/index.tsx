@@ -1,13 +1,13 @@
 "use client";
 
-import { getTheOptionName } from "@/lib/getTheOptionName";
+import { getOptionName } from "@/lib/helpers/getOptionName";
 import { ISelectCardProductProps } from "./interface";
 import { useFormContext } from "react-hook-form";
 import SelectForm from "@/components/uikit/SelectForm";
 
 /** Селект */
 function ListOption({ options }: ISelectCardProductProps) {
-  const [nameOption, option, firstName] = getTheOptionName(options);
+  const [nameOption, option, firstName] = getOptionName(options);
 
   const { register } = useFormContext();
 

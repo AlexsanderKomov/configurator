@@ -1,7 +1,6 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
-
 import TypeOfNodes from "./components/ListNodes";
 import { CHOISE_OF_THE_SYSTEM } from "./constants";
 import { Stage } from "./enums";
