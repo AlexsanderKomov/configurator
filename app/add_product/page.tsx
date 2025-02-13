@@ -1,12 +1,7 @@
-import { AddProduct } from "@/components";
 import React from "react";
 
 function AddProducts() {
-  return (
-    <div>
-      <AddProduct />
-    </div>
-  );
+  return <div>123</div>;
 }
 
 export default AddProducts;

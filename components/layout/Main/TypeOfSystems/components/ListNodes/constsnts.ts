@@ -1,4 +1,4 @@
-export const TYPE_OF_SISTEM = [
+export const LIST_NODES = [
   {
     type: "skirt",
     option: [

@@ -1,6 +1,9 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { redirect } from "next/navigation";
+import delc from "@/public/image/logo.png";
 
 function Header() {
   const handleClick = () => {
@@ -9,9 +12,11 @@ function Header() {
 
   return (
     <div className="container flex justify-between items-center">
-      <div>Header</div>
+      <Link href="#">
+        <Image src={delc} alt="Логотип DELC"></Image>
+      </Link>
       <button
-        className="border p-2 rounded-lg text-white"
+        className="border p-2 rounded-lg text-black"
         onClick={handleClick}
       >
         Добавить продукт
