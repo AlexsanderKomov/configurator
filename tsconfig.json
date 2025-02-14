@@ -31,6 +31,6 @@
     "components/Main/RadioBtn.tsx",
     "components/Main/AddProducts/AddProduct.tsx",
     "components/CardProductForm.jsx"
-  ],
+, "components/layout/Main/ReadExcel/index.еsx"  ],
   "exclude": ["node_modules"]
 }
