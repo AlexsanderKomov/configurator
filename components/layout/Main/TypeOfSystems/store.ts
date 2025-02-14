@@ -18,6 +18,9 @@ export interface ITypeNodeSlice {
 
 export interface IReadExcel {
   data: IData[];
+  loading: boolean;
+  startLoading: () => void;
+  stopLoading: () => void;
   updateData: (newData: IData[]) => void;
 }
 
@@ -39,7 +42,12 @@ const createTypeNodeSlice: StateCreator<ITypeNodeSlice> = (set) => ({
 });
 
 const createReadExcelSlice: StateCreator<IReadExcel> = (set) => ({
-  data: [{ manufacturer: "", name: "", article: "", screenSizes: "" }],
+  data: [
+    /* { manufacturer: "", name: "", article: "", screenSizes: "" } */
+  ],
+  loading: false, // началное состояние
+  startLoading: () => set({ loading: true }), // начать загрузку
+  stopLoading: () => set({ loading: false }), // закончить загрузку
   updateData: (newData) => set({ data: newData }),
 });
 
