@@ -19,7 +19,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   name: {
-    name: "Название",
+    name: "Наименование",
     option: [
       {
         value: null,

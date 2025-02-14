@@ -19,7 +19,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   name: {
-    name: "Название",
+    name: "Наименование",
     option: [
       {
         value: null,

@@ -1,8 +1,10 @@
 "use client";
 
-import ReadExcel from "./ReadExcel";
+import ReadExcel from "./TypeOfSystems/components/ReadExcel";
 // import Appartments from "./Apartments";
 import TypeOfSystems from "./TypeOfSystems";
+import ListLoadedProducts from "./ListLoadedProducts";
+
 
 function Main() {
   return (
@@ -12,6 +14,7 @@ function Main() {
       <ReadExcel />
       <TypeOfSystems />
       {/* <Appartments /> */}
+      <ListLoadedProducts />
     </main>
   );
 }
