@@ -2,14 +2,12 @@ import * as XLSX from "xlsx";
 import { ChangeEvent } from "react";
 
 import { useTypeStore } from "@/components/layout/Main/TypeOfSystems/store";
-import { useListLoadedProducts } from "@/components/layout/Main/ListLoadedProducts/store";
 import { translatetListLoaded } from "@/lib/helpers/translatetListLoaded";
 
 const ReadExcel = () => {
   const { updateData, loading, startLoading, stopLoading } = useTypeStore(
     (state) => state
   );
-  const updateHide = useListLoadedProducts((state) => state.updateHide);
 
   /** Симулируем загрузку данных */
   function simulateLoading() {
@@ -35,7 +33,6 @@ const ReadExcel = () => {
         const firstSheetData =
           XLSX.utils.sheet_to_json<XLSX.WorkSheet>(firstSheet);
 
-        updateHide(true);
         updateData(translatetListLoaded(firstSheetData));
       };
       simulateLoading();

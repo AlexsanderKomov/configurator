@@ -1,8 +1,6 @@
-// import { useListLoadedProducts } from "./store";
 import { useTypeStore } from "@/components/layout/Main/TypeOfSystems/store";
 
 function ListLoadedProducts() {
-  // const hide = useListLoadedProducts((state) => state.hide);
   const { data, loading } = useTypeStore((state) => state);
 
   if (data?.length === 0) return <p>Нет данных</p>;
@@ -10,12 +8,12 @@ function ListLoadedProducts() {
   if (loading) return <p>Загрузка данных...</p>;
 
   return (
-    <div className="grid grid-cols-2 gap-x-12">
+    <div className="grid grid-row-2 gap-y-12">
       {data?.map((item, index) => {
         const key = `list_${item?.name?.name}_${index}`;
 
         return (
-          <ul key={key} className="grid gap-y-4">
+          <ul key={key} className="flex gap-x-8">
             <li>
               {item?.manufacturer?.manufacturer}:{" "}
               {item?.manufacturer?.option?.label}
