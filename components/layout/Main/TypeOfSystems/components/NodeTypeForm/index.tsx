@@ -2,7 +2,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import ButtonStage from "@/components/uikit/ButtonStage";
 import { useTypeStore } from "../../store";
 import { CALLING_PANEL } from "@/shared/constants/select_options/calling_panel";
-import { MONITOR } from "@/shared/constants/select_options/monitor/";
+import { MONITOR } from "@/shared/constants/select_options/monitor";
 import { INodeProperties } from "./interface";
 import ListOption from "./ListOption";
 

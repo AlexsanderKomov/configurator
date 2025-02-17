@@ -1,8 +1,8 @@
-import { IMonitor } from "@/shared/constants/select_options/monitor/interface";
+import { IConstants } from "@/shared/constants/select_options/interface";
 
-export const MONITOR: IMonitor = {
+export const MONITOR: IConstants = {
   manufacturer: {
-    manufacturer: "Производитель",
+    name: "Производитель",
     option: [
       {
         value: "falconEye",
@@ -28,7 +28,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   article: {
-    article: "Артикул",
+    name: "Артикул",
     option: [
       {
         value: null,
@@ -37,7 +37,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   screenSizes: {
-    screenSizes: "Размер экрана",
+    name: "Размер экрана",
     option: [
       {
         value: 4,
@@ -54,7 +54,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   wiFi: {
-    wiFi: "Наличие Wi-Fi",
+    name: "Наличие Wi-Fi",
     option: [
       {
         value: false,
@@ -67,7 +67,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   recordPhoto: {
-    recordPhoto: "Запись фото",
+    name: "Запись фото",
     option: [
       {
         value: false,
@@ -80,7 +80,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   writingVideo: {
-    writingVideo: "Запись видео",
+    name: "Запись видео",
     option: [
       {
         value: false,
@@ -93,7 +93,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   supportSDCard: {
-    supportSDCard: "Поддержка SD карты",
+    name: "Поддержка SD карты",
     option: [
       {
         value: false,
@@ -118,7 +118,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   touchScreen: {
-    touchScreen: "Наличие сенсорного экрана",
+    name: "Наличие сенсорного экрана",
     option: [
       {
         value: false,
@@ -131,7 +131,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   managementButtons: {
-    managementButtons: "Кнопки управления",
+    name: "Кнопки управления",
     option: [
       {
         value: "sensory",
@@ -148,7 +148,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   movementDetectorRecord: {
-    movementDetectorRecord: "Запись по детектору движения",
+    name: "Запись по детектору движения",
     option: [
       {
         value: false,
@@ -161,7 +161,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   theFunctionOfTheSquare: {
-    theFunctionOfTheSquare: "Функция квадратора",
+    name: "Функция квадратора",
     option: [
       {
         value: false,
@@ -174,7 +174,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   typeOfIntercom: {
-    typeOfIntercom: "Тип интерфейса",
+    name: "Тип интерфейса",
     option: [
       {
         value: "IP",
@@ -187,7 +187,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   theNumberOfMonitorsInTheMaxSystem: {
-    theNumberOfMonitorsInTheMaxSystem: "Макс количество мониторов в системе",
+    name: "Макс количество мониторов в системе",
     option: [
       {
         value: 4,
@@ -200,8 +200,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   theNumberOfVideoCamerasInTheMaxSystem: {
-    theNumberOfVideoCamerasInTheMaxSystem:
-      "Макс количество видеокамер в системе",
+    name: "Макс количество видеокамер в системе",
     option: [
       {
         value: 1,
@@ -218,8 +217,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   theNumberOfCallingPanelsInTheMaxSystem: {
-    theNumberOfCallingPanelsInTheMaxSystem:
-      "Макс количество вызывных панелей в системе",
+    name: "Макс количество вызывных панелей в системе",
     option: [
       {
         value: 2,
@@ -228,7 +226,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   supportFullHD: {
-    supportFullHD: "Поддержка Full HD",
+    name: "Поддержка Full HD",
     option: [
       {
         value: false,
@@ -241,8 +239,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   conjugationWithAnAccessIntercom: {
-    conjugationWithAnAccessIntercom:
-      "Возможность сопряжения с подъездным домофоном",
+    name: "Возможность сопряжения с подъездным домофоном",
     option: [
       {
         value: false,
@@ -255,7 +252,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   thePresenceOfHOOKExit: {
-    thePresenceOfHOOKExit: "Наличие HOOK выхода",
+    name: "Наличие HOOK выхода",
     option: [
       {
         value: false,
@@ -268,7 +265,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   loadingYourMelodyToCall: {
-    loadingYourMelodyToCall: "Загрузка своей мелодии на звонок",
+    name: "Загрузка своей мелодии на звонок",
     option: [
       {
         value: false,
@@ -281,7 +278,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   videoSignalFormat: {
-    videoSignalFormat: "Формат видеосигнала",
+    name: "Формат видеосигнала",
     option: [
       {
         value: "NTSC",
@@ -330,7 +327,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   power: {
-    power: "Питание",
+    name: "Питание",
     option: [
       {
         value: null,
@@ -339,11 +336,11 @@ export const MONITOR: IMonitor = {
     ],
   },
   consumption: {
-    consumption: "Потребление",
+    name: "Потребление",
     option: [{ value: null, label: "" }],
   },
   street: {
-    street: "Возможность ставить на улице",
+    name: "Возможность ставить на улице",
     option: [
       {
         value: true,

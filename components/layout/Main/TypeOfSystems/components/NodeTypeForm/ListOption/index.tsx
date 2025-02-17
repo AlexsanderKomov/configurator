@@ -7,15 +7,13 @@ import SelectForm from "@/components/uikit/SelectForm";
 
 /** Селект */
 function ListOption({ options }: ISelectCardProductProps) {
-  const [nameOption, option, firstName] = getOptionName(options);
+  const [nameOption, option, firstKeyArr] = getOptionName(options);
 
   const { register } = useFormContext();
-
   return (
     <ul className="mb-5">
-      {firstName.map((name, index) => {
+      {firstKeyArr.map((name, index) => {
         const key = `name_option_${index}`;
-
         return (
           <li key={key}>
             <label htmlFor={name}>{nameOption[index]}</label>

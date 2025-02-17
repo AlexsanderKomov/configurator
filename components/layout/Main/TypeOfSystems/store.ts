@@ -1,5 +1,5 @@
 import { create, StateCreator } from "zustand";
-import { IData } from "@/components/layout/Main/TypeOfSystems/components/ReadExcel/interface";
+import { IConstants } from "@/shared/constants/select_options/interface";
 
 export interface ITypeSystemSlice {
   typeSystem: string;
@@ -17,11 +17,11 @@ export interface ITypeNodeSlice {
 }
 
 export interface IReadExcel {
-  data: IData[];
+  data: IConstants[];
   loading: boolean;
   startLoading: () => void;
   stopLoading: () => void;
-  updateData: (newData: IData[]) => void;
+  updateData: (newData: IConstants[]) => void;
 }
 
 type StoreSlise = ITypeSystemSlice & IStageSlice & ITypeNodeSlice & IReadExcel;
@@ -42,9 +42,7 @@ const createTypeNodeSlice: StateCreator<ITypeNodeSlice> = (set) => ({
 });
 
 const createReadExcelSlice: StateCreator<IReadExcel> = (set) => ({
-  data: [
-    /* { manufacturer: "", name: "", article: "", screenSizes: "" } */
-  ],
+  data: [],
   loading: false, // началное состояние
   startLoading: () => set({ loading: true }), // начать загрузку
   stopLoading: () => set({ loading: false }), // закончить загрузку

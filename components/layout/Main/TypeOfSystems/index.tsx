@@ -13,10 +13,9 @@ function TypeOfSystems() {
   // Состояние отображения селекта
   const [viewSelect, setViewSelect] = useState(false);
   // Этап по которому мы проходим до нужного нам блока
-  const stage = useTypeStore((state) => state.stage);
-
-  const typeSystem = useTypeStore((state) => state.typeSystem);
-  const updateTypeSystem = useTypeStore((state) => state.updateTypeSystem);
+  const { stage, typeSystem, updateTypeSystem } = useTypeStore(
+    (state) => state
+  );
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     updateTypeSystem(event.target.value); // Обновление выбранного значения при изменении выбора в выпадающем списке

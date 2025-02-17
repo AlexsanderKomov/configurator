@@ -6,30 +6,20 @@ function ListLoadedProducts() {
   if (data?.length === 0) return <p>Нет данных</p>;
 
   if (loading) return <p>Загрузка данных...</p>;
-
   return (
-    <div className="grid grid-row-2 gap-y-12">
+    <div className="grid w-full gap-y-12">
       {data?.map((item, index) => {
-        const key = `list_${item?.name?.name}_${index}`;
-
+        const key = `list_${item.name}_${index}`;
         return (
-          <ul key={key} className="flex gap-x-8">
-            <li>
-              {item?.manufacturer?.manufacturer}:{" "}
-              {item?.manufacturer?.option?.label}
-            </li>
-
-            <li>
-              {item?.name?.name}: {item?.name?.option?.label}
-            </li>
-            <li>
-              {item?.article?.article}: {item?.article?.option?.label}
-            </li>
-
-            <li>
-              {item?.screenSizes?.screenSizes}:{" "}
-              {item?.screenSizes?.option?.label}
-            </li>
+          <ul key={key} className="grid grid-cols-4 gap-8">
+            {Object.keys(item).map((keys, index) => {
+              const key = `item_${item?.[keys]}_${index}`;
+              return (
+                <li key={key} className="w-1/8 text-center">
+                  {item?.[keys].name} : {item?.[keys]?.option[0].label}
+                </li>
+              );
+            })}
           </ul>
         );
       })}

@@ -32,7 +32,7 @@ const ReadExcel = () => {
         const firstSheet = workbook.Sheets[sheetName];
         const firstSheetData =
           XLSX.utils.sheet_to_json<XLSX.WorkSheet>(firstSheet);
-
+        console.log(firstSheetData);
         updateData(translatetListLoaded(firstSheetData));
       };
       simulateLoading();

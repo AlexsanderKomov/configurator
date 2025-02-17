@@ -1,8 +1,8 @@
-import { ICallingPanel } from "@/shared/constants/select_options/calling_panel/interface";
+import { IConstants } from "@/shared/constants/select_options/interface";
 
-export const CALLING_PANEL: ICallingPanel = {
+export const CALLING_PANEL: IConstants = {
   manufacturer: {
-    manufacturer: "Производитель",
+    name: "Производитель",
     option: [
       {
         value: "falconEye",
@@ -28,7 +28,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   article: {
-    article: "Артикул",
+    name: "Артикул",
     option: [
       {
         value: null,
@@ -37,7 +37,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   theNumberOfSubscribers: {
-    theNumberOfSubscribers: "Число абонентов панели",
+    name: "Число абонентов панели",
     option: [
       {
         value: 1,
@@ -62,7 +62,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   permission: {
-    permission: "Разрешение камеры",
+    name: "Разрешение камеры",
     option: [
       {
         value: 1,
@@ -75,7 +75,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   typeOfIntercom: {
-    typeOfIntercom: "Тип интерфейса",
+    name: "Тип интерфейса",
     option: [
       {
         value: "IP",
@@ -88,7 +88,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   videoSignalFormat: {
-    videoSignalFormat: "Формат видеосигнала",
+    name: "Формат видеосигнала",
     option: [
       {
         value: "NTSC",
@@ -137,7 +137,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   wiFi: {
-    wiFi: "Доступ со смартфона (Wi-Fi)",
+    name: "Доступ со смартфона (Wi-Fi)",
     option: [
       {
         value: false,
@@ -150,7 +150,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   supportFullHD: {
-    supportFullHD: "Поддержка Full HD",
+    name: "Поддержка Full HD",
     option: [
       {
         value: false,
@@ -163,7 +163,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   managementButtons: {
-    managementButtons: "Кнопка вызова панели",
+    name: "Кнопка вызова панели",
     option: [
       {
         value: "sensory",
@@ -180,7 +180,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   angleOfView: {
-    angleOfView: "Угол обзора",
+    name: "Угол обзора",
     option: [
       {
         value: 70,
@@ -213,7 +213,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   iKIllumination: {
-    iKIllumination: "ИК-подсветка",
+    name: "ИК-подсветка",
     option: [
       {
         value: false,
@@ -226,7 +226,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   hdFormatSwitcher: {
-    hdFormatSwitcher: "Переключатель форматов AHD/аналог на корпусе",
+    name: "Переключатель форматов AHD/аналог на корпусе",
     option: [
       {
         value: false,
@@ -239,7 +239,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   power: {
-    power: "Питание",
+    name: "Питание",
     option: [
       {
         value: null,
@@ -248,11 +248,11 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   consumption: {
-    consumption: "Потребление",
+    name: "Потребление",
     option: [{ value: null, label: "" }],
   },
   street: {
-    street: "Возможность ставить на улице",
+    name: "Возможность ставить на улице",
     option: [
       {
         value: true,
