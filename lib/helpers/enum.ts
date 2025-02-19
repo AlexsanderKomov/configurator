@@ -1,5 +1,4 @@
-export enum TypeEquipment {
-  typeEquipment = "Вид оборудования",
+export enum Type {
   monitor = "Монитор",
   calling_panel = "Вызывная панель",
 }

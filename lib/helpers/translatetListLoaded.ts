@@ -1,17 +1,19 @@
 import { MONITOR } from "@/shared/constants/select_options/monitor/index";
 import { CALLING_PANEL } from "@/shared/constants/select_options/calling_panel";
 import { IConstants } from "@/shared/constants/select_options/interface";
-import { TypeEquipment } from "./enum";
+import { Type } from "./enum";
 
+const TYPE_EQUIPMENT = "Вид оборудования";
 export function translatetListLoaded(arr: IConstants[]) {
   let current: IConstants | null = null;
 
-  arr.map((item) => {
-    switch (item[TypeEquipment.typeEquipment]) {
-      case TypeEquipment.monitor:
+  arr.forEach((item) => {
+    console.log(item);
+    switch (item[TYPE_EQUIPMENT]) {
+      case Type.monitor:
         current = MONITOR;
         break;
-      case TypeEquipment.calling_panel:
+      case Type.calling_panel:
         current = CALLING_PANEL;
         break;
     }

@@ -129,7 +129,8 @@ export interface IConstants {
 // }
 
 // интерфейс для опций
-interface IOption {
+
+export interface IOption {
   value: string | number | boolean | null;
   label: string;
 }
