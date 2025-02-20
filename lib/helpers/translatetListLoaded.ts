@@ -4,18 +4,25 @@ import { IConstants } from "@/shared/constants/select_options/interface";
 import { TypeEquipment } from "./enum";
 import { transformValue } from "./transformValue";
 import { IArrayTranslate } from "./interface";
+import { TYPE_EQUIPMENT } from "@/shared/constants/type_equipment";
 
-const TYPE_EQUIPMENT = "Вид оборудования";
+/**
+ * Преобразует список загруженных данных из файла excel в вид под интерфейс IConstants.
+ * @param arr - Массив данных для преобразования.
+ * @returns Преобразованный массив данных.
+ */
 
 export function translatetListLoaded(arr: IArrayTranslate[]) {
+  const { monitor, calling_panel } = TypeEquipment;
+
   let current: IConstants | null = null;
 
   arr.forEach((item) => {
     switch (item[TYPE_EQUIPMENT]) {
-      case TypeEquipment.monitor:
+      case monitor:
         current = MONITOR;
         break;
-      case TypeEquipment.calling_panel:
+      case calling_panel:
         current = CALLING_PANEL;
         break;
     }

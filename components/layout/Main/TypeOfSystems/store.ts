@@ -22,6 +22,7 @@ export interface IReadExcel {
   startLoading: () => void;
   stopLoading: () => void;
   updateData: (newData: IConstants[]) => void;
+  resetData: () => void;
 }
 
 type StoreSlise = ITypeSystemSlice & IStageSlice & ITypeNodeSlice & IReadExcel;
@@ -47,6 +48,7 @@ const createReadExcelSlice: StateCreator<IReadExcel> = (set) => ({
   startLoading: () => set({ loading: true }), // начать загрузку
   stopLoading: () => set({ loading: false }), // закончить загрузку
   updateData: (newData) => set({ data: newData }),
+  resetData: () => set({ data: [] }),
 });
 
 export const useTypeStore = create<StoreSlise>()((...state) => ({

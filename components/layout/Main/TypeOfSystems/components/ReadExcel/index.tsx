@@ -1,13 +1,15 @@
 import * as XLSX from "xlsx";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 
 import { useTypeStore } from "@/components/layout/Main/TypeOfSystems/store";
 import { translatetListLoaded } from "@/lib/helpers/translatetListLoaded";
+import { validationFileLoaded } from "@/lib/helpers/validationFileLoaded";
+import { toast } from "react-toastify";
 
 const ReadExcel = () => {
-  const { updateData, loading, startLoading, stopLoading } = useTypeStore(
-    (state) => state
-  );
+  const [value, setValue] = useState<string>("");
+  const { updateData, loading, startLoading, stopLoading, resetData } =
+    useTypeStore((state) => state);
 
   /** Симулируем загрузку данных */
   function simulateLoading() {
@@ -33,7 +35,13 @@ const ReadExcel = () => {
         const firstSheetData =
           XLSX.utils.sheet_to_json<XLSX.WorkSheet>(firstSheet);
 
-        updateData(translatetListLoaded(firstSheetData));
+        if (validationFileLoaded(firstSheetData)) {
+          toast("Вы полностью не заполнили файл!");
+          setValue("");
+          resetData();
+        } else {
+          updateData(translatetListLoaded(firstSheetData));
+        }
       };
       simulateLoading();
 
@@ -47,6 +55,7 @@ const ReadExcel = () => {
       accept=".xls, .xlsx"
       onChange={handleFileReader}
       disabled={loading}
+      value={value}
     />
   );
 };
