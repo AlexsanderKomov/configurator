@@ -1,27 +1,30 @@
 import { MONITOR } from "@/shared/constants/select_options/monitor/index";
 import { CALLING_PANEL } from "@/shared/constants/select_options/calling_panel";
 import { IConstants } from "@/shared/constants/select_options/interface";
-import { Type } from "./enum";
+import { TypeEquipment } from "./enum";
+import { transformValue } from "./transformValue";
+import { IArrayTranslate } from "./interface";
 
 const TYPE_EQUIPMENT = "Вид оборудования";
-export function translatetListLoaded(arr: IConstants[]) {
+
+export function translatetListLoaded(arr: IArrayTranslate[]) {
   let current: IConstants | null = null;
 
   arr.forEach((item) => {
-    console.log(item);
     switch (item[TYPE_EQUIPMENT]) {
-      case Type.monitor:
+      case TypeEquipment.monitor:
         current = MONITOR;
         break;
-      case Type.calling_panel:
+      case TypeEquipment.calling_panel:
         current = CALLING_PANEL;
         break;
     }
   });
 
-  // Переводим ключи объекта в русский язык из таблицы
+  // Переводим ключи объекта на русский язык из таблицы
   return arr.map((item) => {
     const newItem: IConstants = {};
+
     Object.keys(item).forEach((key) => {
       for (const currentKey in current) {
         if (current[currentKey].name === key) {
@@ -29,7 +32,7 @@ export function translatetListLoaded(arr: IConstants[]) {
             name: key,
             option: [
               {
-                value: item[key],
+                value: transformValue(item[key]),
                 label: item[key],
               },
             ],

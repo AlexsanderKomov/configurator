@@ -16,8 +16,6 @@ export function getSecondObject(arr: IGetHelpers[]) {
       secondValues.push(secondValue);
     }
   }
-  console.log(arr);
-  console.log(secondValues);
 
   return secondValues;
 }

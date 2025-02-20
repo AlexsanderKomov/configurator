@@ -5,15 +5,15 @@ export const MONITOR: IConstants = {
     name: "Производитель",
     option: [
       {
-        value: "falconEye",
+        value: "Falcon Eye",
         label: "Falcon Eye",
       },
       {
-        value: "beward",
+        value: "BEWARD",
         label: "BEWARD",
       },
       {
-        value: "dahua",
+        value: "Dahua",
         label: "Dahua",
       },
     ],
