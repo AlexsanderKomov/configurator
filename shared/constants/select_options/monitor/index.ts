@@ -352,4 +352,8 @@ export const MONITOR: IConstants = {
       },
     ],
   },
+  image: {
+    name: "Картинка",
+    option: [{ value: null, label: "" }],
+  },
 };

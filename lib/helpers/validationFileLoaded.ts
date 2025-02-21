@@ -9,7 +9,7 @@ export function validationFileLoaded(arr: IArrayTranslate[]) {
   arr.forEach((item) => {
     switch (item[TYPE_EQUIPMENT]) {
       case monitor:
-        if (!!(Object.keys(item).length === 25)) {
+        if (!!(Object.keys(item).length === 26)) {
           status = false;
         } else {
           status = true;

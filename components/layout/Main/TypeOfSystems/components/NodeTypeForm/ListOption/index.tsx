@@ -16,16 +16,29 @@ function ListOption({ options }: ISelectCardProductProps) {
       {firstKeyArr.map((name, index) => {
         const key = `name_option_${index}`;
 
+        // Проверяем, есть ли изображение в option[index]
+        const hasImage = firstKeyArr[index] === "image";
+
         return (
           <li key={key}>
             <label htmlFor={name}>{nameOption[index]}</label>
             {typeof option[index][0].value === "object" ? (
-              <input
-                id={name}
-                type="text"
-                {...register(`${name}.value`)}
-                required
-              />
+              hasImage ? (
+                <input
+                  id={name}
+                  type="file"
+                  {...register(`${name}.value`)}
+                  accept="image/*"
+                  required
+                />
+              ) : (
+                <input
+                  id={name}
+                  type="text"
+                  {...register(`${name}.value`)}
+                  required
+                />
+              )
             ) : (
               <SelectForm
                 name={name}
@@ -33,6 +46,7 @@ function ListOption({ options }: ISelectCardProductProps) {
                 options={option[index]}
               />
             )}
+            {/* Если есть изображение, добавляем input для загрузки изображения */}
           </li>
         );
       })}

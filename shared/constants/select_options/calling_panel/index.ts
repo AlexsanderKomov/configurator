@@ -264,4 +264,8 @@ export const CALLING_PANEL: IConstants = {
       },
     ],
   },
+  image: {
+    name: "Картинка",
+    option: [{ value: null, label: "" }],
+  },
 };
