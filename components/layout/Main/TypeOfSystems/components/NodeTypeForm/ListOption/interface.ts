@@ -1,6 +1,5 @@
-import { ICallingPanel } from "@/shared/constants/select_options/calling_panel/interface";
-import { IMonitor } from "@/shared/constants/select_options/monitor/interface";
+import { IConstants } from "@/shared/constants/select_options/interface";
 
 export interface ISelectCardProductProps {
-  readonly options: ICallingPanel | IMonitor;
+  readonly options: IConstants;
 }

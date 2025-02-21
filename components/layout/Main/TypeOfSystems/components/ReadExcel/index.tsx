@@ -3,9 +3,11 @@ import ExcelJS from "exceljs";
 import { ChangeEvent, useState } from "react";
 
 import { useTypeStore } from "@/components/layout/Main/TypeOfSystems/store";
-import { translatetListLoaded } from "@/lib/helpers/translatetListLoaded";
+import { transformListLoaded } from "@/lib/helpers/transformListLoaded";
 import { validationFileLoaded } from "@/lib/helpers/validationFileLoaded";
 import { errorLoadingFile } from "@/components/uikit/ErrorLoadingFile";
+import { uploadImageToServer } from "@/lib/helpers/uploadImageToServer";
+import { base64ToBlob } from "@/lib/helpers/base64ToBlob";
 
 export interface IExcelImage {
   cellAddress: string; // Адрес ячейки
@@ -31,40 +33,53 @@ const ReadExcel = () => {
     const workbook = new ExcelJS.Workbook();
     const reader = new FileReader();
 
-    return new Promise<string[]>((resolve) => {
+    return new Promise<string[]>((resolve, reject) => {
       reader.onload = async (e) => {
-        const buffer = e.target?.result as ArrayBuffer;
-        await workbook.xlsx.load(buffer);
+        try {
+          const buffer = e.target?.result as ArrayBuffer;
+          await workbook.xlsx.load(buffer);
 
-        const images: string[] = [];
+          const images: string[] = [];
 
-        workbook.eachSheet((sheet) => {
-          sheet.getImages().forEach((image) => {
-            const imageId = parseInt(image.imageId, 10);
-            if (!isNaN(imageId)) {
-              const imageFile = workbook.getImage(imageId);
+          workbook.eachSheet((sheet) => {
+            sheet.getImages().forEach((image) => {
+              const imageId = parseInt(image.imageId, 10);
+              if (!isNaN(imageId)) {
+                const imageFile = workbook.getImage(imageId);
 
-              if (imageFile && imageFile.buffer) {
-                const base64 = Buffer.from(imageFile.buffer).toString("base64");
-                images.push(`data:image/png;base64,${base64}`);
+                if (imageFile && imageFile.buffer) {
+                  const base64 = Buffer.from(imageFile.buffer).toString(
+                    "base64"
+                  );
+                  images.push(`data:image/png;base64,${base64}`);
+                }
               }
-            }
+            });
           });
-        });
-        resolve(images);
+
+          resolve(images);
+        } catch (error) {
+          console.error("Ошибка при извлечении изображений:", error);
+          reject(error);
+        }
+      };
+
+      reader.onerror = () => {
+        reject(new Error("Ошибка при чтении файла"));
       };
 
       reader.readAsArrayBuffer(file);
     });
   };
 
-  function handleFileReader(e: ChangeEvent<HTMLInputElement>) {
+  const handleFileReader = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e?.target?.files?.[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      const data = e?.target?.result;
+    setValue("");
+
+    try {
+      const data = await readFileAsArrayBuffer(file);
       const workbook = XLSX.read(data, { type: "binary" });
       const sheetName = workbook.SheetNames[0];
       const firstSheet = workbook.Sheets[sheetName];
@@ -73,17 +88,35 @@ const ReadExcel = () => {
 
       if (validationFileLoaded(firstSheetData)) {
         errorLoadingFile();
-        setValue("");
         resetData();
       } else {
         const images = await extractImagesFromExcel(file);
-        updateData(translatetListLoaded(firstSheetData, images));
-      }
-    };
 
-    simulateLoading();
-    reader.readAsArrayBuffer(file);
-  }
+        // Преобразуем base64 в Blob
+        const blobs = images.map((base64) => base64ToBlob(base64, "image/png"));
+
+        // Отправляем Blob на сервер
+        const imageUrls = await Promise.all(blobs.map(uploadImageToServer));
+        updateData(transformListLoaded(firstSheetData, imageUrls));
+      }
+    } catch (error) {
+      console.error("Ошибка при чтении файла:", error);
+      errorLoadingFile();
+      resetData();
+    } finally {
+      stopLoading();
+    }
+  };
+
+  const readFileAsArrayBuffer = (file: File): Promise<ArrayBuffer> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as ArrayBuffer);
+      reader.onerror = () => reject(reader.error);
+      reader.readAsArrayBuffer(file);
+      simulateLoading();
+    });
+  };
 
   return (
     <input

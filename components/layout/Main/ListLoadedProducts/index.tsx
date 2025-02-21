@@ -16,13 +16,19 @@ function ListLoadedProducts() {
           <ul key={key} className="grid grid-cols-4 gap-8">
             {Object.keys(item).map((keys, index) => {
               const key = `item_${item?.[keys]}_${index}`;
-              console.log(item?.[keys].option?.[0].label);
 
               if (keys === "image") {
+                const imageUrl = item?.[keys].option?.[0].label; // Ссылка на изображение
+
                 return (
                   <li key={key} className="w-1/8 text-center">
-                    <Image src={item?.[keys].option?.[0].label} alt="image" />
-                    image
+                    <Image
+                      width={100} // Ширина изображения
+                      height={100} // Высота изображения
+                      className="object-cover"
+                      src={imageUrl}
+                      alt="image"
+                    />
                   </li>
                 );
               } else {

@@ -23,7 +23,7 @@ export function getOptionName(obj: IConstants) {
       nestedObjects.push(value);
     }
   }
-  console.log(obj);
+
   return [
     getFirstObject(nestedObjects),
     getSecondObject(nestedObjects),

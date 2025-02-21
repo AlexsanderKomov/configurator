@@ -13,8 +13,9 @@ import { TYPE_EQUIPMENT } from "@/shared/constants/type_equipment";
  * @returns Преобразованный массив данных.
  */
 
-export function translatetListLoaded(arr: IArrayTranslate[], image: string[]) {
+export function transformListLoaded(arr: IArrayTranslate[], image: string[]) {
   const { monitor, calling_panel } = TypeEquipment;
+
   return arr.map((item, index) => {
     // Определяем текущий тип оборудования
     let current: IConstants | null = null;
@@ -57,6 +58,7 @@ export function translatetListLoaded(arr: IArrayTranslate[], image: string[]) {
       }
     });
 
+    console.log(newItem);
     return newItem;
   });
 }
