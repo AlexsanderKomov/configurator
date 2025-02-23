@@ -1,9 +1,7 @@
 import { FormDataSubmit } from "@/components/layout/Main/TypeOfSystems/components/NodeTypeForm/interface";
-import {
-  IConstants,
-  IOption,
-} from "@/shared/constants/select_options/interface";
+import { IConstants } from "@/shared/constants/select_options/interface";
 import { Image } from "./enum";
+import { IProductData } from "./interface";
 
 /**
  * Преобразует данные из формы в объект IConstants.
@@ -16,34 +14,23 @@ import { Image } from "./enum";
 export function transformationOfProductThroughForm(
   data: FormDataSubmit,
   constant: IConstants,
-  imageUrl: string
-) {
-  const newItem: IConstants = {};
-  console.log(data);
+  imageUrl: string,
+  typeEquipment: string
+): IProductData {
+  const productData: IProductData = {};
 
   Object.keys(constant).forEach((item) => {
-    // Получаем значение и метку из data
     const value = data[item]?.value;
-    const label = data[item]?.label;
 
-    // Создаем массив option
-    const option: IOption[] = [
-      {
-        value: constant[item].name === Image.image ? imageUrl : value, // Значение из data
-        label:
-          constant[item].name === Image.image
-            ? imageUrl
-            : label || String(value), // Если label отсутствует, используем value как строку
-      },
-    ];
-
-    // Добавляем поле в новый объект
-    newItem[item] = {
-      name: constant[item].name, // Используем имя из constant
-      option: option, // Добавляем массив option
-    };
+    // Если поле является изображением, используем imageUrl
+    if (constant[item].name === Image.image) {
+      productData["image"] = imageUrl;
+      productData["typeEquipment"] = typeEquipment;
+    } else {
+      // Иначе сохраняем значение из формы
+      productData[item] = value;
+    }
   });
 
-  console.log(newItem);
-  return newItem;
+  return productData;
 }

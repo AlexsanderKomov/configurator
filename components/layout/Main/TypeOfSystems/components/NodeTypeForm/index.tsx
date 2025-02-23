@@ -1,4 +1,5 @@
 import { FormProvider, useForm } from "react-hook-form";
+import { supabase } from "@/lib/supabaseClient";
 import ButtonStage from "@/components/uikit/ButtonStage";
 import { useTypeStore } from "../../store";
 import { CALLING_PANEL } from "@/shared/constants/select_options/calling_panel";
@@ -44,8 +45,26 @@ function NodeTypeForm() {
       }
     }
 
-    // Передаем обновленные данные в функцию
-    transformationOfProductThroughForm(data, nodeProperties, imageUrl);
+    // Преобразование данных для Supabase
+    const productData = transformationOfProductThroughForm(
+      data,
+      nodeProperties,
+      imageUrl,
+      typeNode
+    );
+
+    console.log(productData);
+    const { data: insertedData, error } = await supabase
+      .from("products")
+      .insert([productData])
+      .single();
+
+    if (error) {
+      console.error("Ошибка при сохранении продукта:", error);
+    } else {
+      console.log("Продукт сохранен:", insertedData);
+    }
+
     reset();
   };
 

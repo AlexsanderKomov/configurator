@@ -1,3 +1,5 @@
+"use client";
+
 import * as XLSX from "xlsx";
 import ExcelJS from "exceljs";
 import { ChangeEvent, useState } from "react";
@@ -106,6 +108,8 @@ const ReadExcel = () => {
     } finally {
       stopLoading();
     }
+
+    simulateLoading();
   };
 
   const readFileAsArrayBuffer = (file: File): Promise<ArrayBuffer> => {
@@ -114,7 +118,6 @@ const ReadExcel = () => {
       reader.onload = () => resolve(reader.result as ArrayBuffer);
       reader.onerror = () => reject(reader.error);
       reader.readAsArrayBuffer(file);
-      simulateLoading();
     });
   };
 

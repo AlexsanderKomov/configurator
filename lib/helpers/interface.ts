@@ -8,3 +8,7 @@ export interface IGetHelpers {
 export interface IArrayTranslate {
   [x: string]: string;
 }
+
+export interface IProductData {
+  [x: string]: string | number | boolean;
+}
