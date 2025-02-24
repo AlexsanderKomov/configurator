@@ -13,10 +13,10 @@ function Header() {
       <Link href={"/add_product"} className="border p-2 rounded-lg text-black">
         Добавить продукт
       </Link>
-      <Link href={"/signin"} className="border p-2 rounded-lg text-black">
+      <Link href={"/login"} className="border p-2 rounded-lg text-black">
         Вход
       </Link>
-      <Link href={"/sign-up"} className="border p-2 rounded-lg text-black">
+      <Link href={"/register"} className="border p-2 rounded-lg text-black">
         Регистрация
       </Link>
     </div>

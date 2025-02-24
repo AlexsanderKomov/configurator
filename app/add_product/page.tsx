@@ -9,7 +9,7 @@ async function AddProducts() {
   const session = await getSession();
 
   if (!session) {
-    redirect("/signin"); // Перенаправление на страницу входа
+    redirect("/login"); // Перенаправление на страницу входа
   }
 
   return (

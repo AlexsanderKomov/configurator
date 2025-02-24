@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 
-const SignInWithEmail = () => {
+const LoginnWithEmail = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignIn = async () => {
+  const handleLogin = async () => {
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -35,9 +35,9 @@ const SignInWithEmail = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleSignIn}>Войти через почту</button>
+      <button onClick={handleLogin}>Войти через почту</button>
     </div>
   );
 };
 
-export default SignInWithEmail;
+export default LoginnWithEmail;
