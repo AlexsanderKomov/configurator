@@ -1,4 +1,4 @@
-import { Slide, toast, ToastContainer } from "react-toastify";
+import { Slide, toast } from "react-toastify";
 
 export const errorLoadingFile = () =>
   toast.error("Вы не заполнили файл полностью!", {
@@ -14,14 +14,3 @@ export const errorLoadingFile = () =>
     transition: Slide,
     toastId: "error-loading-file",
   });
-
-// "Вы полностью не заполнили файл!"
-function ErrorLoadingFile() {
-  return (
-    <div>
-      <ToastContainer />
-    </div>
-  );
-}
-
-export default ErrorLoadingFile;

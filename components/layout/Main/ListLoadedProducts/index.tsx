@@ -1,3 +1,4 @@
+"use client";
 import { useTypeStore } from "@/components/layout/Main/TypeOfSystems/store";
 import Image from "next/image";
 
@@ -7,6 +8,7 @@ function ListLoadedProducts() {
   if (data?.length === 0) return <p>Нет данных</p>;
 
   if (loading) return <p>Загрузка данных...</p>;
+
   return (
     <div className="grid w-full gap-y-12">
       {data?.map((item, index) => {
@@ -31,13 +33,13 @@ function ListLoadedProducts() {
                     />
                   </li>
                 );
-              } else {
-                return (
-                  <li key={key} className="w-1/8 text-center">
-                    {item?.[keys].name} : {item?.[keys]?.option[0].label}
-                  </li>
-                );
               }
+
+              return (
+                <li key={key} className="w-1/8 text-center">
+                  {item?.[keys].name} : {item?.[keys]?.option[0].label}
+                </li>
+              );
             })}
           </ul>
         );

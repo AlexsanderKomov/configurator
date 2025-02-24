@@ -1,10 +1,11 @@
-import SignInWithEmail from "@/components/authentication/SignInWithEmail";
+import LoginForm from "@/components/auth/LoginForm";
 
-export default function SignInPage() {
+const LoginPage = () => {
   return (
-    <div className="flex flex-col gap-y-8">
-      <h1>Вход</h1>
-      <SignInWithEmail />
+    <div>
+      <LoginForm />
     </div>
   );
-}
+};
+
+export default LoginPage;

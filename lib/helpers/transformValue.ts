@@ -3,7 +3,6 @@
  * @param value - Строка для преобразования.
  * @returns Булево значение, соответствующее строке.
  */
-
 export function transformValue(value: string): boolean {
   let result = false;
 

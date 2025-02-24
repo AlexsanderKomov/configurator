@@ -12,7 +12,6 @@ import { TYPE_EQUIPMENT } from "@/shared/constants/type_equipment";
  * @param image - Массив изображений в формате base64.
  * @returns Преобразованный массив данных.
  */
-
 export function transformListLoaded(arr: IArrayTranslate[], image: string[]) {
   const { monitor, calling_panel } = TypeEquipment;
 
@@ -58,7 +57,6 @@ export function transformListLoaded(arr: IArrayTranslate[], image: string[]) {
       }
     });
 
-    console.log(newItem);
     return newItem;
   });
 }

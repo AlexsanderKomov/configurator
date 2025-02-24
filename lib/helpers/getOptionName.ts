@@ -10,7 +10,6 @@ import { IGetHelpers } from "./interface";
  * @returns {IGetHelpersObject[]} - Массив, содержащий результаты вызова функций getFirstObject, getSecondObject и getFirstKey.
  * Эта функция нужна для создания массива всех значений для ListOption.
  */
-
 export function getOptionName(obj: IConstants) {
   const nestedObjects: IGetHelpers[] = [];
 

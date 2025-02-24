@@ -6,7 +6,6 @@ import { IGetHelpers } from "./interface";
  * @returns string[] - Массив опций для <Select />.
  * Эта функция нужна что создать массив опций для передачи этих опций в Select для регистрации name
 */
-
 export function getSecondObject(arr: IGetHelpers[]) {
   const secondValues = [];
 

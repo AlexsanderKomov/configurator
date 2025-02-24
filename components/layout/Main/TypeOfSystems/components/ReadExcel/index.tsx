@@ -7,9 +7,9 @@ import { ChangeEvent, useState } from "react";
 import { useTypeStore } from "@/components/layout/Main/TypeOfSystems/store";
 import { transformListLoaded } from "@/lib/helpers/transformListLoaded";
 import { validationFileLoaded } from "@/lib/helpers/validationFileLoaded";
-import { errorLoadingFile } from "@/components/uikit/ErrorLoadingFile";
 import { uploadImageToServer } from "@/lib/helpers/uploadImageToServer";
 import { base64ToBlob } from "@/lib/helpers/base64ToBlob";
+import { errorLoadingFile } from "@/lib/helpers/errorLoadingFile";
 
 export interface IExcelImage {
   cellAddress: string; // Адрес ячейки

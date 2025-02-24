@@ -6,7 +6,6 @@ import { IGetHelpers } from "./interface";
  * @returns string[] - Массив опций для <Select />.
  * Эта функция нужна что создать массив названия для вставки в label
 */
-
 export function getFirstObject(arr: IGetHelpers[]): string[] {
   const firstValues: string[] = [];
 

@@ -12,5 +12,6 @@ export const uploadImageToServer = async (blob: Blob): Promise<string> => {
   }
 
   const data = await response.json();
+
   return data.url; // Ссылка на сохраненное изображение
 };

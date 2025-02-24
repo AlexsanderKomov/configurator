@@ -1,20 +1,24 @@
-import { getSession } from "@/app/auth/session";
-import SignOut from "@/components/authentication/SignOut";
-import { redirect } from "next/navigation";
-
-export default async function ProfilePage() {
-  const session = await getSession();
-
-  if (!session) {
-    redirect("/login"); // Перенаправление на страницу входа
-  }
-
+const ProfilePage = () => {
   return (
-    <div>
+    <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
       <h1>Профиль</h1>
-      <p>Email: {session.user.email}</p>
-      <p>Телефон: {session.user.phone}</p>
-      <SignOut />
+      <form action="/auth/sign-out" method="POST">
+        <button
+          type="submit"
+          style={{
+            padding: "10px",
+            backgroundColor: "#ff4d4d",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          Выйти
+        </button>
+      </form>
     </div>
   );
-}
+};
+
+export default ProfilePage;

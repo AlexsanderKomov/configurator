@@ -10,7 +10,6 @@ import { IProductData } from "./interface";
  * @param imageUrl - URL изображения.
  * @returns Преобразованный объект IConstants.
  */
-
 export function transformationOfProductThroughForm(
   data: FormDataSubmit,
   constant: IConstants,
