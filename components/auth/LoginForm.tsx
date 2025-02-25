@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabaseClient";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +23,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
+      const supabase = createClient();
       // Вход пользователя через Supabase Auth
       const { data, error } = await supabase.auth.signInWithPassword({
         email: formData.email,

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
+import { useRouter } from "next/navigation"; // Импортируем useRouter
+import { createClient } from "@/lib/supabaseClient";
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,9 @@ const RegisterForm = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const supabase = createClient();
+  const router = useRouter(); // Инициализируем useRouter
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -39,8 +43,7 @@ const RegisterForm = () => {
       });
 
       if (error) {
-        console.error("Ошибка при регистрации:", error); // Логируем ошибку
-        alert(error.message); // Показываем пользователю
+        alert("Пользователь с таким Email уже существует"); // Показываем пользователю
         return;
       }
 
@@ -66,6 +69,7 @@ const RegisterForm = () => {
         }
 
         alert("Регистрация успешна!");
+        router.push("/profile"); // Перенаправляем на страницу /profile
       }
     } catch (error) {
       console.error("Неожиданная ошибка:", error); // Логируем ошибку

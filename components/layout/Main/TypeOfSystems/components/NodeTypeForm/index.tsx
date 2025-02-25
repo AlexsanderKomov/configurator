@@ -1,5 +1,5 @@
 import { FormProvider, useForm } from "react-hook-form";
-import { supabase } from "@/lib/supabaseClient";
+import { createClient } from "@/lib/supabaseClient";
 import ButtonStage from "@/components/uikit/ButtonStage";
 import { useTypeStore } from "../../store";
 import { CALLING_PANEL } from "@/shared/constants/select_options/calling_panel";
@@ -14,6 +14,7 @@ function NodeTypeForm() {
   const { handleSubmit, reset } = methods;
   let nodeProperties: INodeProperties = MONITOR;
   const typeNode = useTypeStore((store) => store.typeNode);
+  const supabase = createClient();
 
   if (typeNode === "callingPanel") {
     nodeProperties = CALLING_PANEL;

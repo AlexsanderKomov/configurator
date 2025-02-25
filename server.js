@@ -4,7 +4,6 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
-import { createClient } from "@supabase/supabase-js";
 
 // Получаем __dirname в ES-модулях
 const __filename = fileURLToPath(import.meta.url);
@@ -12,11 +11,6 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 5000;
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
 
 // Настройка CORS
 app.use(cors());
