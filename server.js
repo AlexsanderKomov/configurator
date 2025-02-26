@@ -4,6 +4,7 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import { createClient } from "@supabase/supabase-js";
 
 // Получаем __dirname в ES-модулях
 const __filename = fileURLToPath(import.meta.url);
@@ -12,8 +13,20 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = 5000;
 
-// Настройка CORS
+// Инициализация Supabase
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL; // Замените на ваш URL
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY; // Замените на ваш ключ
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Middleware для CORS
 app.use(cors());
+// Middleware для обработки JSON
+app.use(express.json());
+
+app.use((req, res, next) => {
+  console.log(`Incoming request: ${req.method} ${req.url}`);
+  next();
+});
 
 // Создаем папку для загруженных файлов, если её нет
 const uploadDir = path.join(__dirname, "uploads");
@@ -48,12 +61,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 // Роут для доступа к загруженным файлам
 app.use("/uploads", express.static(uploadDir));
 
-// Запуск сервера
-app.listen(port, () => {
-  console.log(`Сервер запущен на http://localhost:${port}`);
-});
-
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
   const {
     email,
     password,
@@ -90,7 +98,46 @@ app.post("/register", async (req, res) => {
     if (profileError) {
       return res.status(400).json({ error: profileError.message });
     }
-
-    return res.status(200).json({ message: "Регистрация успешна!" });
   }
+});
+
+app.post("/api/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
+
+  if (error) {
+    return res.status(400).json({ error: error.message });
+  }
+
+  if (data.user) {
+    const { error: profileError } = await supabase.from("profiles").insert([
+      {
+        id: data.user.id,
+        first_name: firstName,
+        last_name: lastName,
+        middle_name: middleName,
+        phone_number: phoneNumber,
+        email,
+        company,
+        role: "user",
+      },
+    ]);
+
+    if (profileError) {
+      return res.status(400).json({ error: profileError.message });
+    }
+
+    res
+      .status(201)
+      .json({ message: "Регистрация прошла успешно", user: data.user });
+  }
+});
+
+// Запуск сервера
+app.listen(port, () => {
+  console.log(`Сервер запущен на http://localhost:${port}`);
 });

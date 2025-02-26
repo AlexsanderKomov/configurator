@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabaseClient";
+// import { useRouter } from "next/navigation";
+// import { createClient } from "@/lib/supabaseClient";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ const LoginForm = () => {
     password: "",
   });
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -23,28 +23,44 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const supabase = createClient();
-      // Вход пользователя через Supabase Auth
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: formData.email,
-        password: formData.password,
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
 
-      if (error) {
-        console.error("Ошибка при входе:", error); // Логируем ошибку
-        alert(error.message); // Показываем пользователю
-        return;
-      }
-
-      // Если вход успешен, перенаправляем на защищённую страницу
-      if (data.user) {
-        alert("Вход выполнен успешно!");
-        router.push("/profile"); // Перенаправление на страницу профиля
+      if (response.ok) {
+        console.log("Успешный вход");
       }
     } catch (error) {
-      console.error("Неожиданная ошибка:", error); // Логируем ошибку
-      alert("Произошла ошибка при входе. Пожалуйста, попробуйте снова."); // Общее сообщение для пользователя
+      console.log(error);
+      return;
     }
+    // try {
+    //   const supabase = createClient();
+    //   // Вход пользователя через Supabase Auth
+    //   const { data, error } = await supabase.auth.signInWithPassword({
+    //     email: formData.email,
+    //     password: formData.password,
+    //   });
+
+    //   if (error) {
+    //     console.error("Ошибка при входе:", error); // Логируем ошибку
+    //     alert(error.message); // Показываем пользователю
+    //     return;
+    //   }
+
+    //   // Если вход успешен, перенаправляем на защищённую страницу
+    //   if (data.user) {
+    //     alert("Вход выполнен успешно!");
+    //     router.push("/profile"); // Перенаправление на страницу профиля
+    //   }
+    // } catch (error) {
+    //   console.error("Неожиданная ошибка:", error); // Логируем ошибку
+    //   alert("Произошла ошибка при входе. Пожалуйста, попробуйте снова."); // Общее сообщение для пользователя
+    // }
   };
 
   return (

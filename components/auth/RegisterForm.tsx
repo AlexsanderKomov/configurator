@@ -1,7 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // Импортируем useRouter
-import { createClient } from "@/lib/supabaseClient";
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -14,9 +12,6 @@ const RegisterForm = () => {
     password: "",
     confirmPassword: "",
   });
-
-  const supabase = createClient();
-  const router = useRouter(); // Инициализируем useRouter
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -36,45 +31,64 @@ const RegisterForm = () => {
     }
 
     try {
-      // Регистрация пользователя в Supabase Auth
-      const { data, error } = await supabase.auth.signUp({
-        email: formData.email,
-        password: formData.password,
+      const response = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
 
-      if (error) {
-        alert("Пользователь с таким Email уже существует"); // Показываем пользователю
-        return;
-      }
-
-      // Если регистрация прошла успешно, сохраняем профиль в таблице `profiles`
-      if (data.user) {
-        const { error: profileError } = await supabase.from("profiles").insert([
-          {
-            id: data.user.id,
-            first_name: formData.firstName,
-            last_name: formData.lastName,
-            middle_name: formData.middleName,
-            phone_number: formData.phoneNumber,
-            email: formData.email,
-            company: formData.company,
-            role: "user", // Роль по умолчанию
-          },
-        ]);
-
-        if (profileError) {
-          console.error("Ошибка при сохранении профиля:", profileError); // Логируем ошибку
-          alert(profileError.message); // Показываем пользователю
-          return;
-        }
-
-        alert("Регистрация успешна!");
-        router.push("/profile"); // Перенаправляем на страницу /profile
+      if (response.ok) {
+        console.log("Регистрация прошла успешно");
+      } else {
+        console.log("Ошибка при регистрации", response.status);
       }
     } catch (error) {
-      console.error("Неожиданная ошибка:", error); // Логируем ошибку
-      alert("Произошла ошибка при регистрации. Пожалуйста, попробуйте снова."); // Общее сообщение для пользователя
+      console.log("Ошибка:", error);
+      return;
     }
+
+    // try {
+    //   // Регистрация пользователя в Supabase Auth
+    //   const { data, error } = await supabase.auth.signUp({
+    //     email: formData.email,
+    //     password: formData.password,
+    //   });
+
+    //   if (error) {
+    //     alert("Пользователь с таким Email уже существует"); // Показываем пользователю
+    //     return;
+    //   }
+
+    //   // Если регистрация прошла успешно, сохраняем профиль в таблице `profiles`
+    //   if (data.user) {
+    //     const { error: profileError } = await supabase.from("profiles").insert([
+    //       {
+    //         id: data.user.id,
+    //         first_name: formData.firstName,
+    //         last_name: formData.lastName,
+    //         middle_name: formData.middleName,
+    //         phone_number: formData.phoneNumber,
+    //         email: formData.email,
+    //         company: formData.company,
+    //         role: "user", // Роль по умолчанию
+    //       },
+    //     ]);
+
+    //     if (profileError) {
+    //       console.error("Ошибка при сохранении профиля:", profileError); // Логируем ошибку
+    //       alert(profileError.message); // Показываем пользователю
+    //       return;
+    //     }
+
+    //     alert("Регистрация успешна!");
+    //     router.push("/profile"); // Перенаправляем на страницу /profile
+    //   }
+    // } catch (error) {
+    //   console.error("Неожиданная ошибка:", error); // Логируем ошибку
+    //   alert("Произошла ошибка при регистрации. Пожалуйста, попробуйте снова."); // Общее сообщение для пользователя
+    // }
   };
 
   return (
