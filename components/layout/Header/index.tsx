@@ -8,15 +8,21 @@ function Header() {
       <Link href="#">
         <Image src={delc} alt="Логотип DELC"></Image>
       </Link>
-      <Link href={"/add_product"} className="border p-2 rounded-lg text-black">
-        Добавить продукт
-      </Link>
-      <Link href={"/login"} className="border p-2 rounded-lg text-black">
-        Вход
-      </Link>
-      <Link href={"/register"} className="border p-2 rounded-lg text-black">
-        Регистрация
-      </Link>
+     
+      <div className="flex space-x-4">
+        <Link
+          href={"/login"}
+          className="border p-2 rounded-lg text-black hover:bg-gray-100"
+        >
+          Вход
+        </Link>
+        <Link
+          href={"/register"}
+          className="border p-2 rounded-lg text-black hover:bg-gray-100"
+        >
+          Регистрация
+        </Link>
+      </div>
     </div>
   );
 }

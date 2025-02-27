@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabaseClient";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -22,28 +21,25 @@ const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    try {
-      const supabase = createClient();
-      // Вход пользователя через Supabase Auth
-      const { data, error } = await supabase.auth.signInWithPassword({
+    const response = await fetch("http://localhost:3001/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
         email: formData.email,
         password: formData.password,
-      });
+      }),
+    });
 
-      if (error) {
-        console.error("Ошибка при входе:", error); // Логируем ошибку
-        alert(error.message); // Показываем пользователю
-        return;
-      }
+    const data = await response.json();
+    console.log("Ответ сервера:", data);
 
-      // Если вход успешен, перенаправляем на защищённую страницу
-      if (data.user) {
-        alert("Вход выполнен успешно!");
-        router.push("/profile"); // Перенаправление на страницу профиля
-      }
-    } catch (error) {
-      console.error("Неожиданная ошибка:", error); // Логируем ошибку
-      alert("Произошла ошибка при входе. Пожалуйста, попробуйте снова."); // Общее сообщение для пользователя
+    if (response.ok) {
+      router.push("/profile");
+    } else {
+      alert(data.error);
     }
   };
 

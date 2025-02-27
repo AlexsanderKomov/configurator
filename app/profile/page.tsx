@@ -1,42 +1,68 @@
 "use client";
-import { getUserRole } from "@/lib/helpers/getUserRole";
 import { createClient } from "@/lib/supabaseClient";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const ProfilePage = () => {
-  const [role, setRole] = useState<string | null>(null);
+  const [user, setUser] = useState<boolean>(false);
+  const router = useRouter();
   const supabase = createClient();
 
   useEffect(() => {
-    const fetchRole = async () => {
-      const role = await getUserRole(supabase); // Используем функцию
-      if (role) {
-        setRole(role);
+    const fetchSession = async () => {
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
+
+      if (error) {
+        console.error("Ошибка при проверке сессии:", error);
+      } else if (user) {
+        setUser(true);
+      } else {
+        console.log("Пользователь не аутентифицирован");
       }
     };
 
-    fetchRole();
+    fetchSession();
   }, [supabase]);
 
+  const handleLogout = async () => {
+    const response = await fetch("http://localhost:3001/api/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+
+    if (response.ok) {
+      router.push("/login");
+    } else {
+      console.log("Ошибка при выходе");
+    }
+  };
+
+  if (!user) {
+    return <p>Загрузка...</p>;
+  }
+
   return (
-    <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
+    <div>
+      <Link href={"/add_product"}>Добавить продукт</Link>
       <h1>Профиль</h1>
-      <p>Ваша роль: {role}</p>
-      <form action="/auth/sign-out" method="POST">
-        <button
-          type="submit"
-          style={{
-            padding: "10px",
-            backgroundColor: "#ff4d4d",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          Выйти
-        </button>
-      </form>
+      <p>Ваша роль: </p>
+      <button
+        onClick={handleLogout}
+        style={{
+          padding: "10px",
+          backgroundColor: "#ff4d4d",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+        }}
+      >
+        Выйти
+      </button>
     </div>
   );
 };
