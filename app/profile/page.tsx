@@ -1,32 +1,11 @@
 "use client";
-import { createClient } from "@/lib/supabaseClient";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const ProfilePage = () => {
   const [user, setUser] = useState<boolean>(false);
   const router = useRouter();
-  const supabase = createClient();
-
-  useEffect(() => {
-    const fetchSession = async () => {
-      const {
-        data: { user },
-        error,
-      } = await supabase.auth.getUser();
-
-      if (error) {
-        console.error("Ошибка при проверке сессии:", error);
-      } else if (user) {
-        setUser(true);
-      } else {
-        console.log("Пользователь не аутентифицирован");
-      }
-    };
-
-    fetchSession();
-  }, [supabase]);
 
   const handleLogout = async () => {
     const response = await fetch("http://localhost:3001/api/logout", {
