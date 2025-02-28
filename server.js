@@ -174,8 +174,11 @@ app.get("/api/profile", async (req, res) => {
       .status(401)
       .json({ error: "Не удалось получить ID пользователя" });
   }
-
-  res.send({ user: userData });
+  if (userData && userData.length > 0) {
+    res.json(userData);
+  } else {
+    res.status(404).json({ error: "Данные пользователя не найдены" });
+  }
 });
 
 // Запуск сервера

@@ -12,6 +12,7 @@ const ProfilePage = () => {
     const fetchProfile = async () => {
       try {
         const response = await fetch("http://localhost:3001/api/profile", {
+          method: "GET",
           credentials: "include", // Включаем куки
         });
 
