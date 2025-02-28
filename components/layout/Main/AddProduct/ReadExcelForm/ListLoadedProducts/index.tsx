@@ -1,5 +1,5 @@
 "use client";
-import { useTypeStore } from "@/components/layout/Main/TypeOfSystems/store";
+import { useTypeStore } from "@/components/layout/Main/AddProduct/TypeOfSystems/store";
 import Image from "next/image";
 
 function ListLoadedProducts() {
@@ -10,12 +10,12 @@ function ListLoadedProducts() {
   if (loading) return <p>Загрузка данных...</p>;
 
   return (
-    <div className="grid w-full gap-y-12">
+    <div className="grid grid-cols-2 w-full gap-12">
       {data?.map((item, index) => {
         const key = `list_${item.name}_${index}`;
 
         return (
-          <ul key={key} className="grid grid-cols-4 gap-8">
+          <ul key={key} className="flex flex-col">
             {Object.keys(item).map((keys, index) => {
               const key = `item_${item?.[keys]}_${index}`;
 
@@ -36,7 +36,7 @@ function ListLoadedProducts() {
               }
 
               return (
-                <li key={key} className="w-1/8 text-center">
+                <li key={key} className="w-1/8 text-center ">
                   {item?.[keys].name} : {item?.[keys]?.option[0].label}
                 </li>
               );

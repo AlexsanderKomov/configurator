@@ -1,24 +1,18 @@
 import { FormProvider, useForm } from "react-hook-form";
-import { createClient } from "@/lib/supabaseClient";
 import ButtonStage from "@/components/uikit/ButtonStage";
-import { useTypeStore } from "../../store";
-import { CALLING_PANEL } from "@/shared/constants/select_options/calling_panel";
-import { MONITOR } from "@/shared/constants/select_options/monitor";
-import { FormDataSubmit, INodeProperties } from "./interface";
+import { useTypeStore } from "../store";
+import { FormDataSubmit } from "./interface";
 import ListOption from "./ListOption";
 import { transformationOfProductThroughForm } from "@/lib/helpers/transformationOfProductThroughForm";
+import { setNodeProperties } from "@/lib/helpers/setNodeProperties";
 
 /** Форма типа узла */
 function NodeTypeForm() {
   const methods = useForm<FormDataSubmit>();
   const { handleSubmit, reset } = methods;
-  let nodeProperties: INodeProperties = MONITOR;
   const typeNode = useTypeStore((store) => store.typeNode);
-  const supabase = createClient();
 
-  if (typeNode === "callingPanel") {
-    nodeProperties = CALLING_PANEL;
-  }
+  const nodeProperties = setNodeProperties(typeNode);
 
   const onSubmit = async (data: FormDataSubmit) => {
     let imageUrl: string = "";
@@ -28,7 +22,7 @@ function NodeTypeForm() {
       formData.append("file", data.image.value[0]);
 
       try {
-        const response = await fetch("http://localhost:5000/api/upload", {
+        const response = await fetch("http://localhost:3001/api/upload", {
           method: "POST",
           body: formData,
         });
@@ -54,16 +48,16 @@ function NodeTypeForm() {
       typeNode
     );
 
-    console.log(productData);
-    const { data: insertedData, error } = await supabase
-      .from("products")
-      .insert([productData])
-      .single();
+    const response = await fetch("http://localhost:3001/api/add_product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productData),
+    });
 
-    if (error) {
-      console.error("Ошибка при сохранении продукта:", error);
-    } else {
-      console.log("Продукт сохранен:", insertedData);
+    if (response.ok) {
+      console.log("Продукт добавлен");
     }
 
     reset();

@@ -1,4 +1,4 @@
-import { FormDataSubmit } from "@/components/layout/Main/TypeOfSystems/components/NodeTypeForm/interface";
+import { FormDataSubmit } from "@/components/layout/Main/AddProduct/TypeOfSystems/NodeTypeForm/interface";
 import { IConstants } from "@/shared/constants/select_options/interface";
 import { Image } from "./enum";
 import { IProductData } from "./interface";

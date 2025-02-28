@@ -1,5 +1,5 @@
 import { IButtonStage } from "./interface";
-import { useTypeStore } from "@/components/layout/Main/TypeOfSystems/store";
+import { useTypeStore } from "@/components/layout/Main/AddProduct/TypeOfSystems/store";
 
 function ButtonStage(props: IButtonStage) {
   const { step, stage, typeNode } = props;

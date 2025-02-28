@@ -5,10 +5,10 @@ import delc from "@/public/image/logo.png";
 function Header() {
   return (
     <div className="container flex justify-between items-center">
-      <Link href="#">
+      <Link href="/">
         <Image src={delc} alt="Логотип DELC"></Image>
       </Link>
-     
+
       <div className="flex space-x-4">
         <Link
           href={"/login"}

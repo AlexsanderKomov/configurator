@@ -181,6 +181,24 @@ app.get("/api/profile", async (req, res) => {
   }
 });
 
+app.post("/api/add_product", async (req, res) => {
+  const productData = req.body;
+
+  if (productData.length === 1) {
+    const { data: insertData, error } = await supabase
+      .from("products")
+      .insert(productData)
+      .single();
+
+    if (error) {
+      return res.status(400).json({ error: error.message });
+    }
+    res.send(insertData);
+  } else {
+    console.log(productData);
+  }
+});
+
 // Запуск сервера
 app.listen(port, () => {
   console.log(`Сервер запущен на http://localhost:${port}`);

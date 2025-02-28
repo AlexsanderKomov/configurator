@@ -1,12 +1,12 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
-import TypeOfNodes from "./components/ListNodes";
 import { CHOISE_OF_THE_SYSTEM } from "./constants";
 import { Stage } from "./enums";
 import { useTypeStore } from "./store";
-import NodeTypeForm from "./components/NodeTypeForm";
+import NodeTypeForm from "./NodeTypeForm";
 import ButtonStage from "@/components/uikit/ButtonStage";
+import ListNodes from "./ListNodes";
 
 /* Типы систем видеонаблюдения */
 function TypeOfSystems() {
@@ -42,7 +42,7 @@ function TypeOfSystems() {
               })}
             </select>
           )}
-          {stage === Stage.two && <TypeOfNodes type={typeSystem} />}
+          {stage === Stage.two && <ListNodes type={typeSystem} />}
           {stage === Stage.one && <ButtonStage step="Дальше" stage={2} />}
           {stage === Stage.two && <ButtonStage step="Назад" stage={1} />}
         </div>

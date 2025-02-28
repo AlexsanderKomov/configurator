@@ -4,7 +4,7 @@ import * as XLSX from "xlsx";
 import ExcelJS from "exceljs";
 import { ChangeEvent, useState } from "react";
 
-import { useTypeStore } from "@/components/layout/Main/TypeOfSystems/store";
+import { useTypeStore } from "@/components/layout/Main/AddProduct/TypeOfSystems/store";
 import { transformListLoaded } from "@/lib/helpers/transformListLoaded";
 import { validationFileLoaded } from "@/lib/helpers/validationFileLoaded";
 import { uploadImageToServer } from "@/lib/helpers/uploadImageToServer";
@@ -16,7 +16,7 @@ export interface IExcelImage {
   base64: string; // Изображение в base64
 }
 
-const ReadExcel = () => {
+const ReadExcelInput = () => {
   const [value, setValue] = useState<string>("");
 
   const { updateData, loading, startLoading, stopLoading, resetData } =
@@ -99,7 +99,12 @@ const ReadExcel = () => {
 
         // Отправляем Blob на сервер
         const imageUrls = await Promise.all(blobs.map(uploadImageToServer));
-        updateData(transformListLoaded(firstSheetData, imageUrls));
+
+        const data = transformListLoaded(firstSheetData, imageUrls);
+        console.log(firstSheetData);
+        updateData(data);
+
+        // const response = await fetch('')
       }
     } catch (error) {
       console.error("Ошибка при чтении файла:", error);
@@ -132,4 +137,4 @@ const ReadExcel = () => {
   );
 };
 
-export default ReadExcel;
+export default ReadExcelInput;
