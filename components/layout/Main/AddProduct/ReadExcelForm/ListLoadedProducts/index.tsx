@@ -1,5 +1,5 @@
 "use client";
-import { useTypeStore } from "@/components/layout/Main/AddProduct/TypeOfSystems/store";
+import { useTypeStore } from "@/components/layout/Main/AddProduct/store";
 import Image from "next/image";
 
 function ListLoadedProducts() {

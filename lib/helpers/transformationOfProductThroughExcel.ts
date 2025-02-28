@@ -1,28 +1,22 @@
 import { IConstants } from "@/shared/constants/select_options/interface";
 import { IProductData } from "./interface";
+import { Type, TypeEquipment } from "./enum";
 
 export function transformationOfProductThroughExcel(
-  constant: IConstants,
-  typeEquipment: string
-): IProductData[] {
+  firstSheetData
+): IProductData {
   const productData: IProductData = {};
 
-  console.log(data);
-
-
-  // return data.map((item) => {
-  //   const productData: IProductData = {};
-
-  //   // Проходим по каждому ключу в объекте
-  //   for (const constant in item) {
-  //     if (item[constant]?.option?.length > 0) {
-  //       // Берём первое значение `value` из массива `option`
-  //       productData[key] = item[key].option[0].value;
-  //     } else {
-  //       // Если `option` пустой, сохраняем `null`
-  //       productData[key] = null;
-  //     }
-  //   }
+  Object.keys(firstSheetData).forEach((key) => {
+    switch (firstSheetData[key][Type.typeEquipment]) {
+      case TypeEquipment.monitor:
+        productData["typeEquipment"] = TypeEquipment.monitor;
+        break;
+      case TypeEquipment.calling_panel:
+        productData["typeEquipment"] = TypeEquipment.calling_panel;
+        break;
+    }
+  });
 
   return productData;
 }

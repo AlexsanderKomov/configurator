@@ -1,11 +1,11 @@
 import { ToastContainer } from "react-toastify";
 import ListLoadedProducts from "./ListLoadedProducts";
 import ReadExcelInput from "./ReadExcelInput";
-import { useTypeStore } from "../TypeOfSystems/store";
+import { useTypeStore } from "../store";
 
 function ReadExcelForm() {
-  const data = useTypeStore((store) => store.data);
-  console.log(data);
+  const { data, loading } = useTypeStore((store) => store);
+
   const handleSubmit = async () => {
     const response = await fetch("http://localhost:3001/api/add_product", {
       method: "POST",
@@ -27,7 +27,7 @@ function ReadExcelForm() {
       <ReadExcelInput />
       <ListLoadedProducts />
       <ToastContainer />
-      {data.length !== 0 && (
+      {data.length !== 0 && !loading && (
         <button onClick={handleSubmit} type="button">
           Добавить продукт
         </button>

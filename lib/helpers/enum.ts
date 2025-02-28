@@ -6,3 +6,7 @@ export enum TypeEquipment {
 export enum Image {
   image = "Картинка",
 }
+
+export enum Type {
+  typeEquipment = "Вид оборудования",
+}

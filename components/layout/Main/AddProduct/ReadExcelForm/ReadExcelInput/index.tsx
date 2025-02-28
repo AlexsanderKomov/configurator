@@ -4,12 +4,13 @@ import * as XLSX from "xlsx";
 import ExcelJS from "exceljs";
 import { ChangeEvent, useState } from "react";
 
-import { useTypeStore } from "@/components/layout/Main/AddProduct/TypeOfSystems/store";
+import { useTypeStore } from "@/components/layout/Main/AddProduct/store";
 import { transformListLoaded } from "@/lib/helpers/transformListLoaded";
 import { validationFileLoaded } from "@/lib/helpers/validationFileLoaded";
 import { uploadImageToServer } from "@/lib/helpers/uploadImageToServer";
 import { base64ToBlob } from "@/lib/helpers/base64ToBlob";
 import { errorLoadingFile } from "@/lib/helpers/errorLoadingFile";
+import { transformationOfProductThroughExcel } from "@/lib/helpers/transformationOfProductThroughExcel";
 
 export interface IExcelImage {
   cellAddress: string; // Адрес ячейки
@@ -101,7 +102,7 @@ const ReadExcelInput = () => {
         const imageUrls = await Promise.all(blobs.map(uploadImageToServer));
 
         const data = transformListLoaded(firstSheetData, imageUrls);
-        console.log(firstSheetData);
+        console.log(transformationOfProductThroughExcel(firstSheetData));
         updateData(data);
 
         // const response = await fetch('')

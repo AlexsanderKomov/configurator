@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from "react-hook-form";
 import ButtonStage from "@/components/uikit/ButtonStage";
-import { useTypeStore } from "../store";
+import { useTypeStore } from "../../store";
 import { FormDataSubmit } from "./interface";
 import ListOption from "./ListOption";
 import { transformationOfProductThroughForm } from "@/lib/helpers/transformationOfProductThroughForm";
