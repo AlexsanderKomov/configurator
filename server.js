@@ -17,7 +17,9 @@ const __dirname = path.dirname(__filename);
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
+const supabaseService = createClient(supabaseUrl, supabaseServiceKey);
 
 const app = express();
 const port = 3001;
@@ -161,8 +163,19 @@ app.get("/api/profile", async (req, res) => {
   if (error) {
     return res.status(401).json({ error: "Неверный токен" });
   }
-  console.log(user);
-  res.json({ user });
+
+  const { data: userData, errorData } = await supabaseService
+    .from("profiles")
+    .select("role, first_name, last_name, company")
+    .eq("id", user.id);
+
+  if (errorData) {
+    return res
+      .status(401)
+      .json({ error: "Не удалось получить ID пользователя" });
+  }
+
+  res.send({ user: userData });
 });
 
 // Запуск сервера
