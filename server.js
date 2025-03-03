@@ -136,7 +136,7 @@ app.post("/api/login", async (req, res) => {
     return res.status(400).json({ error: error.message });
   }
 
-  res.json({ message: "Logged in successfully" });
+  res.json({ message: "Авторизация выполнена успешно" });
 });
 
 // Выход пользователя
@@ -144,7 +144,7 @@ app.post("/api/logout", async (req, res) => {
   await supabase.auth.signOut();
 
   res.clearCookie("auth_token");
-  res.json({ message: "Logged out successfully" });
+  res.json({ message: "Успешно вышел из системы" });
 });
 
 app.get("/api/profile", async (req, res) => {
@@ -187,7 +187,6 @@ app.post("/api/add_product", async (req, res) => {
   const { data: insertData, error } = await supabase
     .from("products")
     .insert(productData);
-  console.log(productData);
   if (error) {
     return res.status(400).json({ error: error.message });
   }

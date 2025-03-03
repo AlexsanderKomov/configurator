@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation"; // Импортируем useRouter
+import { error } from "@/lib/helpers/error";
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ const RegisterForm = () => {
 
     // Проверка совпадения паролей
     if (formData.password !== formData.confirmPassword) {
-      alert("Пароли не совпадают");
+      error("Пароли не совпадают");
       return;
     }
 
@@ -45,7 +46,7 @@ const RegisterForm = () => {
     if (response.ok) {
       router.push("/login"); // Перенаправляем на страницу /login
     } else {
-      console.log("Ошибка при выходе");
+      error("Ошибка при выходе");
     }
   };
 

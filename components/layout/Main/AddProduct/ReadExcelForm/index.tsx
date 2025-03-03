@@ -1,4 +1,3 @@
-import { ToastContainer } from "react-toastify";
 import ListLoadedProducts from "./ListLoadedProducts";
 import ReadExcelInput from "./ReadExcelInput";
 import { useTypeStore } from "../store";
@@ -26,7 +25,6 @@ function ReadExcelForm() {
     <>
       <ReadExcelInput />
       <ListLoadedProducts />
-      <ToastContainer />
       {data.length !== 0 && !loading && (
         <button onClick={handleSubmit} type="button">
           Добавить продукт

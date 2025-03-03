@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { error } from "@/lib/helpers/error";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -33,7 +34,7 @@ const LoginForm = () => {
     if (response.ok) {
       router.push("/profile"); // Перенаправляем на страницу /profile
     } else {
-      console.log("Ошибка при входе");
+      error("Ошибка при входе");
     }
   };
 

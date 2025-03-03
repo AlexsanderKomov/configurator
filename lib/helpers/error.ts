@@ -1,7 +1,7 @@
 import { Slide, toast } from "react-toastify";
 
-export const errorLoadingFile = () =>
-  toast.error("Вы не заполнили файл полностью!", {
+export const error = (text: string) =>
+  toast.error(text, {
     position: "top-center",
     autoClose: 5000,
     hideProgressBar: true,

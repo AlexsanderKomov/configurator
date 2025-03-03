@@ -9,8 +9,8 @@ import { transformListLoaded } from "@/lib/helpers/transformListLoaded";
 import { validationFileLoaded } from "@/lib/helpers/validationFileLoaded";
 import { uploadImageToServer } from "@/lib/helpers/uploadImageToServer";
 import { base64ToBlob } from "@/lib/helpers/base64ToBlob";
-import { errorLoadingFile } from "@/lib/helpers/errorLoadingFile";
 import { transformationOfProductThroughExcel } from "@/lib/helpers/transformationOfProductThroughExcel";
+import { error } from "@/lib/helpers/error";
 
 export interface IExcelImage {
   cellAddress: string; // Адрес ячейки
@@ -96,7 +96,7 @@ const ReadExcelInput = () => {
         XLSX.utils.sheet_to_json<XLSX.WorkSheet>(firstSheet);
 
       if (validationFileLoaded(firstSheetData)) {
-        errorLoadingFile();
+        error("Вы не заполнили файл полностью!");
         resetData();
       } else {
         const images = await extractImagesFromExcel(file);
@@ -115,7 +115,6 @@ const ReadExcelInput = () => {
       }
     } catch (error) {
       console.error("Ошибка при чтении файла:", error);
-      errorLoadingFile();
       resetData();
     } finally {
       stopLoading();
