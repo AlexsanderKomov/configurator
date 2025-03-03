@@ -4,7 +4,7 @@ import ReadExcelInput from "./ReadExcelInput";
 import { useTypeStore } from "../store";
 
 function ReadExcelForm() {
-  const { data, loading } = useTypeStore((store) => store);
+  const { data, loading, dataExcel } = useTypeStore((store) => store);
 
   const handleSubmit = async () => {
     const response = await fetch("http://localhost:3001/api/add_product", {
@@ -12,7 +12,7 @@ function ReadExcelForm() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(dataExcel),
     });
 
     if (response.ok) {

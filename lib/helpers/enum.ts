@@ -10,3 +10,4 @@ export enum Image {
 export enum Type {
   typeEquipment = "Вид оборудования",
 }
+

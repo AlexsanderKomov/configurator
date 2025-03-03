@@ -1,12 +1,11 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useProfile } from "./store";
 
 const Profile = () => {
-  const [userRole, setUserRole] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const router = useRouter();
+  const { updateUser, user } = useProfile((state) => state);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -21,7 +20,7 @@ const Profile = () => {
         }
 
         const data = await response.json();
-        setUserRole(data[0].role);
+        updateUser(data);
       } catch (error) {
         console.error("Ошибка:", error);
       } finally {
@@ -29,20 +28,7 @@ const Profile = () => {
       }
     };
     fetchProfile();
-  }, []);
-
-  const handleLogout = async () => {
-    const response = await fetch("http://localhost:3001/api/logout", {
-      method: "POST",
-      credentials: "include",
-    });
-
-    if (response.ok) {
-      router.push("/login");
-    } else {
-      console.log("Ошибка при выходе");
-    }
-  };
+  }, [updateUser]);
 
   if (loading) {
     return <p>Загрузка...</p>;
@@ -50,24 +36,11 @@ const Profile = () => {
 
   return (
     <div>
-      {userRole === "admin" && (
+      {user[0].role === "admin" && (
         <Link href={"/add_product"}>Добавить продукт</Link>
       )}
       <h1>Профиль</h1>
-      <p>Ваша роль: {userRole}</p>
-      <button
-        onClick={handleLogout}
-        style={{
-          padding: "10px",
-          backgroundColor: "#ff4d4d",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
-        Выйти
-      </button>
+      <p>Ваша роль: {user[0].role}</p>
     </div>
   );
 };

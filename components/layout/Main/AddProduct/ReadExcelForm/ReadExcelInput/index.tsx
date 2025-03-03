@@ -20,8 +20,14 @@ export interface IExcelImage {
 const ReadExcelInput = () => {
   const [value, setValue] = useState<string>("");
 
-  const { updateData, loading, startLoading, stopLoading, resetData } =
-    useTypeStore((state) => state);
+  const {
+    updateData,
+    loading,
+    startLoading,
+    stopLoading,
+    resetData,
+    updateDataExcel,
+  } = useTypeStore((state) => state);
 
   /** Симулируем загрузку данных */
   function simulateLoading() {
@@ -102,10 +108,10 @@ const ReadExcelInput = () => {
         const imageUrls = await Promise.all(blobs.map(uploadImageToServer));
 
         const data = transformListLoaded(firstSheetData, imageUrls);
-        console.log(transformationOfProductThroughExcel(firstSheetData));
+        updateDataExcel(
+          transformationOfProductThroughExcel(firstSheetData, imageUrls)
+        );
         updateData(data);
-
-        // const response = await fetch('')
       }
     } catch (error) {
       console.error("Ошибка при чтении файла:", error);

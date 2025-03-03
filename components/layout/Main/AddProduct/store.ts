@@ -1,5 +1,6 @@
 import { create, StateCreator } from "zustand";
 import { IConstants } from "@/shared/constants/select_options/interface";
+import { IProductData } from "@/lib/helpers/interface";
 
 export interface ITypeSystemSlice {
   typeSystem: string;
@@ -25,7 +26,16 @@ export interface IReadExcel {
   resetData: () => void;
 }
 
-type StoreSlise = ITypeSystemSlice & IStageSlice & ITypeNodeSlice & IReadExcel;
+export interface IDataEcxel {
+  dataExcel: IProductData[];
+  updateDataExcel: (newDataExcel: IProductData[]) => void;
+}
+
+type StoreSlise = ITypeSystemSlice &
+  IStageSlice &
+  ITypeNodeSlice &
+  IReadExcel &
+  IDataEcxel;
 
 const createTypeSystemSlice: StateCreator<ITypeSystemSlice> = (set) => ({
   typeSystem: "skirt",
@@ -51,9 +61,15 @@ const createReadExcelSlice: StateCreator<IReadExcel> = (set) => ({
   resetData: () => set({ data: [] }),
 });
 
+const createEcxcelData: StateCreator<IDataEcxel> = (set) => ({
+  dataExcel: [],
+  updateDataExcel: (newDataExcel) => set({ dataExcel: newDataExcel }),
+});
+
 export const useTypeStore = create<StoreSlise>()((...state) => ({
   ...createTypeSystemSlice(...state),
   ...createStageSlice(...state),
   ...createTypeNodeSlice(...state),
   ...createReadExcelSlice(...state),
+  ...createEcxcelData(...state),
 }));
