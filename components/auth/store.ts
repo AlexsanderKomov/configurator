@@ -1,22 +1,22 @@
 import { create, StateCreator } from "zustand";
 
-interface IUser {
-  role: string;
-  first_name: string;
-  last_name: string;
-  company: string;
-}
+// interface IUser {
+//   role: string;
+//   first_name: string;
+//   last_name: string;
+//   company: string;
+// }
 
 interface IProfileRole {
-  user: IUser[];
-  updateUser: (newRole: []) => void;
-  resetUser: () => void;
+  role: string;
+  updateRole: (newRole: string) => void;
+  resetRole: () => void;
 }
 
 const createRoleSlice: StateCreator<IProfileRole> = (set) => ({
-  user: [],
-  updateUser: (newUser) => set(() => ({ user: newUser })),
-  resetUser: () => set(() => ({ user: [] })),
+  role: "",
+  updateRole: (newRole) => set(() => ({ role: newRole })),
+  resetRole: () => set({ role: "" }),
 });
 
 export const useProfile = create<IProfileRole>()((...state) => ({

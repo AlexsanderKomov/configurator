@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 function ButtonLogout() {
-  const { resetUser } = useProfile((state) => state);
+  const { resetRole } = useProfile((state) => state);
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -14,7 +14,7 @@ function ButtonLogout() {
     });
 
     if (response.ok) {
-      resetUser();
+      resetRole();
       router.push("/login");
     } else {
       console.log("Ошибка при выходе");

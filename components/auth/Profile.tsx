@@ -5,7 +5,7 @@ import { useProfile } from "./store";
 
 const Profile = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const { updateUser, user } = useProfile((state) => state);
+  const { updateRole, role } = useProfile((state) => state);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -20,7 +20,7 @@ const Profile = () => {
         }
 
         const data = await response.json();
-        updateUser(data);
+        updateRole(data[0].role);
       } catch (error) {
         console.error("Ошибка:", error);
       } finally {
@@ -28,7 +28,7 @@ const Profile = () => {
       }
     };
     fetchProfile();
-  }, [updateUser]);
+  }, [updateRole]);
 
   if (loading) {
     return <p>Загрузка...</p>;
@@ -36,11 +36,9 @@ const Profile = () => {
 
   return (
     <div>
-      {user[0].role === "admin" && (
-        <Link href={"/add_product"}>Добавить продукт</Link>
-      )}
+      {role === "admin" && <Link href={"/add_product"}>Добавить продукт</Link>}
       <h1>Профиль</h1>
-      <p>Ваша роль: {user[0].role}</p>
+      <p>Ваша роль: {role}</p>
     </div>
   );
 };

@@ -7,7 +7,7 @@ import { useProfile } from "@/components/auth/store";
 import ButtonLogout from "@/components/uikit/ButtonLogout";
 
 function Header() {
-  const { user } = useProfile((state) => state);
+  const { role } = useProfile((state) => state);
 
   return (
     <div className="container flex justify-between items-center">
@@ -16,8 +16,8 @@ function Header() {
       </Link>
 
       <div className="flex space-x-4">
-        {user && <ButtonLogout />}
-        {!user && (
+        {role && <ButtonLogout />}
+        {!role && (
           <Link
             href={"/login"}
             className="border p-2 rounded-lg text-black hover:bg-gray-100"
@@ -25,7 +25,7 @@ function Header() {
             Вход
           </Link>
         )}
-        {!user && (
+        {!role && (
           <Link
             href={"/register"}
             className="border p-2 rounded-lg text-black hover:bg-gray-100"
