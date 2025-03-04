@@ -2,7 +2,7 @@ import AddProduct from "@/components/layout/Main/AddProduct";
 
 const AddProductPage = () => {
   return (
-    <div>
+    <div className="container">
       <AddProduct />
     </div>
   );

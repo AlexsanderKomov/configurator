@@ -2,7 +2,7 @@ import Profile from "@/components/auth/Profile";
 
 function ProfilePage() {
   return (
-    <div>
+    <div className="container">
       <Profile />
     </div>
   );

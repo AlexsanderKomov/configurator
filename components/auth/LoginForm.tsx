@@ -22,19 +22,33 @@ const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:3001/api/login", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const response = await fetch("http://localhost:3001/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(formData),
+      });
 
-    if (response.ok) {
-      router.push("/profile"); // Перенаправляем на страницу /profile
-    } else {
-      error("Ошибка при входе");
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Отображаем пользователю сообщение об ошибке
+        error(data.error || "Ошибка при входе");
+        return;
+      }
+
+      // Успешный вход
+      console.log("Успешный вход:", data.message);
+      router.push("/profile");
+    } catch (err) {
+      // Логируем ошибку для разработчиков
+      console.error("Ошибка при входе:", err);
+
+      // Отображаем пользователю общее сообщение
+      error("Ошибка сервера");
     }
   };
 

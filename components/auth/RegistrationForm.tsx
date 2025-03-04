@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation"; // Импортируем useRouter
 import { error } from "@/lib/helpers/error";
 
-const RegisterForm = () => {
+const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -34,7 +34,7 @@ const RegisterForm = () => {
       return;
     }
 
-    const response = await fetch("http://localhost:3001/api/register", {
+    const response = await fetch("http://localhost:3001/api/registration", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -46,7 +46,7 @@ const RegisterForm = () => {
     if (response.ok) {
       router.push("/login"); // Перенаправляем на страницу /login
     } else {
-      error("Ошибка при выходе");
+      error("Пользователь с таким Email уже существует");
     }
   };
 
@@ -157,4 +157,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default RegistrationForm;

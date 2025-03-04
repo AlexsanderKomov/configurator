@@ -63,7 +63,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 app.use("/uploads", express.static(uploadDir));
 
 // Регистрация пользователя
-app.post("/api/register", async (req, res) => {
+app.post("/api/registration", async (req, res) => {
   const {
     firstName,
     lastName,
@@ -108,35 +108,38 @@ app.post("/api/register", async (req, res) => {
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
 
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-  // Проверяем, что data.session существует
-  if (!data.session) {
-    console.error("Сессия не найдена в data:", data); // Логируем данные
-    return res.status(400).json({ error: "Сессия не найдена" });
+    if (error) {
+      // Логируем ошибку для разработчиков
+      console.error("Ошибка при входе:", error.message);
+
+      // Отправляем пользователю понятное сообщение
+      if (error.message === "Invalid login credentials") {
+        return res.status(400).json({ error: "Неверный email или пароль" });
+      }
+      return res.status(400).json({ error: "Ошибка при входе" });
+    }
+
+    // Успешный вход
+    res.cookie("auth_token", data.session.access_token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+    });
+
+    res.json({ message: "Авторизация выполнена успешно" });
+  } catch (error) {
+    // Логируем ошибку для разработчиков
+    console.error("Ошибка при входе:", error);
+
+    // Отправляем пользователю общее сообщение
+    res.status(500).json({ error: "Ошибка сервера" });
   }
-
-  // Проверяем, что access_token существует
-  if (!data.session.access_token) {
-    console.error("access_token не найден в сессии:", data.session); // Логируем сессию
-    return res.status(400).json({ error: "access_token не найден" });
-  }
-
-  // Установка куки
-  res.cookie("auth_token", data.session.access_token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax", // Добавьте sameSite
-  });
-
-  if (error) {
-    return res.status(400).json({ error: error.message });
-  }
-
-  res.json({ message: "Авторизация выполнена успешно" });
 });
 
 // Выход пользователя
@@ -166,7 +169,7 @@ app.get("/api/profile", async (req, res) => {
 
   const { data: userData, errorData } = await supabaseService
     .from("profiles")
-    .select("role, first_name, last_name, company")
+    .select("role, first_name, last_name, company, phone_number")
     .eq("id", user.id);
 
   if (errorData) {

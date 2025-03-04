@@ -4,7 +4,7 @@ import Appartments from "./Apartments";
 
 function Main() {
   return (
-    <main className="w-full flex flex-col items-center">
+    <main className="container flex-col items-center">
       <h2 className="mb-5">Конфигуратор СКУД</h2>
 
       <Appartments />
