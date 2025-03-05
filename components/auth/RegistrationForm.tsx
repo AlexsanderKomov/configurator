@@ -1,18 +1,18 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation"; // Импортируем useRouter
-import { error } from "@/lib/helpers/error";
+import { error, success } from "@/lib/helpers/toastifyFunctions";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    middleName: "",
-    phoneNumber: "",
+    first_name: "",
+    last_name: "",
+    middle_name: "",
+    phone_number: "",
     email: "",
     company: "",
     password: "",
-    confirmPassword: "",
+    confirm_password: "",
   });
 
   const router = useRouter(); // Инициализируем useRouter
@@ -29,7 +29,7 @@ const RegistrationForm = () => {
     e.preventDefault();
 
     // Проверка совпадения паролей
-    if (formData.password !== formData.confirmPassword) {
+    if (formData.password !== formData.confirm_password) {
       error("Пароли не совпадают");
       return;
     }
@@ -44,6 +44,7 @@ const RegistrationForm = () => {
     });
 
     if (response.ok) {
+      success("Регистрация успешна");
       router.push("/login"); // Перенаправляем на страницу /login
     } else {
       error("Пользователь с таким Email уже существует");
@@ -64,9 +65,9 @@ const RegistrationForm = () => {
       {/* Имя */}
       <input
         type="text"
-        name="firstName"
+        name="first_name"
         placeholder="Имя"
-        value={formData.firstName}
+        value={formData.first_name}
         onChange={handleChange}
         required
       />
@@ -74,9 +75,9 @@ const RegistrationForm = () => {
       {/* Фамилия */}
       <input
         type="text"
-        name="lastName"
+        name="last_name"
         placeholder="Фамилия"
-        value={formData.lastName}
+        value={formData.last_name}
         onChange={handleChange}
         required
       />
@@ -84,18 +85,18 @@ const RegistrationForm = () => {
       {/* Отчество (опционально) */}
       <input
         type="text"
-        name="middleName"
+        name="middle_name"
         placeholder="Отчество (необязательно)"
-        value={formData.middleName}
+        value={formData.middle_name}
         onChange={handleChange}
       />
 
       {/* Номер телефона */}
       <input
         type="tel"
-        name="phoneNumber"
+        name="phone_number"
         placeholder="Номер телефона"
-        value={formData.phoneNumber}
+        value={formData.phone_number}
         onChange={handleChange}
         required
       />
@@ -132,9 +133,9 @@ const RegistrationForm = () => {
       {/* Подтверждение пароля */}
       <input
         type="password"
-        name="confirmPassword"
+        name="confirm_password"
         placeholder="Подтвердите пароль"
-        value={formData.confirmPassword}
+        value={formData.confirm_password}
         onChange={handleChange}
         required
       />

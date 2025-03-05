@@ -184,6 +184,49 @@ app.get("/api/profile", async (req, res) => {
   }
 });
 
+// Редактирование профиля
+app.put("/api/profile", async (req, res) => {
+  const token = req.cookies.auth_token;
+
+  if (!token) {
+    return res.status(401).json({ error: "Не авторизован" });
+  }
+
+  // Получаем данные пользователя из Supabase
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser(token);
+
+  if (authError) {
+    return res.status(401).json({ error: "Неверный токен" });
+  }
+
+  // Данные для обновления профиля
+  const { first_name, last_name, middle_name, phone_number, company } =
+    req.body;
+
+  // Обновляем профиль в таблице profiles
+  const { data: updatedProfile, error: updateError } = await supabase
+    .from("profiles")
+    .update({
+      first_name,
+      last_name,
+      middle_name,
+      phone_number,
+      company,
+    })
+    .eq("id", user.id) // Обновляем только профиль текущего пользователя
+    .select(); // Возвращаем обновленные данные
+
+  if (updateError) {
+    return res.status(400).json({ error: updateError.message });
+  }
+
+  // Возвращаем обновленные данные профиля
+  res.json(updatedProfile);
+});
+
 app.post("/api/add_product", async (req, res) => {
   const productData = req.body;
 

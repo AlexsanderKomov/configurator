@@ -1,6 +1,6 @@
 import { create, StateCreator } from "zustand";
 
-interface IUser {
+export interface IUser {
   role: string;
   first_name: string;
   last_name: string;

@@ -10,7 +10,7 @@ import { validationFileLoaded } from "@/lib/helpers/validationFileLoaded";
 import { uploadImageToServer } from "@/lib/helpers/uploadImageToServer";
 import { base64ToBlob } from "@/lib/helpers/base64ToBlob";
 import { transformationOfProductThroughExcel } from "@/lib/helpers/transformationOfProductThroughExcel";
-import { error } from "@/lib/helpers/error";
+import { error } from "@/lib/helpers/toastifyFunctions";
 
 export interface IExcelImage {
   cellAddress: string; // Адрес ячейки

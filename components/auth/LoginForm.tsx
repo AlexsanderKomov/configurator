@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { error } from "@/lib/helpers/error";
+import { error, success } from "@/lib/helpers/toastifyFunctions";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -41,7 +41,7 @@ const LoginForm = () => {
       }
 
       // Успешный вход
-      console.log("Успешный вход:", data.message);
+      success("Вход выполнен успешно");
       router.push("/profile");
     } catch (err) {
       // Логируем ошибку для разработчиков
@@ -88,14 +88,7 @@ const LoginForm = () => {
       {/* Кнопка отправки */}
       <button
         type="submit"
-        style={{
-          padding: "10px",
-          backgroundColor: "#0070f3",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
+        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
       >
         Войти
       </button>
