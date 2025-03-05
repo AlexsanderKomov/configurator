@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import delc from "@/public/image/logo.png";
+import delc from "@/public/image/Logo-01.svg";
 import { useProfile } from "@/components/auth/store";
 import ProfileHeader from "@/components/auth/ProfileHeader";
 
@@ -12,7 +12,7 @@ function Header() {
   return (
     <div className="container flex justify-between items-center py-5">
       <Link href="/">
-        <Image src={delc} alt="Логотип DELC"></Image>
+        <Image width={150} src={delc} alt="Логотип DELC"></Image>
       </Link>
 
       <div className="flex space-x-4">

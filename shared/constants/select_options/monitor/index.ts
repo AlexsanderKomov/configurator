@@ -53,6 +53,10 @@ export const MONITOR: IConstants = {
       },
     ],
   },
+  videoSignalFormat: {
+    name: "Формат видеосигнала",
+    option: [{ value: null, label: "" }],
+  },
   wiFi: {
     name: "Наличие Wi-Fi",
     option: [
@@ -277,61 +281,13 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  videoSignalFormat: {
-    name: "Формат видеосигнала",
-    option: [
-      {
-        value: "NTSC",
-        label: "NTSC",
-      },
-      {
-        value: "PAL",
-        label: "PAL",
-      },
-      {
-        value: "SECAM",
-        label: "SECAM",
-      },
-      {
-        value: "HDMI",
-        label: "HDMI",
-      },
-      {
-        value: "VGA",
-        label: "VGA",
-      },
-      {
-        value: "DVI",
-        label: "DVI",
-      },
-      {
-        value: "SDI",
-        label: "SDI",
-      },
-      {
-        value: "Component",
-        label: "Component",
-      },
-      {
-        value: "YCbCr",
-        label: "YCbCr",
-      },
-      {
-        value: "eDP",
-        label: "eDP",
-      },
-      {
-        value: "DisplayPort",
-        label: "DisplayPort",
-      },
-    ],
-  },
+
   power: {
     name: "Питание",
     option: [
       {
-        value: null,
-        label: "",
+        value: 220,
+        label: "220В",
       },
     ],
   },

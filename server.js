@@ -233,6 +233,7 @@ app.post("/api/add_product", async (req, res) => {
   const { data: insertData, error } = await supabase
     .from("products")
     .insert(productData);
+
   if (error) {
     return res.status(400).json({ error: error.message });
   }

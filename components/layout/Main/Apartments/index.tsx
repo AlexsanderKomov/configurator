@@ -1,5 +1,5 @@
 import { FormProvider, useForm } from "react-hook-form";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import RadioButtonsGroup from "@/components/uikit/RadioButtonGroup";
 
@@ -8,14 +8,14 @@ import { RADIO_OPTIONS } from "./constants";
 function Appartments() {
   const methods = useForm({ defaultValues: { apartments: "privateHouse" } });
 
+  const route = useRouter();
+
   return (
     <FormProvider {...methods}>
       <form
         className="flex flex-col items-center gap-4 mb-5"
         onSubmit={methods.handleSubmit((data) => {
-          console.log(data);
-
-          redirect(`/config/${data?.apartments}`);
+          route.push(`/config/${data?.apartments}`);
         })}
       >
         <RadioButtonsGroup
