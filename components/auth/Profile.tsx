@@ -5,6 +5,7 @@ import { IUser, useProfile } from "./store";
 import { redirect } from "next/navigation";
 import { error, success } from "@/lib/helpers/toastifyFunctions";
 import EditProfileModal from "./EditProfileModal";
+import Button from "../uikit/Button";
 
 const Profile = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -14,7 +15,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch("http://localhost:3001/api/profile", {
+        const response = await fetch("/api/profile", {
           method: "GET",
           credentials: "include", // Включаем куки
         });
@@ -51,7 +52,7 @@ const Profile = () => {
   const handleSave = async (updatedUser: IUser) => {
     try {
       // Отправляем обновленные данные на сервер
-      const response = await fetch("http://localhost:3001/api/profile", {
+      const response = await fetch("/api/profile", {
         method: "PUT",
         credentials: "include",
         headers: {
@@ -93,13 +94,11 @@ const Profile = () => {
       <p className="col-span-3">Ваша компания: {user.company}</p>
       <p className="col-span-3">Ваш номер: {user.phone_number}</p>
       <p className="col-span-2">Ваша роль: {role}</p>
-      <button
+      <Button
+        text="Редактировать профиль"
         onClick={handleEditClick}
-        className="col-span-2 col-start-11 text-center px-4 py-2 bg-blue-500 text-white rounded 
-                  hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-      >
-        Редактировать профиль
-      </button>
+        className="col-span-2 col-start-11"
+      />
 
       <EditProfileModal
         isOpen={isModalOpen}

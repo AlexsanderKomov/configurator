@@ -7,6 +7,7 @@ import { useTypeStore } from "../store";
 import NodeTypeForm from "./NodeTypeForm";
 import ButtonStage from "@/components/uikit/ButtonStage";
 import ListNodes from "./ListNodes";
+import Button from "@/components/uikit/Button";
 
 /* Типы систем видеонаблюдения */
 function TypeOfSystems() {
@@ -51,12 +52,7 @@ function TypeOfSystems() {
           {stage === Stage.two && <ButtonStage step="Назад" stage={1} />}
         </div>
       ) : (
-        <button
-          onClick={handleClick}
-          className="px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-        >
-          Добавить продукт
-        </button>
+        <Button text="Добавить продукт" onClick={handleClick} />
       )}
       {stage === Stage.three && <NodeTypeForm />}
     </div>

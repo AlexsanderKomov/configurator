@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { IUser } from "./store";
+import Button from "../uikit/Button";
 
 interface EditProfileModalProps {
   user: IUser;
@@ -120,24 +121,16 @@ const EditProfileModal = ({
             />
           </div>
           <div className="flex justify-end gap-2">
-            <button
-              type="button"
+            <Button
+              text="Закрыть"
               onClick={onClose}
-              className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
-            >
-              Закрыть
-            </button>
-            <button
+              className="bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-500"
+            />
+            <Button
+              text="Сохранить"
               type="submit"
-              className={`px-4 py-2 bg-blue-500 text-white rounded ${
-                !isFormChanged || phoneError
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              }`}
-              disabled={!isFormChanged || !!phoneError}
-            >
-              Сохранить
-            </button>
+              error={!isFormChanged || !!phoneError}
+            />
           </div>
         </form>
       </div>

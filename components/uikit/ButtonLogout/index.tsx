@@ -2,6 +2,7 @@ import { useProfile } from "@/components/auth/store";
 import { useRouter } from "next/navigation";
 
 import React from "react";
+import Button from "../Button";
 
 function ButtonLogout() {
   const { resetRole } = useProfile((state) => state);
@@ -22,12 +23,11 @@ function ButtonLogout() {
   };
 
   return (
-    <button
+    <Button
       onClick={handleLogout}
-      className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-    >
-      Выйти
-    </button>
+      text="Выйти"
+      className="bg-red-500 hover:bg-red-600 focus:bg-red-500"
+    />    
   );
 }
 

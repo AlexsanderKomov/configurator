@@ -24,7 +24,7 @@ export function transformationOfProductThroughForm(
     // Если поле является изображением, используем imageUrl
     if (constant[item].name === Image.image) {
       productData["image"] = imageUrl;
-      productData["typeEquipment"] = typeEquipment;
+      productData["type_equipment"] = typeEquipment;
     } else {
       // Иначе сохраняем значение из формы
       productData[item] = value;

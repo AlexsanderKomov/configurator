@@ -36,7 +36,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  screenSizes: {
+  screen_sizes: {
     name: "Размер экрана",
     option: [
       {
@@ -53,11 +53,11 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  videoSignalFormat: {
+  video_signal_format: {
     name: "Формат видеосигнала",
     option: [{ value: null, label: "" }],
   },
-  wiFi: {
+  wi_fi: {
     name: "Наличие Wi-Fi",
     option: [
       {
@@ -70,7 +70,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  recordPhoto: {
+  record_photo: {
     name: "Запись фото",
     option: [
       {
@@ -83,7 +83,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  writingVideo: {
+  writing_video: {
     name: "Запись видео",
     option: [
       {
@@ -96,7 +96,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  supportSDCard: {
+  support_sd_card: {
     name: "Поддержка SD карты",
     option: [
       {
@@ -121,7 +121,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  touchScreen: {
+  touch_screen: {
     name: "Наличие сенсорного экрана",
     option: [
       {
@@ -134,7 +134,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  managementButtons: {
+  management_buttons: {
     name: "Кнопки управления",
     option: [
       {
@@ -151,7 +151,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  movementDetectorRecord: {
+  movement_detector_record: {
     name: "Запись по детектору движения",
     option: [
       {
@@ -164,7 +164,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  theFunctionOfTheSquare: {
+  the_function_of_the_square: {
     name: "Функция квадратора",
     option: [
       {
@@ -177,7 +177,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  typeOfIntercom: {
+  type_of_intercom: {
     name: "Тип интерфейса",
     option: [
       {
@@ -190,7 +190,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  theNumberOfMonitorsInTheMaxSystem: {
+  the_number_of_monitors_in_the_max_system: {
     name: "Макс количество мониторов в системе",
     option: [
       {
@@ -203,7 +203,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  theNumberOfVideoCamerasInTheMaxSystem: {
+  the_number_of_video_cameras_in_the_max_system: {
     name: "Макс количество видеокамер в системе",
     option: [
       {
@@ -220,7 +220,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  theNumberOfCallingPanelsInTheMaxSystem: {
+  the_number_of_calling_panels_in_the_max_system: {
     name: "Макс количество вызывных панелей в системе",
     option: [
       {
@@ -229,7 +229,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  supportFullHD: {
+  support_full_hd: {
     name: "Поддержка Full HD",
     option: [
       {
@@ -242,7 +242,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  conjugationWithAnAccessIntercom: {
+  conjugation_with_an_access_intercom: {
     name: "Возможность сопряжения с подъездным домофоном",
     option: [
       {
@@ -255,7 +255,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  thePresenceOfHOOKExit: {
+  the_presence_of_hook_exit: {
     name: "Наличие HOOK выхода",
     option: [
       {
@@ -268,7 +268,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  loadingYourMelodyToCall: {
+  loading_your_melody_to_call: {
     name: "Загрузка своей мелодии на звонок",
     option: [
       {

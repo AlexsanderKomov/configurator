@@ -36,7 +36,7 @@ export const CALLING_PANEL: IConstants = {
       },
     ],
   },
-  theNumberOfSubscribers: {
+  the_umber_of_subscribers: {
     name: "Число абонентов панели",
     option: [
       {
@@ -61,7 +61,7 @@ export const CALLING_PANEL: IConstants = {
       },
     ],
   },
-  videoSignalFormat: {
+  video_signal_format: {
     name: "Формат видеосигнала",
     option: [{ value: null, label: "" }],
   },
@@ -78,7 +78,7 @@ export const CALLING_PANEL: IConstants = {
       },
     ],
   },
-  typeOfIntercom: {
+  type_of_intercom: {
     name: "Тип интерфейса",
     option: [
       {
@@ -92,7 +92,7 @@ export const CALLING_PANEL: IConstants = {
     ],
   },
 
-  wiFi: {
+  wi_fi: {
     name: "Доступ со смартфона (Wi-Fi)",
     option: [
       {
@@ -105,7 +105,7 @@ export const CALLING_PANEL: IConstants = {
       },
     ],
   },
-  supportFullHD: {
+  support_full_hd: {
     name: "Поддержка Full HD",
     option: [
       {
@@ -118,7 +118,7 @@ export const CALLING_PANEL: IConstants = {
       },
     ],
   },
-  managementButtons: {
+  management_buttons: {
     name: "Кнопка вызова панели",
     option: [
       {
@@ -135,7 +135,7 @@ export const CALLING_PANEL: IConstants = {
       },
     ],
   },
-  angleOfView: {
+  angle_of_view: {
     name: "Угол обзора",
     option: [
       {
@@ -168,7 +168,7 @@ export const CALLING_PANEL: IConstants = {
       },
     ],
   },
-  iKIllumination: {
+  ik_illumination: {
     name: "ИК-подсветка",
     option: [
       {
@@ -181,7 +181,7 @@ export const CALLING_PANEL: IConstants = {
       },
     ],
   },
-  hdFormatSwitcher: {
+  hd_format_switcher: {
     name: "Переключатель форматов AHD/аналог на корпусе",
     option: [
       {

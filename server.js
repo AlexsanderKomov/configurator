@@ -240,6 +240,28 @@ app.post("/api/add_product", async (req, res) => {
   res.send(insertData);
 });
 
+app.post("/api/configurator/private_house", async (req, res) => {
+  if (!req.body.action) {
+    return res.status(400).json({ error: "Действие не указано" });
+  }
+
+  if (req.body.action === "monitor") {
+    const { data: productData, error } = await supabaseService
+      .from("products")
+      .select("*")
+      .eq("type_equipment", req.body.action);
+
+    if (error) {
+      console.error("Ошибка при запросе к Supabase:", error);
+      return res.status(500).json({ error: "Ошибка при получении данных" });
+    }
+
+    res.json(productData);
+  } else {
+    res.status(400).json({ error: "Неверное действие" });
+  }
+});
+
 // Запуск сервера
 app.listen(port, () => {
   console.log(`Сервер запущен на http://localhost:${port}`);

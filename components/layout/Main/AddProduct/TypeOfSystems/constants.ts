@@ -7,12 +7,12 @@ export const CHOISE_OF_THE_SYSTEM = [
   },
   {
     id: 2,
-    type: "securityAlarm",
+    type: "security_alarm",
     label: "Охранно-пожарная сигнализация",
   },
   {
     id: 3,
-    type: "videoSurveillance",
+    type: "video_surveillance",
     label: "Видеонаблюдение",
   },
 ];

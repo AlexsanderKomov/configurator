@@ -5,6 +5,7 @@ import { FormDataSubmit } from "./interface";
 import ListOption from "./ListOption";
 import { transformationOfProductThroughForm } from "@/lib/helpers/transformationOfProductThroughForm";
 import { setNodeProperties } from "@/lib/helpers/setNodeProperties";
+import Button from "@/components/uikit/Button";
 
 /** Форма типа узла */
 function NodeTypeForm() {
@@ -22,7 +23,7 @@ function NodeTypeForm() {
       formData.append("file", data.image.value[0]);
 
       try {
-        const response = await fetch("http://localhost:3001/api/upload", {
+        const response = await fetch("/api/upload", {
           method: "POST",
           body: formData,
         });
@@ -47,8 +48,8 @@ function NodeTypeForm() {
       imageUrl,
       typeNode
     );
-
-    const response = await fetch("http://localhost:3001/api/add_product", {
+    console.log(productData);
+    const response = await fetch("/api/add_product", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +68,7 @@ function NodeTypeForm() {
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
         <ListOption options={nodeProperties} />
-        <button type="submit">Отправить</button>
+        <Button type="submit" text="Отправить" />
         <ButtonStage step="Назад" stage={2} />
       </form>
     </FormProvider>

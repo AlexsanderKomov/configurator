@@ -7,7 +7,7 @@ export const LIST_NODES = [
         label: "Монитор видеодомофона",
       },
       {
-        value: "callingPanel",
+        value: "calling_panel",
         label: "Вызывная панель",
       },
       {

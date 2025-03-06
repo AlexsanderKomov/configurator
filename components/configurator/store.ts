@@ -9,11 +9,12 @@ export interface IStageSlice {
   stage: number;
   stageForward: () => void;
   stageBack: () => void;
+  updateStage: (newStage: number) => void;
 }
 
 interface IRadioState {
-  selectedOption: "individually" | "kit" | null; // Выбранный вариант
-  setSelectedOption: (option: "individually" | "kit") => void; // Функция для выбора варианта
+  selectedOption: string; // Выбранный вариант
+  setSelectedOption: (option: string) => void; // Функция для выбора варианта
 }
 
 type StoreSlise = ITypeEquipmentSlice & IStageSlice & IRadioState;
@@ -34,10 +35,11 @@ const createStageSlice: StateCreator<IStageSlice> = (set, get) => ({
     const currentStage = get().stage;
     set({ stage: currentStage - 1 });
   },
+  updateStage: (newStage) => set({ stage: newStage }),
 });
 
 export const createRadioStoreSlice: StateCreator<IRadioState> = (set) => ({
-  selectedOption: null, // По умолчанию ничего не выбрано
+  selectedOption: "individually", // По умолчанию ничего не выбрано
   setSelectedOption: (option) => set({ selectedOption: option }),
 });
 

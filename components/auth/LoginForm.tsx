@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { error, success } from "@/lib/helpers/toastifyFunctions";
+import Button from "../uikit/Button";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3001/api/login", {
+      const response = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -86,12 +87,7 @@ const LoginForm = () => {
       />
 
       {/* Кнопка отправки */}
-      <button
-        type="submit"
-        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-      >
-        Войти
-      </button>
+      <Button text="Войти" type="submit" />
     </form>
   );
 };

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation"; // Импортируем useRouter
 import { error, success } from "@/lib/helpers/toastifyFunctions";
+import Button from "../uikit/Button";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -34,7 +35,7 @@ const RegistrationForm = () => {
       return;
     }
 
-    const response = await fetch("http://localhost:3001/api/registration", {
+    const response = await fetch("/api/registration", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -141,12 +142,7 @@ const RegistrationForm = () => {
       />
 
       {/* Кнопка отправки */}
-      <button
-        type="submit"
-        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-      >
-        Зарегистрироваться
-      </button>
+      <Button type="submit" text="Зарегистрироваться" />
     </form>
   );
 };
