@@ -8,12 +8,14 @@ import Button from "../uikit/Button";
 const RadioForm = () => {
   const { setSelectedOption, stageForward } = useConfigStore();
 
-  const methods = useForm({ defaultValues: { option: "individually" } });
+  const methods = useForm({
+    defaultValues: { option_intercom: "individually" },
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    setSelectedOption(methods.getValues().option);
+    setSelectedOption(methods.getValues().option_intercom);
     stageForward();
   };
 
@@ -22,7 +24,7 @@ const RadioForm = () => {
       <form onSubmit={handleSubmit} className="p-4 space-y-4">
         <RadioButtonsGroup
           className="flex gap-5"
-          name="option"
+          name="option_intercom"
           options={RADIO_OPTIONS_INTERCOM}
         />
         <Button type="submit" text="Дальше" />

@@ -12,12 +12,25 @@ export interface IStageSlice {
   updateStage: (newStage: number) => void;
 }
 
-interface IRadioState {
+interface IRadioStateSlice {
   selectedOption: string; // Выбранный вариант
   setSelectedOption: (option: string) => void; // Функция для выбора варианта
 }
 
-type StoreSlise = ITypeEquipmentSlice & IStageSlice & IRadioState;
+interface IDataSlice {
+  data: IData[];
+  updateData: (newData: IData[]) => void;
+}
+
+export interface IData {
+  [x: string]: string | boolean;
+  name: string;
+  image: string;
+}
+type StoreSlise = ITypeEquipmentSlice &
+  IStageSlice &
+  IRadioStateSlice &
+  IDataSlice;
 
 const createTypeEquipmentSlice: StateCreator<ITypeEquipmentSlice> = (set) => ({
   typeEquipment: "",
@@ -38,13 +51,19 @@ const createStageSlice: StateCreator<IStageSlice> = (set, get) => ({
   updateStage: (newStage) => set({ stage: newStage }),
 });
 
-export const createRadioStoreSlice: StateCreator<IRadioState> = (set) => ({
+const createRadioStoreSlice: StateCreator<IRadioStateSlice> = (set) => ({
   selectedOption: "individually", // По умолчанию ничего не выбрано
   setSelectedOption: (option) => set({ selectedOption: option }),
+});
+
+const createDataSlice: StateCreator<IDataSlice> = (set) => ({
+  data: [],
+  updateData: (newData) => set({ data: newData }),
 });
 
 export const useConfigStore = create<StoreSlise>()((...state) => ({
   ...createTypeEquipmentSlice(...state),
   ...createStageSlice(...state),
   ...createRadioStoreSlice(...state),
+  ...createDataSlice(...state),
 }));

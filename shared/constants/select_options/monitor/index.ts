@@ -55,7 +55,16 @@ export const MONITOR: IConstants = {
   },
   video_signal_format: {
     name: "Формат видеосигнала",
-    option: [{ value: null, label: "" }],
+    option: [
+      {
+        value: "AHD",
+        label: "AHD",
+      },
+      {
+        value: "CVBS",
+        label: "CVBS",
+      },
+    ],
   },
   wi_fi: {
     name: "Наличие Wi-Fi",
@@ -182,7 +191,7 @@ export const MONITOR: IConstants = {
     option: [
       {
         value: "IP",
-        label: "Адресный",
+        label: "IP",
       },
       {
         value: "analog",
@@ -227,6 +236,10 @@ export const MONITOR: IConstants = {
         value: 2,
         label: "2",
       },
+      {
+        value: 16,
+        label: "16",
+      },
     ],
   },
   support_full_hd: {
@@ -255,19 +268,6 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  the_presence_of_hook_exit: {
-    name: "Наличие HOOK выхода",
-    option: [
-      {
-        value: false,
-        label: "Нет",
-      },
-      {
-        value: true,
-        label: "Да",
-      },
-    ],
-  },
   loading_your_melody_to_call: {
     name: "Загрузка своей мелодии на звонок",
     option: [
@@ -281,7 +281,6 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-
   power: {
     name: "Питание",
     option: [
