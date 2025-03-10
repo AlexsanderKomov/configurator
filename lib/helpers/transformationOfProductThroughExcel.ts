@@ -51,12 +51,12 @@ export function transformationOfProductThroughExcel(
 
     switch (item[Type.typeEquipment]) {
       case TypeEquipment.monitor:
-        productData["typeEquipment"] = TypeEquipment.monitor;
+        productData["type_equipment"] = "monitor";
         transformValueExcel(item, index, productData, MONITOR, imageUrls);
         productDataArr.push(productData);
         break;
       case TypeEquipment.calling_panel:
-        productData["typeEquipment"] = TypeEquipment.calling_panel;
+        productData["type_equipment"] = "calling_panel";
         transformValueExcel(item, index, productData, CALLING_PANEL, imageUrls);
         productDataArr.push(productData);
         break;

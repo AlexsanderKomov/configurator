@@ -21,6 +21,7 @@ function EquimpmentList({ equimpment }: { equimpment: string }) {
       }
 
       const data = await response.json();
+      console.log(data);
       updateData(data);
     };
 
@@ -28,9 +29,9 @@ function EquimpmentList({ equimpment }: { equimpment: string }) {
   }, [equimpment, updateData]);
 
   return (
-    <ul className="flex gap-5 col-span-9 col-start-3 ">
+    <ul className="flex gap-5 col-span-9 col-start-3">
       {data.map((item, index) => {
-        const key = `equimpment_name_ ${index}`;
+        const key = `equimpment_name_${index}`;
         return (
           <li key={key}>
             <ProductCard item={item} />

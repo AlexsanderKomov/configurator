@@ -25,6 +25,7 @@ const ProductCard = ({ item }: { item: IData }) => {
           height={200}
           src={image}
           alt={name}
+          priority
         />
         <div className="px-6 py-4">
           <h3 className="font-bold text-xl mb-2">{name}</h3>

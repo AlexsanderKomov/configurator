@@ -12,7 +12,7 @@ function Header() {
   return (
     <div className="container flex justify-between items-center py-5">
       <Link href="/">
-        <Image width={150} src={delc} alt="Логотип DELC"></Image>
+        <Image width={150} height={100} src={delc} alt="Логотип DELC" />
       </Link>
 
       <div className="flex space-x-4">

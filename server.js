@@ -257,6 +257,18 @@ app.post("/api/configurator/private_house", async (req, res) => {
     }
 
     res.json(productData);
+  } else if (req.body.action === "calling_panel") {
+    const { data: productData, error } = await supabaseService
+      .from("products")
+      .select("*")
+      .eq("type_equipment", req.body.action);
+
+    if (error) {
+      console.error("Ошибка при запросе к Supabase:", error);
+      return res.status(500).json({ error: "Ошибка при получении данных" });
+    }
+
+    res.json(productData);
   } else {
     res.status(400).json({ error: "Неверное действие" });
   }

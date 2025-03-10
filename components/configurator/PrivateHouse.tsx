@@ -20,7 +20,7 @@ function PrivateHouse() {
         ) : (
           <Kit />
         ))}
-
+      {stage === 4 && <EquimpmentList equimpment="calling_panel" />}
       {stage !== 1 && <Button text="Назад" onClick={stageBack} />}
     </div>
   );

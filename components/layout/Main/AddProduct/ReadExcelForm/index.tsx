@@ -2,6 +2,7 @@ import ListLoadedProducts from "./ListLoadedProducts";
 import ReadExcelInput from "./ReadExcelInput";
 import { useTypeStore } from "../store";
 import Button from "@/components/uikit/Button";
+import { error, success } from "@/lib/helpers/toastifyFunctions";
 
 function ReadExcelForm() {
   const { data, loading, dataExcel } = useTypeStore((store) => store);
@@ -16,9 +17,9 @@ function ReadExcelForm() {
     });
 
     if (response.ok) {
-      console.log("Продукты добавлены");
+      success("Продукты добавлены");
     } else {
-      console.log("Ошибка при добавлении продуктов");
+      error("Ошибка при добавлении продуктов");
     }
   };
 

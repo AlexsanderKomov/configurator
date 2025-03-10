@@ -6,6 +6,7 @@ import ListOption from "./ListOption";
 import { transformationOfProductThroughForm } from "@/lib/helpers/transformationOfProductThroughForm";
 import { setNodeProperties } from "@/lib/helpers/setNodeProperties";
 import Button from "@/components/uikit/Button";
+import { success } from "@/lib/helpers/toastifyFunctions";
 
 /** Форма типа узла */
 function NodeTypeForm() {
@@ -58,7 +59,7 @@ function NodeTypeForm() {
     });
 
     if (response.ok) {
-      console.log("Продукт добавлен");
+      success("Товар успешно добавлен");
     }
 
     reset();
