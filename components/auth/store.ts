@@ -20,24 +20,20 @@ interface IProfileRole {
   resetRole: () => void;
 }
 
+const DEFAULT_VALUE = {
+  role: "",
+  first_name: "",
+  last_name: "",
+  company: "",
+  phone_number: "",
+};
+
 const createUserSlice: StateCreator<IProfileUser> = (set) => ({
-  user: {
-    role: "",
-    first_name: "",
-    last_name: "",
-    company: "",
-    phone_number: "",
-  },
+  user: DEFAULT_VALUE,
   updateUser: (newUser) => set(() => ({ user: newUser })),
   resetUser: () =>
     set({
-      user: {
-        role: "",
-        first_name: "",
-        last_name: "",
-        company: "",
-        phone_number: "",
-      },
+      user: DEFAULT_VALUE,
     }),
 });
 

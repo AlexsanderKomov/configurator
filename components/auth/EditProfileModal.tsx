@@ -4,6 +4,8 @@
 import { useEffect, useState } from "react";
 import { IUser } from "./store";
 import Button from "../uikit/Button";
+import InputForm from "./comoinents/InputForm";
+import LabelForm from "./comoinents/LabelForm";
 
 interface EditProfileModalProps {
   user: IUser;
@@ -77,48 +79,46 @@ const EditProfileModal = ({
         <h2 className="text-xl font-bold mb-4">Редактирование профиля</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Имя:</label>
-            <input
-              type="text"
-              name="first_name"
-              value={formData.first_name}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-            />
+            <LabelForm text="Имя:">
+              <InputForm
+                name="first_name"
+                value={formData.first_name}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+              />
+            </LabelForm>
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Фамилия:</label>
-            <input
-              type="text"
-              name="last_name"
-              value={formData.last_name}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-            />
+            <LabelForm text="Фамилия:">
+              <InputForm
+                name="last_name"
+                value={formData.last_name}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+              />
+            </LabelForm>
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Компания:</label>
-            <input
-              type="text"
-              name="company"
-              value={formData.company}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-            />
+            <LabelForm text="Компания:">
+              <InputForm
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+              />
+            </LabelForm>
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">
-              Номер телефона:
-            </label>
-            <input
-              type="text"
-              name="phone_number"
-              value={formData.phone_number}
-              onChange={handleChange}
-              className={`w-full p-2 border rounded ${
-                phoneError ? "border-red-500" : ""
-              }`}
-            />
+            <LabelForm text="Номер телефона:">
+              <InputForm
+                name="phone_number"
+                value={formData.phone_number}
+                onChange={handleChange}
+                className={`w-full p-2 border rounded ${
+                  phoneError ? "border-red-500" : ""
+                }`}
+              />
+            </LabelForm>
           </div>
           <div className="flex justify-end gap-2">
             <Button
@@ -129,7 +129,7 @@ const EditProfileModal = ({
             <Button
               text="Сохранить"
               type="submit"
-              error={!isFormChanged || !!phoneError}
+              error={!isFormChanged || Boolean(phoneError)}
             />
           </div>
         </form>

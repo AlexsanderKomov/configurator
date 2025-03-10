@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation"; // Импортируем useRouter
 import { error, success } from "@/lib/helpers/toastifyFunctions";
 import Button from "../uikit/Button";
+import InputForm from "./comoinents/InputForm";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -52,6 +53,8 @@ const RegistrationForm = () => {
     }
   };
 
+  console.log(formData);
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -64,81 +67,71 @@ const RegistrationForm = () => {
       }}
     >
       {/* Имя */}
-      <input
-        type="text"
+      <InputForm
         name="first_name"
-        placeholder="Имя"
+        placeholder="Введите имя"
         value={formData.first_name}
         onChange={handleChange}
-        required
       />
 
       {/* Фамилия */}
-      <input
-        type="text"
+      <InputForm
         name="last_name"
-        placeholder="Фамилия"
+        placeholder="Введите фамилию"
         value={formData.last_name}
         onChange={handleChange}
-        required
       />
 
       {/* Отчество (опционально) */}
-      <input
-        type="text"
+      <InputForm
         name="middle_name"
-        placeholder="Отчество (необязательно)"
+        placeholder="Введите отчество"
         value={formData.middle_name}
         onChange={handleChange}
       />
 
       {/* Номер телефона */}
-      <input
+      <InputForm
         type="tel"
         name="phone_number"
-        placeholder="Номер телефона"
+        placeholder="Введите номер телефона"
         value={formData.phone_number}
         onChange={handleChange}
-        required
       />
 
       {/* Почта */}
-      <input
+      <InputForm
         type="email"
         name="email"
-        placeholder="Почта"
+        placeholder="Введите почту"
         value={formData.email}
         onChange={handleChange}
-        required
       />
 
       {/* Компания */}
-      <input
-        type="text"
+      <InputForm
         name="company"
-        placeholder="Компания"
+        placeholder="Введите компанию"
         value={formData.company}
         onChange={handleChange}
       />
 
       {/* Пароль */}
-      <input
+      <InputForm
         type="password"
         name="password"
-        placeholder="Пароль"
+        placeholder="Введите пароль"
         value={formData.password}
         onChange={handleChange}
-        required
       />
 
       {/* Подтверждение пароля */}
-      <input
+      <InputForm
         type="password"
         name="confirm_password"
         placeholder="Подтвердите пароль"
         value={formData.confirm_password}
         onChange={handleChange}
-        required
       />
 
       {/* Кнопка отправки */}

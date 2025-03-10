@@ -2,7 +2,17 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["localhost", "localhost:3001"], // Добавь домен и порт
+    remotePatterns: [
+      {
+        protocol: "http", // или "https", в зависимости от вашего сервера
+        hostname: "localhost",
+        port: "3001", // Указываем порт, если он отличается от стандартного
+      },
+      {
+        protocol: "http", // или "https"
+        hostname: "localhost",
+      },
+    ],
   },
   async rewrites() {
     return [

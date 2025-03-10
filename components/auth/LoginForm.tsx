@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { error, success } from "@/lib/helpers/toastifyFunctions";
 import Button from "../uikit/Button";
+import InputForm from "./comoinents/InputForm";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -67,23 +68,21 @@ const LoginForm = () => {
       <h1>Вход</h1>
 
       {/* Почта */}
-      <input
+      <InputForm
         type="email"
         name="email"
-        placeholder="Почта"
+        placeholder="Введите почту"
         value={formData.email}
         onChange={handleChange}
-        required
       />
 
       {/* Пароль */}
-      <input
+      <InputForm
         type="password"
         name="password"
-        placeholder="Пароль"
+        placeholder="Введите пароль"
         value={formData.password}
         onChange={handleChange}
-        required
       />
 
       {/* Кнопка отправки */}
