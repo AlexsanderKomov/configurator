@@ -36,14 +36,17 @@ const LoginForm = () => {
 
       const data = await response.json();
 
+      // Сохраняем роль в localStorage
+      localStorage.setItem("userData", JSON.stringify(data.user));
+
       if (!response.ok) {
         // Отображаем пользователю сообщение об ошибке
-        error(data.error || "Ошибка при входе");
+        error(data.message);
         return;
       }
 
       // Успешный вход
-      success("Вход выполнен успешно");
+      success(data.message);
       router.push("/profile");
     } catch (err) {
       // Логируем ошибку для разработчиков

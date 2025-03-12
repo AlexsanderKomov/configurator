@@ -294,19 +294,6 @@ export const MONITOR: IConstants = {
     name: "Потребление",
     option: [{ value: null, label: "" }],
   },
-  street: {
-    name: "Возможность ставить на улице",
-    option: [
-      {
-        value: true,
-        label: "Да",
-      },
-      {
-        value: false,
-        label: "Нет",
-      },
-    ],
-  },
   image: {
     name: "Картинка",
     option: [{ value: null, label: "" }],

@@ -22,6 +22,8 @@ const Profile = () => {
 
         // Если пользователь не авторизован, перенаправляем на страницу входа
         if (response.status === 401) {
+          // Если пользователь не авторизован, очищаем localStorage
+          localStorage.removeItem("userData");
           error("Вы не афторизовались");
           redirect("/login");
         }
@@ -33,6 +35,7 @@ const Profile = () => {
         if (data && data.length > 0) {
           updateRole(data[0].role);
           updateUser(data[0]);
+          localStorage.setItem("userData", JSON.stringify(data[0])); // Сохраняем в localStorage
         } else {
           console.error("Данные пользователя не найдены");
         }
@@ -64,6 +67,7 @@ const Profile = () => {
       if (response.ok) {
         success("Профиль успешно обновлен");
         updateUser(updatedUser); // Обновляем данные в хранилище
+        localStorage.setItem("userData", JSON.stringify(updatedUser)); // Обновляем в localStorage
         setIsModalOpen(false); // Закрываем модальное окно
       } else {
         console.error("Ошибка при обновлении профиля");

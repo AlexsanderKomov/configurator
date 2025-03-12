@@ -21,7 +21,6 @@ function EquimpmentList({ equimpment }: { equimpment: string }) {
       }
 
       const data = await response.json();
-      console.log(data);
       updateData(data);
     };
 

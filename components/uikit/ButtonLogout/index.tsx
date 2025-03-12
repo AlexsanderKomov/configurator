@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 
 import React from "react";
 import Button from "../Button";
+import { success } from "@/lib/helpers/toastifyFunctions";
 
 function ButtonLogout() {
   const { resetRole } = useProfile((state) => state);
@@ -14,8 +15,12 @@ function ButtonLogout() {
       credentials: "include",
     });
 
+    const result = await response.json();
+
     if (response.ok) {
       resetRole();
+      localStorage.removeItem("userData");
+      success(result.message);
       router.push("/login");
     } else {
       console.log("Ошибка при выходе");
@@ -27,7 +32,7 @@ function ButtonLogout() {
       onClick={handleLogout}
       text="Выйти"
       className="bg-red-500 hover:bg-red-600 focus:bg-red-500"
-    />    
+    />
   );
 }
 

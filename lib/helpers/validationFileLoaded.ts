@@ -8,26 +8,26 @@ import {
 
 export function validationFileLoaded(arr: IArrayTranslate[]) {
   const { monitor, calling_panel } = TypeEquipment;
-  let status: boolean = true;
+  const status: boolean[] = [];
 
   arr.forEach((item) => {
     switch (item[TYPE_EQUIPMENT]) {
       case monitor:
         if (!!(Object.keys(item).length === MONITOR_LENGTH_COLUMN)) {
-          status = false;
+          status.push(false);
         } else {
-          status = true;
+          status.push(true);
         }
         break;
       case calling_panel:
         if (!!(Object.keys(item).length === CALLING_PANEL_LENGTH_COLUMN)) {
-          status = false;
+          status.push(false);
         } else {
-          status = true;
+          status.push(true);
         }
         break;
     }
   });
 
-  return status;
+  return status.some((stat) => stat === true);
 }

@@ -5,7 +5,7 @@ import { MONITOR } from "@/shared/constants/select_options/monitor";
 export function setNodeProperties(typeNode: string) {
   let nodeProperties: INodeProperties = MONITOR;
 
-  if (typeNode === "callingPanel") {
+  if (typeNode === "calling_panel") {
     nodeProperties = CALLING_PANEL;
   }
 

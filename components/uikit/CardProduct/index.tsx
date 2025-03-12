@@ -2,9 +2,22 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Button from "../Button";
 import { IData, useConfigStore } from "@/components/configurator/store";
+import { createPortal } from "react-dom";
 
-const ProductCard = ({ item }: { item: IData }) => {
-  const { name, article, image, manufacturer, description } = item;
+interface IProductCardProps {
+  item: IData;
+  onSelect?: (manufacturer: string, video_signal_format: string) => void;
+}
+
+const ProductCard = ({ item, onSelect }: IProductCardProps) => {
+  const {
+    name,
+    article,
+    image,
+    manufacturer,
+    description,
+    video_signal_format,
+  } = item;
   const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для модального окна
   const { stageForward } = useConfigStore((store) => store);
 
@@ -14,6 +27,13 @@ const ProductCard = ({ item }: { item: IData }) => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleSelect = () => {
+    if (onSelect) {
+      onSelect(manufacturer, video_signal_format); // Вызываем колбэк с данными
+    }
+    stageForward(); // Вызываем функцию из store
   };
 
   return (
@@ -35,20 +55,22 @@ const ProductCard = ({ item }: { item: IData }) => {
         </div>
         <div className="px-6 pt-4 pb-6 flex gap-5">
           <Button text="Описание" onClick={handleOpenModal} />
-          <Button text="Выбрать" onClick={stageForward} />
+          <Button text="Выбрать" onClick={handleSelect} />
         </div>
       </div>
 
       {/* Модальное окно */}
-      {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg max-w-lg w-full mx-4">
-            <h2 className="font-bold text-xl mb-4">{name}</h2>
-            <p className="text-gray-700 text-base mb-4">{description}</p>
-            <Button text="Закрыть" onClick={handleCloseModal} />
-          </div>
-        </div>
-      )}
+      {isModalOpen &&
+        createPortal(
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="bg-white p-6 rounded-lg max-w-lg w-full mx-4">
+              <h2 className="font-bold text-xl mb-4">{name}</h2>
+              <p className="text-gray-700 text-base mb-4">{description}</p>
+              <Button text="Закрыть" onClick={handleCloseModal} />
+            </div>
+          </div>,
+          document.getElementById("modal-root")!
+        )}
     </>
   );
 };

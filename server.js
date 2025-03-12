@@ -62,6 +62,19 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 // Роут для доступа к загруженным файлам
 app.use("/uploads", express.static(uploadDir));
 
+app.post("/api/delete_images", (req, res) => {
+  const { images } = req.body;
+
+  images.forEach((imagePath) => {
+    const fullPath = path.join(__dirname, "uploads", imagePath);
+    if (fs.existsSync(fullPath)) {
+      fs.unlinkSync(fullPath);
+    }
+  });
+
+  res.status(200).send("Изображения удалены");
+});
+
 // Регистрация пользователя
 app.post("/api/registration", async (req, res) => {
   const {
@@ -115,14 +128,11 @@ app.post("/api/login", async (req, res) => {
     });
 
     if (error) {
-      // Логируем ошибку для разработчиков
-      console.error("Ошибка при входе:", error.message);
-
       // Отправляем пользователю понятное сообщение
       if (error.message === "Invalid login credentials") {
-        return res.status(400).json({ error: "Неверный email или пароль" });
+        return res.status(400).json({ message: "Неверный email или пароль" });
       }
-      return res.status(400).json({ error: "Ошибка при входе" });
+      return res.status(400).json({ message: "Ошибка при входе" });
     }
 
     // Успешный вход
@@ -130,6 +140,7 @@ app.post("/api/login", async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 дней
     });
 
     res.json({ message: "Авторизация выполнена успешно" });
@@ -147,7 +158,7 @@ app.post("/api/logout", async (req, res) => {
   await supabase.auth.signOut();
 
   res.clearCookie("auth_token");
-  res.json({ message: "Успешно вышел из системы" });
+  res.json({ message: "Успешно вышли из системы" });
 });
 
 app.get("/api/profile", async (req, res) => {
@@ -230,14 +241,46 @@ app.put("/api/profile", async (req, res) => {
 app.post("/api/add_product", async (req, res) => {
   const productData = req.body;
 
-  const { data: insertData, error } = await supabase
-    .from("products")
-    .insert(productData);
+  try {
+    // Проверяем каждый товар в массиве на наличие дубликатов по артикулу
+    for (const product of productData) {
+      const { data: existingProduct, error: fetchError } = await supabaseService
+        .from("products")
+        .select("*")
+        .eq("article", product.article); // Предполагаем, что артикул хранится в поле "article"
 
-  if (error) {
-    return res.status(400).json({ error: error.message });
+      if (fetchError) {
+        return res.status(500).json({ error: "Ошибка при проверке товара" });
+      }
+
+      // Если товар с таким артикулом уже существует, возвращаем ошибку
+      if (existingProduct && existingProduct.length > 0) {
+        return res.status(400).json({
+          message: `Товар с артикулом ${product.article} уже существует`,
+        });
+      }
+    }
+
+    // Если дубликатов нет, добавляем все товары в базу данных
+    const { data: insertData, error: insertError } = await supabaseService
+      .from("products")
+      .insert(productData);
+
+    if (insertError) {
+      return res.status(400).json({ error: insertError.message });
+    }
+
+    // Отправляем успешный ответ
+    return res.status(201).json({
+      message: "Товары успешно добавлены",
+      data: insertData,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Ошибка сервера",
+      message: `Ошибка при добавлении товаров: ${error}`,
+    });
   }
-  res.send(insertData);
 });
 
 app.post("/api/configurator/private_house", async (req, res) => {

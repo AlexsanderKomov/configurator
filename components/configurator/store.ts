@@ -24,6 +24,8 @@ interface IDataSlice {
 
 export interface IData {
   [x: string]: string | boolean;
+  manufacturer: string;
+  video_signal_format: string;
   name: string;
   image: string;
 }

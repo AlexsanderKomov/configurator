@@ -11,4 +11,5 @@ export interface IArrayTranslate {
 
 export interface IProductData {
   [x: string]: string | number | boolean;
+  image: string;
 }
