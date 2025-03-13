@@ -21,7 +21,6 @@ function ReadExcelForm() {
 
       const result = await response.json(); // Парсим ответ сервера
 
-      console.log(dataExcel);
       if (response.ok) {
         success(result.message);
 
@@ -43,7 +42,7 @@ function ReadExcelForm() {
         );
 
         if (!deleteResponse.ok) {
-          console.error("Ошибка при удалении изображений");
+          error("Ошибка при удалении изображений");
         }
 
         // Если сервер вернул артикул дубликата, выводим его
@@ -51,7 +50,7 @@ function ReadExcelForm() {
         resetData();
       }
     } catch (err) {
-      console.error("Ошибка при отправке данных:", err);
+      error(`Ошибка при отправке данных: ${err}`);
     }
   };
 

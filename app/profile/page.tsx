@@ -1,5 +1,6 @@
 import Profile from "@/components/auth/Profile";
 
+
 function ProfilePage() {
   return (
     <div className="container">

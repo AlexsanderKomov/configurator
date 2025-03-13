@@ -4,8 +4,8 @@
 import { useEffect, useState } from "react";
 import { IUser } from "./store";
 import Button from "../uikit/Button";
-import InputForm from "./comoinents/InputForm";
-import LabelForm from "./comoinents/LabelForm";
+import InputForm from "./components/InputForm";
+import LabelForm from "./components/LabelForm";
 
 interface EditProfileModalProps {
   user: IUser;

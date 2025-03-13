@@ -6,7 +6,7 @@ import ListOption from "./ListOption";
 import { transformationOfProductThroughForm } from "@/lib/helpers/transformationOfProductThroughForm";
 import { setNodeProperties } from "@/lib/helpers/setNodeProperties";
 import Button from "@/components/uikit/Button";
-import { success } from "@/lib/helpers/toastifyFunctions";
+import { error, success } from "@/lib/helpers/toastifyFunctions";
 
 /** Форма типа узла */
 function NodeTypeForm() {
@@ -32,13 +32,9 @@ function NodeTypeForm() {
         if (response.ok) {
           const result = await response.json();
           imageUrl = result.url;
-          console.log("Изображение загружено:", result.url);
-        } else {
-          console.error("Ошибка при загрузке изображения");
         }
-      } catch (error) {
-        console.error("Ошибка:", error);
-        return;
+      } catch (err) {
+        error(`Ошибка: ${err}`);
       }
     }
 
@@ -55,11 +51,35 @@ function NodeTypeForm() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(productData),
+      body: JSON.stringify([productData]),
     });
+
+    const result = await response.json(); // Парсим ответ сервера
 
     if (response.ok) {
       success("Товар успешно добавлен");
+    } else {
+      const imagesToDelete = [productData].map((product) =>
+        product.image.replace("http://localhost:3001/uploads/", "")
+      );
+      // Если произошла ошибка, удаляем изображения
+      const deleteResponse = await fetch(
+        "http://localhost:3001/api/delete_images",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ images: imagesToDelete }),
+        }
+      );
+
+      if (!deleteResponse.ok) {
+        error("Ошибка при удалении изображений");
+      }
+
+      // Если сервер вернул артикул дубликата, выводим его
+      error(result.message);
     }
 
     reset();

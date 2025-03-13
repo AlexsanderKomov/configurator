@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { error, success } from "@/lib/helpers/toastifyFunctions";
 import Button from "../uikit/Button";
-import InputForm from "./comoinents/InputForm";
+import InputForm from "./components/InputForm";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({

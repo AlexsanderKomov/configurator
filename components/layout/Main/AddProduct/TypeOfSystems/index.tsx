@@ -2,12 +2,12 @@
 
 import { ChangeEvent, useState } from "react";
 import { CHOISE_OF_THE_SYSTEM } from "./constants";
-import { Stage } from "./enums";
 import { useTypeStore } from "../store";
 import NodeTypeForm from "./NodeTypeForm";
 import ButtonStage from "@/components/uikit/ButtonStage";
 import ListNodes from "./ListNodes";
 import Button from "@/components/uikit/Button";
+import { Stage } from "@/lib/enumStage";
 
 /* Типы систем видеонаблюдения */
 function TypeOfSystems() {
