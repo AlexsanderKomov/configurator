@@ -5,11 +5,18 @@ import Kit from "./Kit";
 import { useConfigStore } from "./store";
 import EquimpmentList from "./EquimpmentList";
 import { Stage } from "@/lib/enumStage";
+import Readers from "./Readers";
 
 function PrivateHouse() {
-  const { stage, stageForward, stageBack, selectedOption } = useConfigStore(
-    (store) => store
-  );
+  const { stage, stageForward, stageBack, selectedOption, resetValue } =
+    useConfigStore((store) => store);
+
+  const handleSubmit = () => {
+    stageBack();
+    if (stage === Stage.four) {
+      resetValue();
+    }
+  };
 
   return (
     <div className="container">
@@ -24,7 +31,8 @@ function PrivateHouse() {
           <Kit />
         ))}
       {stage === Stage.four && <EquimpmentList equimpment="calling_panel" />}
-      {stage !== Stage.one && <Button text="Назад" onClick={stageBack} />}
+      {stage === Stage.five && <Readers />}
+      {stage !== Stage.one && <Button text="Назад" onClick={handleSubmit} />}
     </div>
   );
 }

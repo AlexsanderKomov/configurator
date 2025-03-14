@@ -1,15 +1,14 @@
 import React from "react";
 import { useConfigStore } from "./store";
 import RadioButtonsGroup from "../uikit/RadioButtonGroup";
-import { RADIO_OPTIONS_INTERCOM } from "./constants";
 import { FormProvider, useForm } from "react-hook-form";
 import Button from "../uikit/Button";
+import { IRadionButtonGroup } from "../uikit/RadioButtonGroup/interface";
 
-const RadioForm = () => {
+const RadioForm = (props: IRadionButtonGroup) => {
   const { setSelectedOption, stageForward } = useConfigStore();
-
   const methods = useForm({
-    defaultValues: { option_intercom: "individually" },
+    defaultValues: { option_intercom: props.options[0].value },
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -25,7 +24,7 @@ const RadioForm = () => {
         <RadioButtonsGroup
           className="flex gap-5"
           name="option_intercom"
-          options={RADIO_OPTIONS_INTERCOM}
+          options={props.options}
         />
         <Button type="submit" text="Дальше" />
       </form>

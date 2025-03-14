@@ -53,8 +53,6 @@ const RegistrationForm = () => {
     }
   };
 
-  console.log(formData);
-
   return (
     <form
       onSubmit={handleSubmit}

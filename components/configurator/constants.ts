@@ -8,3 +8,18 @@ export const RADIO_OPTIONS_INTERCOM = [
     value: "kit",
   },
 ];
+
+export const RADIO_OPTIONS_READERS = [
+  {
+    label: "Не нужно",
+    value: "false",
+  },
+  {
+    label: "Считыватель",
+    value: "reader",
+  },
+  {
+    label: "Кодонаборная панель",
+    value: "keypad",
+  },
+];

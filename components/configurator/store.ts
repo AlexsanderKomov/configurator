@@ -29,10 +29,23 @@ export interface IData {
   name: string;
   image: string;
 }
+
+interface ISelectedValue {
+  manufacturer: string;
+  video_signal_format: string;
+}
+
+interface IFilterValues {
+  selectedValue: ISelectedValue;
+  updateSelectedValue: (newValue: ISelectedValue) => void;
+  resetValue: () => void;
+}
+
 type StoreSlise = ITypeEquipmentSlice &
   IStageSlice &
   IRadioStateSlice &
-  IDataSlice;
+  IDataSlice &
+  IFilterValues;
 
 const createTypeEquipmentSlice: StateCreator<ITypeEquipmentSlice> = (set) => ({
   typeEquipment: "",
@@ -63,9 +76,20 @@ const createDataSlice: StateCreator<IDataSlice> = (set) => ({
   updateData: (newData) => set({ data: newData }),
 });
 
+const SELECTED_VALUE_DEFAULT = { manufacturer: "", video_signal_format: "" };
+
+const createFilteredValue: StateCreator<IFilterValues> = (set) => ({
+  selectedValue: SELECTED_VALUE_DEFAULT,
+  updateSelectedValue: (newValue) => {
+    set({ selectedValue: newValue });
+  },
+  resetValue: () => set({ selectedValue: SELECTED_VALUE_DEFAULT }),
+});
+
 export const useConfigStore = create<StoreSlise>()((...state) => ({
   ...createTypeEquipmentSlice(...state),
   ...createStageSlice(...state),
   ...createRadioStoreSlice(...state),
   ...createDataSlice(...state),
+  ...createFilteredValue(...state),
 }));
