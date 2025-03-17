@@ -1,5 +1,6 @@
 "use client";
 import { useTypeStore } from "@/components/layout/Main/AddProduct/store";
+import Loader from "@/components/uikit/Loader";
 import Image from "next/image";
 
 function ListLoadedProducts() {
@@ -7,7 +8,8 @@ function ListLoadedProducts() {
 
   if (data?.length === 0) return <p>Нет данных</p>;
 
-  if (loading) return <p>Загрузка данных...</p>;
+  if (loading) return <Loader />;
+
   return (
     <div className="grid grid-cols-2 w-full gap-12">
       {data?.map((item, index) => {

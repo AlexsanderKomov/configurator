@@ -3,6 +3,7 @@ import Image from "next/image";
 import Button from "../Button";
 import { IData, useConfigStore } from "@/components/configurator/store";
 import { createPortal } from "react-dom";
+import ModalCard from "./ModalCard";
 
 interface IProductCardProps {
   item: IData;
@@ -10,14 +11,7 @@ interface IProductCardProps {
 }
 
 const ProductCard = ({ item, onSelect }: IProductCardProps) => {
-  const {
-    name,
-    article,
-    image,
-    manufacturer,
-    description,
-    video_signal_format,
-  } = item;
+  const { name, article, image, manufacturer, video_signal_format } = item;
   const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для модального окна
   const { stageForward } = useConfigStore((store) => store);
 
@@ -25,8 +19,8 @@ const ProductCard = ({ item, onSelect }: IProductCardProps) => {
     setIsModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleCloseModal = (statusFalse: boolean) => {
+    setIsModalOpen(statusFalse);
   };
 
   const handleSelect = () => {
@@ -38,7 +32,7 @@ const ProductCard = ({ item, onSelect }: IProductCardProps) => {
 
   return (
     <>
-      <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300">
+      <div className="w-[400px] rounded overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300">
         <Image
           className="w-full h-48 object-contain"
           width={300}
@@ -62,14 +56,8 @@ const ProductCard = ({ item, onSelect }: IProductCardProps) => {
       {/* Модальное окно */}
       {isModalOpen &&
         createPortal(
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white p-6 rounded-lg max-w-lg w-full mx-4">
-              <h2 className="font-bold text-xl mb-4">{name}</h2>
-              <p className="text-gray-700 text-base mb-4">{description}</p>
-              <Button text="Закрыть" onClick={handleCloseModal} />
-            </div>
-          </div>,
-          document.getElementById("modal-root")!
+          <ModalCard item={item} onClose={handleCloseModal} />,
+          document.getElementById("modal-root") as HTMLElement
         )}
     </>
   );

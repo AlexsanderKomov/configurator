@@ -1,10 +1,6 @@
 import React, { InputHTMLAttributes } from "react";
 
 interface IInputForm extends InputHTMLAttributes<HTMLInputElement> {
-  type?: string;
-  name: string;
-  placeholder?: string;
-  value: string;
   className?: string;
 }
 

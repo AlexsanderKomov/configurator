@@ -79,7 +79,7 @@ const EditProfileModal = ({
         <h2 className="text-xl font-bold mb-4">Редактирование профиля</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <LabelForm text="Имя:">
+            <LabelForm label="Имя:">
               <InputForm
                 name="first_name"
                 value={formData.first_name}
@@ -89,7 +89,7 @@ const EditProfileModal = ({
             </LabelForm>
           </div>
           <div className="mb-4">
-            <LabelForm text="Фамилия:">
+            <LabelForm label="Фамилия:">
               <InputForm
                 name="last_name"
                 value={formData.last_name}
@@ -99,7 +99,7 @@ const EditProfileModal = ({
             </LabelForm>
           </div>
           <div className="mb-4">
-            <LabelForm text="Компания:">
+            <LabelForm label="Компания:">
               <InputForm
                 name="company"
                 value={formData.company}
@@ -109,7 +109,7 @@ const EditProfileModal = ({
             </LabelForm>
           </div>
           <div className="mb-4">
-            <LabelForm text="Номер телефона:">
+            <LabelForm label="Номер телефона:">
               <InputForm
                 name="phone_number"
                 value={formData.phone_number}

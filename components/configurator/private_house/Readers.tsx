@@ -1,9 +1,9 @@
-import { RADIO_OPTIONS_READERS } from "./constants";
-import RadioForm from "./RadioForm";
+import { RADIO_OPTIONS_READERS } from "../constants";
+import RadioForm from "../RadioForm";
 
 function Readers() {
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <p>Нужно ли вам дополнительное оборудование на вход?</p>
       <RadioForm name="readers" options={RADIO_OPTIONS_READERS} />
     </div>

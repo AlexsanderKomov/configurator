@@ -2,12 +2,24 @@
 import { useEffect } from "react";
 import { useConfigStore } from "./store";
 import ProductCard from "../uikit/ProductCard";
+import { useTypeStore } from "../layout/Main/AddProduct/store";
+import Loader from "../uikit/Loader";
 
 function EquimpmentList({ equimpment }: { equimpment: string }) {
   const { data, updateData, updateSelectedValue, selectedValue } =
     useConfigStore((store) => store);
+  const { loading, startLoading, stopLoading } = useTypeStore((state) => state);
 
   useEffect(() => {
+    /** Симулируем загрузку данных */
+    function simulateLoading() {
+      startLoading();
+
+      setTimeout(() => {
+        stopLoading();
+      }, 1000);
+    }
+
     const fetchData = async () => {
       const response = await fetch("/api/configurator/private_house", {
         method: "POST",
@@ -26,7 +38,8 @@ function EquimpmentList({ equimpment }: { equimpment: string }) {
     };
 
     fetchData();
-  }, [equimpment, updateData]);
+    simulateLoading();
+  }, [equimpment, updateData, startLoading, stopLoading]);
 
   const oneSelect = (manufacturer: string, video_signal_format: string) => {
     updateSelectedValue({ manufacturer, video_signal_format });
@@ -42,15 +55,19 @@ function EquimpmentList({ equimpment }: { equimpment: string }) {
       : data;
 
   return (
-    <ul className="flex gap-5 col-span-9 col-start-3">
-      {filteredData.map((item, index) => {
-        const key = `equimpment_name_${index}`;
-        return (
-          <li key={key}>
-            <ProductCard item={item} onSelect={oneSelect} />
-          </li>
-        );
-      })}
+    <ul className="flex gap-5">
+      {loading ? (
+        <Loader />
+      ) : (
+        filteredData.map((item, index) => {
+          const key = `equimpment_name_${index}`;
+          return (
+            <li key={key}>
+              <ProductCard item={item} onSelect={oneSelect} />
+            </li>
+          );
+        })
+      )}
     </ul>
   );
 }

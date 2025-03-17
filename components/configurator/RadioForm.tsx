@@ -11,16 +11,15 @@ const RadioForm = (props: IRadionButtonGroup) => {
     defaultValues: { option_intercom: props.options[0].value },
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    setSelectedOption(methods.getValues().option_intercom);
-    stageForward();
-  };
-
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit} className="p-4 space-y-4">
+      <form
+        onSubmit={methods.handleSubmit((data) => {
+          setSelectedOption(data.option_intercom);
+          stageForward();
+        })}
+        className="p-4 space-y-4 flex flex-col items-center"
+      >
         <RadioButtonsGroup
           className="flex gap-5"
           name="option_intercom"

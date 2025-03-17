@@ -5,21 +5,16 @@ import Button from "@/components/uikit/Button";
 import { useState } from "react";
 
 function AddProduct() {
-  const [addForm, setAddForm] = useState<boolean>(true);
-
-  const handleClick = () => {
-    setAddForm(!addForm);
-  };
+  const [isExcelForm, setIsExcelForm] = useState<boolean>(true);
 
   return (
     <div className="flex flex-col items-center gap-y-8">
       <Button
-        text={addForm ? "Через Excel" : "Через форму"}
-        onClick={handleClick}
+        text={isExcelForm ? "Через Excel" : "Через форму"}
+        onClick={() => setIsExcelForm(!isExcelForm)}
       />
 
-      {addForm && <TypeOfSystems />}
-      {!addForm && <ReadExcelForm />}
+      {isExcelForm ? <TypeOfSystems /> : <ReadExcelForm />}
     </div>
   );
 }
