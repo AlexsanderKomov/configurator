@@ -30,9 +30,10 @@ export interface IData {
   image: string;
 }
 
-interface ISelectedValue {
-  manufacturer: string;
-  video_signal_format: string;
+export interface ISelectedValue {
+  manufacturer?: string;
+  video_signal_format?: string;
+  type_lock?: string;
 }
 
 interface IFilterValues {

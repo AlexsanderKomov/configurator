@@ -13,10 +13,13 @@ export type Database = {
         Row: {
           angle_of_view: string | null
           article: string | null
+          color: string | null
           conjugation_with_an_access_intercom: boolean | null
           consumption: string | null
+          corner: boolean | null
           created_at: string
           hd_format_switcher: boolean | null
+          holding_force: string | null
           id: string
           ik_illumination: boolean | null
           image: string | null
@@ -28,6 +31,7 @@ export type Database = {
           permission: string | null
           power: string | null
           record_photo: boolean | null
+          reed_switch: boolean | null
           screen_sizes: string | null
           street: boolean | null
           support_full_hd: boolean | null
@@ -39,6 +43,7 @@ export type Database = {
           the_umber_of_subscribers: string | null
           touch_screen: boolean | null
           type_equipment: string | null
+          type_lock: string | null
           type_of_intercom: string | null
           video_signal_format: string | null
           wi_fi: boolean | null
@@ -47,10 +52,13 @@ export type Database = {
         Insert: {
           angle_of_view?: string | null
           article?: string | null
+          color?: string | null
           conjugation_with_an_access_intercom?: boolean | null
           consumption?: string | null
+          corner?: boolean | null
           created_at?: string
           hd_format_switcher?: boolean | null
+          holding_force?: string | null
           id?: string
           ik_illumination?: boolean | null
           image?: string | null
@@ -62,6 +70,7 @@ export type Database = {
           permission?: string | null
           power?: string | null
           record_photo?: boolean | null
+          reed_switch?: boolean | null
           screen_sizes?: string | null
           street?: boolean | null
           support_full_hd?: boolean | null
@@ -73,6 +82,7 @@ export type Database = {
           the_umber_of_subscribers?: string | null
           touch_screen?: boolean | null
           type_equipment?: string | null
+          type_lock?: string | null
           type_of_intercom?: string | null
           video_signal_format?: string | null
           wi_fi?: boolean | null
@@ -81,10 +91,13 @@ export type Database = {
         Update: {
           angle_of_view?: string | null
           article?: string | null
+          color?: string | null
           conjugation_with_an_access_intercom?: boolean | null
           consumption?: string | null
+          corner?: boolean | null
           created_at?: string
           hd_format_switcher?: boolean | null
+          holding_force?: string | null
           id?: string
           ik_illumination?: boolean | null
           image?: string | null
@@ -96,6 +109,7 @@ export type Database = {
           permission?: string | null
           power?: string | null
           record_photo?: boolean | null
+          reed_switch?: boolean | null
           screen_sizes?: string | null
           street?: boolean | null
           support_full_hd?: boolean | null
@@ -107,6 +121,7 @@ export type Database = {
           the_umber_of_subscribers?: string | null
           touch_screen?: boolean | null
           type_equipment?: string | null
+          type_lock?: string | null
           type_of_intercom?: string | null
           video_signal_format?: string | null
           wi_fi?: boolean | null

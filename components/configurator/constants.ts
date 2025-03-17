@@ -1,25 +1,25 @@
 export const RADIO_OPTIONS_INTERCOM = [
   {
-    label: "По отдельности",
     value: "individually",
+    label: "По отдельности",
   },
   {
-    label: "Комплект",
     value: "kit",
+    label: "Комплект",
   },
 ];
 
-export const RADIO_OPTIONS_READERS = [
+export const RADIO_OPTIONS_LOCK = [
   {
-    label: "Не нужно",
     value: "false",
+    label: "Не нужно",
   },
   {
-    label: "Считыватель",
-    value: "reader",
+    value: "electromagnetic_lock",
+    label: "Элетромагнитный замок",
   },
   {
-    label: "Кодонаборная панель",
-    value: "keypad",
+    value: "electromechanical_lock",
+    label: "Электромеханический замок",
   },
 ];

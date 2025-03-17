@@ -1,13 +1,13 @@
-import { RADIO_OPTIONS_READERS } from "../constants";
+import { RADIO_OPTIONS_LOCK } from "../constants";
 import RadioForm from "../RadioForm";
 
-function Readers() {
+function Lock() {
   return (
     <div className="flex flex-col items-center">
       <p>Нужно ли вам дополнительное оборудование на вход?</p>
-      <RadioForm name="readers" options={RADIO_OPTIONS_READERS} />
+      <RadioForm name="lock" options={RADIO_OPTIONS_LOCK} />
     </div>
   );
 }
 
-export default Readers;
+export default Lock;

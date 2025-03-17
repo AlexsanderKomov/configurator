@@ -3,7 +3,7 @@ import { useProfile } from "@/components/auth/store";
 import EquimpmentList from "@/components/configurator/EquimpmentList";
 import Intercom from "@/components/configurator/private_house/Intercom";
 import Kit from "@/components/configurator/private_house/Kit";
-import Readers from "@/components/configurator/private_house/Readers";
+import Lock from "@/components/configurator/private_house/Lock";
 import { useConfigStore } from "@/components/configurator/store";
 import Button from "@/components/uikit/Button";
 import { Stage } from "@/lib/enumStage";
@@ -24,20 +24,36 @@ function PrivateHousePage() {
     }
   };
 
-  return (
-    <div className="container flex flex-col items-center gap-5">
-      {stage === Stage.one && (
-        <Button text="Начать подбор" onClick={stageForward} />
-      )}
-      {stage === Stage.two && <Intercom />}
-      {stage === Stage.three &&
-        (selectedOption === "individually" ? (
+  const renderStage = () => {
+    switch (stage) {
+      case Stage.one:
+        return <Button text="Начать подбор" onClick={stageForward} />;
+      case Stage.two:
+        return <Intercom />;
+      case Stage.three:
+        return selectedOption === "individually" ? (
           <EquimpmentList equimpment="monitor" />
         ) : (
           <Kit />
-        ))}
-      {stage === Stage.four && <EquimpmentList equimpment="calling_panel" />}
-      {stage === Stage.five && <Readers />}
+        );
+      case Stage.four:
+        return <EquimpmentList equimpment="calling_panel" />;
+      case Stage.five:
+        return <Lock />;
+      case Stage.six:
+        return selectedOption === "electromagnetic_lock" ? (
+          <EquimpmentList equimpment="lock" />
+        ) : (
+          <EquimpmentList equimpment="smart_lock" />
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="container flex flex-col items-center gap-5">
+      {renderStage()}
       {stage !== Stage.one && <Button text="Назад" onClick={handleSubmit} />}
     </div>
   );

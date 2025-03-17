@@ -1,0 +1,121 @@
+import { IConstants } from "@/shared/constants/select_options/interface";
+
+export const LOCK: IConstants = {
+  manufacturer: {
+    name: "Производитель",
+    option: [
+      {
+        value: "Accordtek",
+        label: "Accordtek",
+      },
+    ],
+  },
+  name: {
+    name: "Наименование",
+    option: [
+      {
+        value: null,
+        label: "",
+      },
+    ],
+  },
+  article: {
+    name: "Артикул",
+    option: [
+      {
+        value: null,
+        label: "",
+      },
+    ],
+  },
+  type_lock: {
+    name: "Тип замка",
+    option: [
+      {
+        value: "electromagnetic_lock",
+        label: "Элетромагнитный замок",
+      },
+      {
+        value: "electromechanical_lock",
+        label: "Электромеханический замок",
+      },
+    ],
+  },
+  color: {
+    name: "Цвет",
+    option: [
+      {
+        value: "Серый",
+        label: "Серый",
+      },
+      {
+        value: "Коричневый",
+        label: "Коричневый",
+      },
+    ],
+  },
+  corner: {
+    name: "Угол монтажный",
+    option: [
+      {
+        value: true,
+        label: "Да",
+      },
+      {
+        value: false,
+        label: "Нет",
+      },
+    ],
+  },
+  reed_switch: {
+    name: "Наличие геркона",
+    option: [
+      {
+        value: true,
+        label: "Да",
+      },
+      {
+        value: false,
+        label: "Нет",
+      },
+    ],
+  },
+  holding_force: {
+    name: "Сила удержания",
+    option: [{ value: null, label: "" }],
+  },
+  power: {
+    name: "Питание",
+    option: [
+      {
+        value: "12",
+        label: "12В",
+      },
+      {
+        value: "24",
+        label: "24В",
+      },
+      {
+        value: "12/24",
+        label: "12В/24В",
+      },
+    ],
+  },
+  consumption: {
+    name: "Потребление",
+    option: [{ value: null, label: "" }],
+  },
+  street: {
+    name: "Возможность ставить на улице",
+    option: [
+      {
+        value: true,
+        label: "Да",
+      },
+    ],
+  },
+  image: {
+    name: "Картинка",
+    option: [{ value: null, label: "" }],
+  },
+};

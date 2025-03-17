@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Button from "../Button";
-import { IData, useConfigStore } from "@/components/configurator/store";
+import {
+  IData,
+  ISelectedValue,
+  useConfigStore,
+} from "@/components/configurator/store";
 import { createPortal } from "react-dom";
 import ModalCard from "./ModalCard";
 
 interface IProductCardProps {
   item: IData;
-  onSelect?: (manufacturer: string, video_signal_format: string) => void;
+  onSelect?: (values: ISelectedValue) => void;
 }
 
 const ProductCard = ({ item, onSelect }: IProductCardProps) => {
@@ -25,7 +29,7 @@ const ProductCard = ({ item, onSelect }: IProductCardProps) => {
 
   const handleSelect = () => {
     if (onSelect) {
-      onSelect(manufacturer, video_signal_format); // Вызываем колбэк с данными
+      onSelect({ manufacturer, video_signal_format }); // Вызываем колбэк с данными
     }
     stageForward(); // Вызываем функцию из store
   };

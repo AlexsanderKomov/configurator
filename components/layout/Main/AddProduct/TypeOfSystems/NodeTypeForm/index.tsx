@@ -46,6 +46,7 @@ function NodeTypeForm() {
       typeNode
     );
 
+    console.log(productData);
     const response = await fetch("/api/add_product", {
       method: "POST",
       headers: {

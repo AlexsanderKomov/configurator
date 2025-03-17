@@ -4,11 +4,11 @@ import { Image } from "./enum";
 import { IProductData } from "./interface";
 
 /**
- * Преобразует данные из формы в объект IConstants.
+ * Преобразует данные из формы в объект для базы данных.
  * @param data - Данные из формы.
  * @param constant - Константы для преобразования.
  * @param imageUrl - URL изображения.
- * @returns Преобразованный объект IConstants.
+ * @returns Преобразованный объект для базы данных.
  */
 export function transformationOfProductThroughForm(
   data: FormDataSubmit,

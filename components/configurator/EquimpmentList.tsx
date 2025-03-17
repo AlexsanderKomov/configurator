@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { useConfigStore } from "./store";
+import { ISelectedValue, useConfigStore } from "./store";
 import ProductCard from "../uikit/ProductCard";
 import { useTypeStore } from "../layout/Main/AddProduct/store";
 import Loader from "../uikit/Loader";
@@ -41,10 +41,12 @@ function EquimpmentList({ equimpment }: { equimpment: string }) {
     simulateLoading();
   }, [equimpment, updateData, startLoading, stopLoading]);
 
-  const oneSelect = (manufacturer: string, video_signal_format: string) => {
-    updateSelectedValue({ manufacturer, video_signal_format });
+  // Функция, которая принимает объект с динамическими ключами
+  const oneSelect = (values: ISelectedValue) => {
+    updateSelectedValue(values);
   };
 
+  console.log(data);
   const filteredData =
     selectedValue.manufacturer && selectedValue.video_signal_format
       ? data.filter(
