@@ -4,7 +4,7 @@ import RadioForm from "../RadioForm";
 function Lock() {
   return (
     <div className="flex flex-col items-center">
-      <p>Нужно ли вам дополнительное оборудование на вход?</p>
+      <p>Выберите замок если он вам нужен</p>
       <RadioForm name="lock" options={RADIO_OPTIONS_LOCK} />
     </div>
   );

@@ -6,23 +6,23 @@ import Button from "../uikit/Button";
 import { IRadionButtonGroup } from "../uikit/RadioButtonGroup/interface";
 
 const RadioForm = (props: IRadionButtonGroup) => {
-  const { setSelectedOption, stageForward } = useConfigStore();
+  const { updateSelectedOption, stageForward } = useConfigStore();
   const methods = useForm({
-    defaultValues: { option_intercom: props.options[0].value },
+    defaultValues: { option_equipment: props.options[0].value },
   });
 
   return (
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit((data) => {
-          setSelectedOption(data.option_intercom);
+          updateSelectedOption(data.option_equipment);
           stageForward();
         })}
         className="p-4 space-y-4 flex flex-col items-center"
       >
         <RadioButtonsGroup
           className="flex gap-5"
-          name="option_intercom"
+          name="option_equipment"
           options={props.options}
         />
         <Button type="submit" text="Дальше" />

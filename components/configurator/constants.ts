@@ -11,7 +11,7 @@ export const RADIO_OPTIONS_INTERCOM = [
 
 export const RADIO_OPTIONS_LOCK = [
   {
-    value: "false",
+    value: "no",
     label: "Не нужно",
   },
   {
@@ -21,5 +21,16 @@ export const RADIO_OPTIONS_LOCK = [
   {
     value: "electromechanical_lock",
     label: "Электромеханический замок",
+  },
+];
+
+export const RADIO_OPTIONS_ADDITIONAL_EQUIPMENT = [
+  {
+    value: "no",
+    label: "Не нужно",
+  },
+  {
+    value: "yes",
+    label: "Нужно",
   },
 ];

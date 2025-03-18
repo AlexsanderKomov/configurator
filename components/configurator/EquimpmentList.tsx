@@ -1,13 +1,19 @@
 "use client";
 import { useEffect } from "react";
-import { ISelectedValue, useConfigStore } from "./store";
+import { IData, useConfigStore } from "./store";
 import ProductCard from "../uikit/ProductCard";
 import { useTypeStore } from "../layout/Main/AddProduct/store";
 import Loader from "../uikit/Loader";
+import { filteredData } from "@/lib/helpers/filteredData";
 
 function EquimpmentList({ equimpment }: { equimpment: string }) {
-  const { data, updateData, updateSelectedValue, selectedValue } =
-    useConfigStore((store) => store);
+  const {
+    data,
+    updateData,
+    updateSelectedValue,
+    selectedValue,
+    selectedOption,
+  } = useConfigStore((store) => store);
   const { loading, startLoading, stopLoading } = useTypeStore((state) => state);
 
   useEffect(() => {
@@ -36,33 +42,24 @@ function EquimpmentList({ equimpment }: { equimpment: string }) {
       const data = await response.json();
       updateData(data);
     };
-
     fetchData();
     simulateLoading();
   }, [equimpment, updateData, startLoading, stopLoading]);
 
   // Функция, которая принимает объект с динамическими ключами
-  const oneSelect = (values: ISelectedValue) => {
+  const oneSelect = (values: IData) => {
     updateSelectedValue(values);
   };
 
-  console.log(data);
-  const filteredData =
-    selectedValue.manufacturer && selectedValue.video_signal_format
-      ? data.filter(
-          (item) =>
-            item.manufacturer === selectedValue.manufacturer &&
-            item.video_signal_format === selectedValue.video_signal_format
-        )
-      : data;
+  const newData = filteredData({ data, selectedValue, selectedOption });
 
   return (
     <ul className="flex gap-5">
       {loading ? (
         <Loader />
       ) : (
-        filteredData.map((item, index) => {
-          const key = `equimpment_name_${index}`;
+        newData.map((item, index) => {
+          const key = `equimpment_${item.name}_${index}`;
           return (
             <li key={key}>
               <ProductCard item={item} onSelect={oneSelect} />

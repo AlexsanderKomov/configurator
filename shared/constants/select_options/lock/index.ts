@@ -45,11 +45,11 @@ export const LOCK: IConstants = {
     name: "Цвет",
     option: [
       {
-        value: "Серый",
+        value: "grey",
         label: "Серый",
       },
       {
-        value: "Коричневый",
+        value: "brown",
         label: "Коричневый",
       },
     ],

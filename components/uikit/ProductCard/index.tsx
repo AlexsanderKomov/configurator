@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Button from "../Button";
-import {
-  IData,
-  ISelectedValue,
-  useConfigStore,
-} from "@/components/configurator/store";
+import { IData, useConfigStore } from "@/components/configurator/store";
 import { createPortal } from "react-dom";
 import ModalCard from "./ModalCard";
+import { saveItemToLocalStorage } from "@/lib/helpers/saveItemToLocalStorage";
 
-interface IProductCardProps {
+export interface IProductCardProps {
   item: IData;
-  onSelect?: (values: ISelectedValue) => void;
+  onSelect?: (values: IData) => void;
 }
 
 const ProductCard = ({ item, onSelect }: IProductCardProps) => {
-  const { name, article, image, manufacturer, video_signal_format } = item;
+  const { name, article, image, manufacturer } = item;
   const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для модального окна
   const { stageForward } = useConfigStore((store) => store);
 
@@ -29,9 +26,12 @@ const ProductCard = ({ item, onSelect }: IProductCardProps) => {
 
   const handleSelect = () => {
     if (onSelect) {
-      onSelect({ manufacturer, video_signal_format }); // Вызываем колбэк с данными
+      onSelect(item); // Вызываем колбэк с данными
     }
     stageForward(); // Вызываем функцию из store
+
+    // Сохраняем item в localStorage
+    saveItemToLocalStorage(item);
   };
 
   return (
