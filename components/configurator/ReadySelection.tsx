@@ -1,16 +1,17 @@
 import { useEffect } from "react";
 import ProductCard from "../uikit/ProductCard";
-import { IData, useConfigStore } from "./store";
+import { ILocalStorageData, useConfigStore } from "./store";
 
 function ReadySelection() {
   const { localStorageData, updateLocalStorageData, resetLocalStorageData } =
     useConfigStore((store) => store);
+
   useEffect(() => {
     const storedData = localStorage.getItem("selectedItems");
 
     if (storedData) {
       // Парсим данные, если они есть
-      const parsedData: IData[] = JSON.parse(storedData);
+      const parsedData: ILocalStorageData[] = JSON.parse(storedData);
       updateLocalStorageData(parsedData);
     } else {
       // Если данных нет, устанавливаем пустой массив или null
@@ -23,15 +24,13 @@ function ReadySelection() {
     return <p>Нет выбранных элементов.</p>;
   }
 
-  console.log(localStorageData);
-
   return (
     <ul className="flex gap-5">
       {localStorageData.map((item) => {
-        const key = `localStorage_${item.name}`;
+        const key = `localStorage_${item.item.name}`;
         return (
           <li key={key}>
-            <ProductCard item={item} />
+            <ProductCard item={item.item} />
           </li>
         );
       })}

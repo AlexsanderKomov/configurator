@@ -2,6 +2,7 @@ import { INodeProperties } from "@/components/layout/Main/AddProduct/TypeOfSyste
 import { CALLING_PANEL } from "@/shared/constants/select_options/calling_panel";
 import { LOCK } from "@/shared/constants/select_options/lock";
 import { MONITOR } from "@/shared/constants/select_options/monitor";
+import { POWER } from "@/shared/constants/select_options/power";
 
 export function setNodeProperties(typeNode: string) {
   let nodeProperties: INodeProperties = MONITOR;
@@ -12,6 +13,8 @@ export function setNodeProperties(typeNode: string) {
       break;
     case "lock":
       nodeProperties = LOCK;
+    case "power":
+      nodeProperties = POWER;
   }
 
   return nodeProperties;

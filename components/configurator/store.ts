@@ -1,24 +1,5 @@
 import { Stage } from "@/lib/enumStage";
-import { create, StateCreator } from "zustand";
-
-export interface IStageSlice {
-  stage: number;
-  stageForward: () => void;
-  stageBack: () => void;
-  updateStage: (newStage: number) => void;
-}
-
-interface IRadioStateSlice {
-  selectedOption: string; // Выбранный вариант
-  updateSelectedOption: (option: string) => void; // Функция для выбора варианта
-  getPreviousSelectedOption: () => string;
-  previousSelectedOption: string;
-}
-
-interface IDataSlice {
-  data: IData[];
-  updateData: (newData: IData[]) => void;
-}
+import { create } from "zustand";
 
 export interface IData {
   [x: string]: string | boolean;
@@ -34,82 +15,73 @@ export interface ISelectedValue {
   type_lock?: string;
 }
 
-interface IFilterValues {
-  selectedValue: ISelectedValue;
-  previousSelectedValue: ISelectedValue;
-  updateSelectedValue: (newValue: ISelectedValue) => void;
-  getPreviousSelectedValue: () => ISelectedValue;
-  resetValue: () => void;
+export interface ILocalStorageData {
+  item: IData;
+  stage: Stage;
 }
 
-interface ILocalStorageDataSlice {
-  localStorageData: IData[];
-  updateLocalStorageData: (newData: IData[]) => void;
+interface IConfigStore {
+  localStorageData: ILocalStorageData[];
+  data: IData[];
+  stage: number;
+  selectedOption: string;
+  selectedValue: ISelectedValue | null;
+  history: { selectedOption: string; selectedValue: ISelectedValue | null }[];
+  updateLocalStorageData: (newData: ILocalStorageData[]) => void;
   resetLocalStorageData: () => void;
+  updateData: (newData: IData[]) => void;
+  updateStage: (newStage: number) => void;
+  stageForward: () => void;
+  stageBack: () => void;
+  resetValue: () => void;
+  updateSelectedOption: (option: string) => void;
+  updateSelectedValue: (value: ISelectedValue) => void;
 }
 
-type StoreSlise = IStageSlice &
-  IRadioStateSlice &
-  IDataSlice &
-  IFilterValues &
-  ILocalStorageDataSlice;
-
-const createStageSlice: StateCreator<IStageSlice> = (set, get) => ({
-  stage: Stage.one,
-  stageForward: () => {
-    const currentStage = get().stage;
-    set({ stage: currentStage + 1 });
-  },
-  stageBack: () => {
-    const currentStage = get().stage;
-    set({ stage: currentStage - 1 });
-  },
-  updateStage: (newStage) => set({ stage: newStage }),
-});
-
-const createRadioStoreSlice: StateCreator<IRadioStateSlice> = (set, get) => ({
-  selectedOption: "individually", // По умолчанию ничего не выбрано
-  previousSelectedOption: "",
-  updateSelectedOption: (option) =>
-    set((state) => ({
-      previousSelectedOption: state.selectedOption,
-      selectedOption: option,
-    })),
-  getPreviousSelectedOption: () => get().previousSelectedOption,
-});
-
-const createDataSlice: StateCreator<IDataSlice> = (set) => ({
+export const useConfigStore = create<IConfigStore>((set, get) => ({
+  localStorageData: [],
   data: [],
+  stage: Stage.one,
+  selectedOption: "individually",
+  selectedValue: null,
+  history: [],
+
+  updateLocalStorageData: (newData) => set({ localStorageData: newData }),
+
+  resetLocalStorageData: () => set({ localStorageData: [] }),
+
   updateData: (newData) => set({ data: newData }),
-});
 
-const SELECTED_VALUE_DEFAULT = { manufacturer: "", video_signal_format: "" };
+  updateStage: (newStage) => set({ stage: newStage }),
 
-const createFilteredValue: StateCreator<IFilterValues> = (set, get) => ({
-  selectedValue: SELECTED_VALUE_DEFAULT,
-  previousSelectedValue: "",
-  updateSelectedValue: (newValue) => {
+  stageForward: () => {
+    const currentState = {
+      selectedOption: get().selectedOption,
+      selectedValue: get().selectedValue,
+    };
     set((state) => ({
-      previousSelectedValue: state.selectedValue,
-      selectedValue: newValue,
+      stage: state.stage + 1,
+      history: [...state.history, currentState], // Сохраняем текущее состояние в историю
     }));
   },
-  getPreviousSelectedValue: () => get().previousSelectedValue,
-  resetValue: () => set({ selectedValue: SELECTED_VALUE_DEFAULT }),
-});
+  stageBack: () => {
+    set((state) => {
+      if (state.history.length > 0) {
+        const previousState = state.history[state.history.length - 1]; // Берем последнее состояние из истории
+        return {
+          stage: state.stage - 1,
+          selectedOption: previousState.selectedOption,
+          selectedValue: previousState.selectedValue,
+          history: state.history.slice(0, -1), // Удаляем последнее состояние из истории
+        };
+      }
+      return state;
+    });
+  },
+  resetValue: () =>
+    set({ selectedOption: "individually", selectedValue: null }),
 
-const createLocalStorageDataSlice: StateCreator<ILocalStorageDataSlice> = (
-  set
-) => ({
-  localStorageData: [],
-  updateLocalStorageData: (newData) => set({ localStorageData: newData }),
-  resetLocalStorageData: () => set({ localStorageData: [] }),
-});
+  updateSelectedOption: (option) => set({ selectedOption: option }),
 
-export const useConfigStore = create<StoreSlise>()((...state) => ({
-  ...createStageSlice(...state),
-  ...createRadioStoreSlice(...state),
-  ...createDataSlice(...state),
-  ...createFilteredValue(...state),
-  ...createLocalStorageDataSlice(...state),
+  updateSelectedValue: (value) => set({ selectedValue: value }),
 }));

@@ -2,30 +2,34 @@ import { IData, ISelectedValue } from "@/components/configurator/store";
 
 interface IFilteredData {
   data: IData[];
-  selectedValue: ISelectedValue;
-  selectedOption: string | boolean;
+  history: { selectedOption: string; selectedValue: ISelectedValue | null }[];
 }
 
-export function filteredData({
-  data,
-  selectedValue,
-  selectedOption,
-}: IFilteredData) {
+export function filteredData({ data, history }: IFilteredData) {
+  // Берем последний элемент из истории
+  const lastHistoryEntry = history[history.length - 1];
+
   if (
-    selectedValue.manufacturer &&
-    selectedValue.video_signal_format &&
-    selectedOption === "individually"
+    lastHistoryEntry.selectedValue?.manufacturer &&
+    lastHistoryEntry.selectedValue?.video_signal_format &&
+    lastHistoryEntry.selectedOption === "individually"
   ) {
     return data.filter(
       (item) =>
-        item.manufacturer === selectedValue.manufacturer &&
-        item.video_signal_format === selectedValue.video_signal_format
+        item.manufacturer === lastHistoryEntry.selectedValue?.manufacturer &&
+        item.video_signal_format ===
+          lastHistoryEntry.selectedValue?.video_signal_format
     );
   } else if (
-    selectedOption === "electromagnetic_lock" ||
-    selectedOption === "electromechanical_lock"
+    (lastHistoryEntry.selectedOption === "electromagnetic_lock" ||
+      lastHistoryEntry.selectedOption === "electromechanical_lock") &&
+    data[0].type_equipment === "lock"
   ) {
-    return data.filter((item) => item.type_lock === selectedOption);
+    return data.filter(
+      (item) => item.type_lock === lastHistoryEntry.selectedOption
+    );
+  } else if (lastHistoryEntry.selectedOption === "electromechanical_lock") {
+    return data.filter((item) => +item.output_current >= 5);
   } else {
     return data;
   }

@@ -1,19 +1,13 @@
 "use client";
 import { useEffect } from "react";
-import { IData, useConfigStore } from "./store";
+import { useConfigStore } from "./store";
 import ProductCard from "../uikit/ProductCard";
 import { useTypeStore } from "../layout/Main/AddProduct/store";
 import Loader from "../uikit/Loader";
 import { filteredData } from "@/lib/helpers/filteredData";
 
 function EquimpmentList({ equimpment }: { equimpment: string }) {
-  const {
-    data,
-    updateData,
-    updateSelectedValue,
-    selectedValue,
-    selectedOption,
-  } = useConfigStore((store) => store);
+  const { data, updateData, history } = useConfigStore((store) => store);
   const { loading, startLoading, stopLoading } = useTypeStore((state) => state);
 
   useEffect(() => {
@@ -44,14 +38,9 @@ function EquimpmentList({ equimpment }: { equimpment: string }) {
     };
     fetchData();
     simulateLoading();
-  }, [equimpment, updateData, startLoading, stopLoading]);
+  }, [equimpment, startLoading, stopLoading, updateData]);
 
-  // Функция, которая принимает объект с динамическими ключами
-  const oneSelect = (values: IData) => {
-    updateSelectedValue(values);
-  };
-
-  const newData = filteredData({ data, selectedValue, selectedOption });
+  const newData = filteredData({ data, history });
 
   return (
     <ul className="flex gap-5">
@@ -62,7 +51,7 @@ function EquimpmentList({ equimpment }: { equimpment: string }) {
           const key = `equimpment_${item.name}_${index}`;
           return (
             <li key={key}>
-              <ProductCard item={item} onSelect={oneSelect} />
+              <ProductCard item={item} />
             </li>
           );
         })
