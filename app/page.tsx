@@ -8,12 +8,15 @@ import { useEffect } from "react";
 
 export default function Home() {
   const { updateUser, updateRole } = useProfile((store) => store);
-  const { resetLocalStorageData } = useConfigStore((store) => store);
+  const { resetLocalStorageData, resetValue } = useConfigStore(
+    (store) => store
+  );
 
   useEffect(() => {
     localStorage.removeItem("selectedItems");
     resetLocalStorageData();
-  }, [resetLocalStorageData]);
+    resetValue();
+  }, [resetLocalStorageData, resetValue]);
   // Получаем данные пользователя из хранилища для определения авторизован ли пользователь
   useFetchUserFromLocalStorage("userData", updateUser, updateRole);
 

@@ -19,20 +19,24 @@ export type Database = {
           corner: boolean | null
           created_at: string
           hd_format_switcher: boolean | null
-          holding_force: string | null
+          holding_force: number | null
           id: string
           ik_illumination: boolean | null
           image: string | null
+          input_voltage: number | null
           loading_your_melody_to_call: boolean | null
           management_buttons: string | null
           manufacturer: string | null
           movement_detector_record: boolean | null
           name: string | null
+          output_current: number | null
+          output_voltage: string | null
           permission: string | null
           power: string | null
+          price: number | null
           record_photo: boolean | null
           reed_switch: boolean | null
-          screen_sizes: string | null
+          screen_sizes: number | null
           street: boolean | null
           support_full_hd: boolean | null
           support_sd_card: boolean | null
@@ -58,20 +62,24 @@ export type Database = {
           corner?: boolean | null
           created_at?: string
           hd_format_switcher?: boolean | null
-          holding_force?: string | null
+          holding_force?: number | null
           id?: string
           ik_illumination?: boolean | null
           image?: string | null
+          input_voltage?: number | null
           loading_your_melody_to_call?: boolean | null
           management_buttons?: string | null
           manufacturer?: string | null
           movement_detector_record?: boolean | null
           name?: string | null
+          output_current?: number | null
+          output_voltage?: string | null
           permission?: string | null
           power?: string | null
+          price?: number | null
           record_photo?: boolean | null
           reed_switch?: boolean | null
-          screen_sizes?: string | null
+          screen_sizes?: number | null
           street?: boolean | null
           support_full_hd?: boolean | null
           support_sd_card?: boolean | null
@@ -97,20 +105,24 @@ export type Database = {
           corner?: boolean | null
           created_at?: string
           hd_format_switcher?: boolean | null
-          holding_force?: string | null
+          holding_force?: number | null
           id?: string
           ik_illumination?: boolean | null
           image?: string | null
+          input_voltage?: number | null
           loading_your_melody_to_call?: boolean | null
           management_buttons?: string | null
           manufacturer?: string | null
           movement_detector_record?: boolean | null
           name?: string | null
+          output_current?: number | null
+          output_voltage?: string | null
           permission?: string | null
           power?: string | null
+          price?: number | null
           record_photo?: boolean | null
           reed_switch?: boolean | null
-          screen_sizes?: string | null
+          screen_sizes?: number | null
           street?: boolean | null
           support_full_hd?: boolean | null
           support_sd_card?: boolean | null

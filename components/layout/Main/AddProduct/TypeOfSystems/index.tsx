@@ -18,19 +18,15 @@ function TypeOfSystems() {
     (state) => state
   );
 
-  const handleClick = () => {
-    setViewSelect(!viewSelect);
-  };
-
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     updateTypeSystem(event.target.value); // Обновление выбранного значения при изменении выбора в выпадающем списке
   };
 
-  return (
-    <div className="flex justify-center mb-5 h-auto p-5 flex-col">
-      {viewSelect ? (
-        <div className="flex flex-col items-center gap-y-5">
-          {stage === Stage.one && (
+  const renderStage = () => {
+    switch (stage) {
+      case Stage.one:
+        return (
+          <>
             <select
               id="typeSystem"
               onChange={handleSelectChange}
@@ -46,15 +42,35 @@ function TypeOfSystems() {
                 );
               })}
             </select>
-          )}
-          {stage === Stage.two && <ListNodes type={typeSystem} />}
-          {stage === Stage.one && <ButtonStage step="Дальше" stage={2} />}
-          {stage === Stage.two && <ButtonStage step="Назад" stage={1} />}
+            <ButtonStage step="Дальше" stage={2} />
+          </>
+        );
+      case Stage.two:
+        return (
+          <>
+            <ListNodes type={typeSystem} />
+            <ButtonStage step="Назад" stage={1} />
+          </>
+        );
+      case Stage.three:
+        return <NodeTypeForm />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="flex justify-center mb-5 h-auto p-5 flex-col">
+      {viewSelect ? (
+        <div className="flex flex-col items-center gap-y-5">
+          {renderStage()}
         </div>
       ) : (
-        <Button text="Добавить продукт" onClick={handleClick} />
+        <Button
+          text="Добавить продукт"
+          onClick={() => setViewSelect(!viewSelect)}
+        />
       )}
-      {stage === Stage.three && <NodeTypeForm />}
     </div>
   );
 }

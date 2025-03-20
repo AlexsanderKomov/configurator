@@ -1,13 +1,13 @@
 // components/EditProfileModal.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IUser } from "./store";
 import Button from "../uikit/Button";
 import InputForm from "./components/InputForm";
 import LabelForm from "./components/LabelForm";
 
-interface EditProfileModalProps {
+interface IEditProfileModalProps {
   user: IUser;
   isOpen: boolean;
   onClose: () => void;
@@ -19,7 +19,7 @@ const EditProfileModal = ({
   isOpen,
   onClose,
   onSave,
-}: EditProfileModalProps) => {
+}: IEditProfileModalProps) => {
   const [formData, setFormData] = useState<IUser>(user);
   const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
   const [phoneError, setPhoneError] = useState<string | null>(null);
@@ -61,7 +61,6 @@ const EditProfileModal = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     // Проверяем валидность номера телефона перед отправкой
     if (!validatePhone(formData.phone_number)) {
       return; // Останавливаем отправку, если номер невалиден

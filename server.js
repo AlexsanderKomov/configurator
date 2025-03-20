@@ -168,26 +168,60 @@ app.get("/api/profile", async (req, res) => {
     return res.status(401).json({ error: "Не авторизован" });
   }
 
-  // Получаем данные пользователя из Supabase
+  // Проверяем текущий токен
   const {
     data: { user },
-    error,
+    error: userError,
   } = await supabase.auth.getUser(token);
 
-  if (error) {
-    return res.status(401).json({ error: "Неверный токен" });
+  if (userError) {
+    // Если токен истек или недействителен, пытаемся обновить его
+    const {
+      data: { session },
+      error: refreshError,
+    } = await supabase.auth.refreshSession({ refresh_token: token });
+
+    if (refreshError) {
+      return res.status(401).json({ error: "Неверный токен" });
+    }
+
+    // Обновляем токен в куках
+    res.cookie("auth_token", session.access_token, {
+      httpOnly: true,
+      secure: true,
+    });
+
+    // Продолжаем с новым токеном
+    const { data: userData, error: dataError } = await supabaseService
+      .from("profiles")
+      .select("role, first_name, last_name, company, phone_number")
+      .eq("id", session.user.id);
+
+    if (dataError) {
+      return res
+        .status(401)
+        .json({ error: "Не удалось получить ID пользователя" });
+    }
+
+    if (userData && userData.length > 0) {
+      return res.json(userData);
+    } else {
+      return res.status(404).json({ error: "Данные пользователя не найдены" });
+    }
   }
 
-  const { data: userData, errorData } = await supabaseService
+  // Если токен действителен, продолжаем с текущим токеном
+  const { data: userData, error: dataError } = await supabaseService
     .from("profiles")
     .select("role, first_name, last_name, company, phone_number")
     .eq("id", user.id);
 
-  if (errorData) {
+  if (dataError) {
     return res
       .status(401)
       .json({ error: "Не удалось получить ID пользователя" });
   }
+
   if (userData && userData.length > 0) {
     res.json(userData);
   } else {
@@ -287,7 +321,6 @@ app.post("/api/configurator/private_house", async (req, res) => {
   if (!req.body.action) {
     return res.status(400).json({ error: "Действие не указано" });
   } else {
-    console.log(req.body.action);
     const { data: productData, error } = await supabaseService
       .from("products")
       .select("*")
@@ -299,6 +332,26 @@ app.post("/api/configurator/private_house", async (req, res) => {
     }
 
     res.json(productData);
+  }
+});
+
+// Роут для получения всех товаров
+app.get("/api/products", async (req, res) => {
+  try {
+    // Запрашиваем все товары из таблицы products
+    const { data: products, error } = await supabaseService
+      .from("products")
+      .select("*");
+
+    if (error) {
+      console.error("Ошибка при запросе к Supabase:", error);
+      return res.status(500).json({ error: "Ошибка при получении данных" });
+    }
+
+    return res.status(200).send(products);
+  } catch (error) {
+    console.error("Ошибка сервера:", error);
+    return res.status(500).json({ error: "Ошибка сервера" });
   }
 });
 

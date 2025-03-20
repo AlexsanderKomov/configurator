@@ -224,4 +224,8 @@ export const CALLING_PANEL: IConstants = {
     name: "Картинка",
     option: [{ value: null, label: "" }],
   },
+  price: {
+    name: "Цена",
+    option: [{ value: null, label: "" }],
+  },
 };

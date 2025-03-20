@@ -13,9 +13,7 @@ import { deleteLastItemFromLocalStorage } from "@/lib/helpers/dataLocalStorage";
 import useFetchUserFromLocalStorage from "@/lib/hooks/useFetchUserFromLocalStorage";
 
 function PrivateHousePage() {
-  const { stage, stageForward, stageBack, selectedOption } = useConfigStore(
-    (store) => store
-  );
+  const { stage, stageBack, selectedOption } = useConfigStore((store) => store);
   const { updateUser, updateRole } = useProfile((store) => store);
 
   // Получаем данные пользователя из хранилища для определения авторизован ли пользователь
@@ -31,27 +29,25 @@ function PrivateHousePage() {
   const renderStage = () => {
     switch (stage) {
       case Stage.one:
-        return <Button text="Начать подбор" onClick={stageForward} />;
-      case Stage.two:
         return <Intercom />;
-      case Stage.three:
+      case Stage.two:
         return selectedOption === "individually" ? (
           <EquimpmentList equimpment="monitor" />
         ) : (
           <Kit />
         );
-      case Stage.four:
+      case Stage.three:
         return <EquimpmentList equimpment="calling_panel" />;
-      case Stage.five:
+      case Stage.four:
         return <Lock />;
-      case Stage.six:
+      case Stage.five:
         return selectedOption === "electromagnetic_lock" ||
           selectedOption === "electromechanical_lock" ? (
           <EquimpmentList equimpment="lock" />
         ) : (
           <AdditionalEquipment />
         );
-      case Stage.seven:
+      case Stage.six:
         return selectedOption === "electromagnetic_lock" ||
           selectedOption === "electromechanical_lock" ? (
           <EquimpmentList equimpment="power" />
@@ -60,14 +56,15 @@ function PrivateHousePage() {
         ) : (
           <ReadySelection />
         );
-      case Stage.eight:
+      case Stage.seven:
         return <AdditionalEquipment />;
-      case Stage.nine:
+      case Stage.eight:
         return selectedOption === "yes" ? (
           <p>дополнительное оборудование</p>
         ) : (
           <ReadySelection />
         );
+
       default:
         return null;
     }
