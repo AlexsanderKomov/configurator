@@ -7,7 +7,7 @@ import { IUser, useProfile } from "@/components/auth/store";
 import Button from "@/components/uikit/Button";
 import EditProfileModal from "@/components/auth/EditProfileModal";
 import { createPortal } from "react-dom";
-import ChangeProductModal from "@/components/uikit/ChangeProductModal";
+import ChangeProductsModal from "@/components/uikit/ChangeProductsModal";
 
 function ProfilePage() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -109,7 +109,7 @@ function ProfilePage() {
 
       {isModalOpenChange &&
         createPortal(
-          <ChangeProductModal
+          <ChangeProductsModal
             isOpen={isModalOpenChange}
             onClose={() => setIsModalOpenChange(false)}
           />,
