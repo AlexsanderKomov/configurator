@@ -2,25 +2,29 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import delc from "@/public/image/logo.png";
+import delc from "@/public/image/Logo-01.svg";
+import { useProfile } from "@/components/auth/store";
+import ProfileHeader from "@/components/auth/ProfileHeader";
+import Login from "./components/Login";
+import Registration from "./components/Registration";
 
 function Header() {
-  const handleClick = () => {
-    redirect("/add_product");
-  };
+  const { role } = useProfile((state) => state);
 
   return (
-    <div className="container flex justify-between items-center">
-      <Link href="#">
-        <Image src={delc} alt="Логотип DELC"></Image>
+    <div className="container flex justify-between items-center py-5">
+      <Link href="/">
+        <Image width={150} height={100} src={delc} alt="Логотип DELC" />
       </Link>
-      <button
-        className="border p-2 rounded-lg text-black"
-        onClick={handleClick}
-      >
-        Добавить продукт
-      </button>
+
+      <div className="flex space-x-4">
+        {role && <ProfileHeader />}
+        {!role && (
+          <>
+            <Login /> <Registration />
+          </>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,25 +1,25 @@
-import { IMonitor } from "@/shared/constants/select_options/monitor/interface";
+import { IConstants } from "@/shared/constants/select_options/interface";
 
-export const MONITOR: IMonitor = {
+export const MONITOR: IConstants = {
   manufacturer: {
-    manufacturer: "Производитель",
+    name: "Производитель",
     option: [
       {
-        value: "falconEye",
+        value: "Falcon Eye",
         label: "Falcon Eye",
       },
       {
-        value: "beward",
+        value: "BEWARD",
         label: "BEWARD",
       },
       {
-        value: "dahua",
+        value: "Dahua",
         label: "Dahua",
       },
     ],
   },
   name: {
-    name: "Название",
+    name: "Наименование",
     option: [
       {
         value: null,
@@ -28,7 +28,7 @@ export const MONITOR: IMonitor = {
     ],
   },
   article: {
-    article: "Артикул",
+    name: "Артикул",
     option: [
       {
         value: null,
@@ -36,8 +36,8 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  screenSizes: {
-    screenSizes: "Размер экрана",
+  screen_sizes: {
+    name: "Размер экрана",
     option: [
       {
         value: 4,
@@ -53,8 +53,21 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  wiFi: {
-    wiFi: "Наличие Wi-Fi",
+  video_signal_format: {
+    name: "Формат видеосигнала",
+    option: [
+      {
+        value: "AHD",
+        label: "AHD",
+      },
+      {
+        value: "CVBS",
+        label: "CVBS",
+      },
+    ],
+  },
+  wi_fi: {
+    name: "Наличие Wi-Fi",
     option: [
       {
         value: false,
@@ -66,8 +79,8 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  recordPhoto: {
-    recordPhoto: "Запись фото",
+  record_photo: {
+    name: "Запись фото",
     option: [
       {
         value: false,
@@ -79,8 +92,8 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  writingVideo: {
-    writingVideo: "Запись видео",
+  writing_video: {
+    name: "Запись видео",
     option: [
       {
         value: false,
@@ -92,8 +105,8 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  supportSDCard: {
-    supportSDCard: "Поддержка SD карты",
+  support_sd_card: {
+    name: "Поддержка SD карты",
     option: [
       {
         value: false,
@@ -117,8 +130,8 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  touchScreen: {
-    touchScreen: "Наличие сенсорного экрана",
+  touch_screen: {
+    name: "Наличие сенсорного экрана",
     option: [
       {
         value: false,
@@ -130,8 +143,8 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  managementButtons: {
-    managementButtons: "Кнопки управления",
+  management_buttons: {
+    name: "Кнопки управления",
     option: [
       {
         value: "sensory",
@@ -147,8 +160,8 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  movementDetectorRecord: {
-    movementDetectorRecord: "Запись по детектору движения",
+  movement_detector_record: {
+    name: "Запись по детектору движения",
     option: [
       {
         value: false,
@@ -160,8 +173,8 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  theFunctionOfTheSquare: {
-    theFunctionOfTheSquare: "Функция квадратора",
+  the_function_of_the_square: {
+    name: "Функция квадратора",
     option: [
       {
         value: false,
@@ -173,12 +186,12 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  typeOfIntercom: {
-    typeOfIntercom: "Тип интерфейса",
+  type_of_intercom: {
+    name: "Тип интерфейса",
     option: [
       {
         value: "IP",
-        label: "Адресный",
+        label: "IP",
       },
       {
         value: "analog",
@@ -186,8 +199,8 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  theNumberOfMonitorsInTheMaxSystem: {
-    theNumberOfMonitorsInTheMaxSystem: "Макс количество мониторов в системе",
+  the_number_of_monitors_in_the_max_system: {
+    name: "Макс количество мониторов в системе",
     option: [
       {
         value: 4,
@@ -199,9 +212,8 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  theNumberOfVideoCamerasInTheMaxSystem: {
-    theNumberOfVideoCamerasInTheMaxSystem:
-      "Макс количество видеокамер в системе",
+  the_number_of_video_cameras_in_the_max_system: {
+    name: "Макс количество видеокамер в системе",
     option: [
       {
         value: 1,
@@ -217,18 +229,21 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  theNumberOfCallingPanelsInTheMaxSystem: {
-    theNumberOfCallingPanelsInTheMaxSystem:
-      "Макс количество вызывных панелей в системе",
+  the_number_of_calling_panels_in_the_max_system: {
+    name: "Макс количество вызывных панелей в системе",
     option: [
       {
         value: 2,
         label: "2",
       },
+      {
+        value: 16,
+        label: "16",
+      },
     ],
   },
-  supportFullHD: {
-    supportFullHD: "Поддержка Full HD",
+  support_full_hd: {
+    name: "Поддержка Full HD",
     option: [
       {
         value: false,
@@ -240,9 +255,8 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  conjugationWithAnAccessIntercom: {
-    conjugationWithAnAccessIntercom:
-      "Возможность сопряжения с подъездным домофоном",
+  conjugation_with_an_access_intercom: {
+    name: "Возможность сопряжения с подъездным домофоном",
     option: [
       {
         value: false,
@@ -254,8 +268,8 @@ export const MONITOR: IMonitor = {
       },
     ],
   },
-  thePresenceOfHOOKExit: {
-    thePresenceOfHOOKExit: "Наличие HOOK выхода",
+  loading_your_melody_to_call: {
+    name: "Загрузка своей мелодии на звонок",
     option: [
       {
         value: false,
@@ -264,95 +278,28 @@ export const MONITOR: IMonitor = {
       {
         value: true,
         label: "Да",
-      },
-    ],
-  },
-  loadingYourMelodyToCall: {
-    loadingYourMelodyToCall: "Загрузка своей мелодии на звонок",
-    option: [
-      {
-        value: false,
-        label: "Нет",
-      },
-      {
-        value: true,
-        label: "Да",
-      },
-    ],
-  },
-  videoSignalFormat: {
-    videoSignalFormat: "Формат видеосигнала",
-    option: [
-      {
-        value: "NTSC",
-        label: "NTSC",
-      },
-      {
-        value: "PAL",
-        label: "PAL",
-      },
-      {
-        value: "SECAM",
-        label: "SECAM",
-      },
-      {
-        value: "HDMI",
-        label: "HDMI",
-      },
-      {
-        value: "VGA",
-        label: "VGA",
-      },
-      {
-        value: "DVI",
-        label: "DVI",
-      },
-      {
-        value: "SDI",
-        label: "SDI",
-      },
-      {
-        value: "Component",
-        label: "Component",
-      },
-      {
-        value: "YCbCr",
-        label: "YCbCr",
-      },
-      {
-        value: "eDP",
-        label: "eDP",
-      },
-      {
-        value: "DisplayPort",
-        label: "DisplayPort",
       },
     ],
   },
   power: {
-    power: "Питание",
+    name: "Питание",
     option: [
       {
-        value: null,
-        label: "",
+        value: 220,
+        label: "220В",
       },
     ],
   },
   consumption: {
-    consumption: "Потребление",
+    name: "Потребление",
     option: [{ value: null, label: "" }],
   },
-  street: {
-    street: "Возможность ставить на улице",
-    option: [
-      {
-        value: true,
-        label: "Да",
-      },
-      {
-        value: false,
-        label: "Нет",
-      },
-    ],
+  image: {
+    name: "Картинка",
+    option: [{ value: null, label: "" }],
+  },
+  price: {
+    name: "Цена",
+    option: [{ value: null, label: "" }],
   },
 };

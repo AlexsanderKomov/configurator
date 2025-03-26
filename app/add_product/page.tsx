@@ -1,7 +1,11 @@
-import React from "react";
+import AddProduct from "@/components/layout/Main/AddProduct";
 
-function AddProducts() {
-  return <div>123</div>;
-}
+const AddProductPage = () => {
+  return (
+    <div className="container">
+      <AddProduct />
+    </div>
+  );
+};
 
-export default AddProducts;
+export default AddProductPage;

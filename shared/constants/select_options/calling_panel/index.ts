@@ -1,25 +1,25 @@
-import { ICallingPanel } from "@/shared/constants/select_options/calling_panel/interface";
+import { IConstants } from "@/shared/constants/select_options/interface";
 
-export const CALLING_PANEL: ICallingPanel = {
+export const CALLING_PANEL: IConstants = {
   manufacturer: {
-    manufacturer: "Производитель",
+    name: "Производитель",
     option: [
       {
-        value: "falconEye",
+        value: "Falcon Eye",
         label: "Falcon Eye",
       },
       {
-        value: "beward",
+        value: "BEWARD",
         label: "BEWARD",
       },
       {
-        value: "dahua",
+        value: "Dahua",
         label: "Dahua",
       },
     ],
   },
   name: {
-    name: "Название",
+    name: "Наименование",
     option: [
       {
         value: null,
@@ -28,7 +28,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   article: {
-    article: "Артикул",
+    name: "Артикул",
     option: [
       {
         value: null,
@@ -36,8 +36,8 @@ export const CALLING_PANEL: ICallingPanel = {
       },
     ],
   },
-  theNumberOfSubscribers: {
-    theNumberOfSubscribers: "Число абонентов панели",
+  the_umber_of_subscribers: {
+    name: "Число абонентов панели",
     option: [
       {
         value: 1,
@@ -61,8 +61,12 @@ export const CALLING_PANEL: ICallingPanel = {
       },
     ],
   },
+  video_signal_format: {
+    name: "Формат видеосигнала",
+    option: [{ value: null, label: "" }],
+  },
   permission: {
-    permission: "Разрешение камеры",
+    name: "Разрешение камеры",
     option: [
       {
         value: 1,
@@ -74,8 +78,8 @@ export const CALLING_PANEL: ICallingPanel = {
       },
     ],
   },
-  typeOfIntercom: {
-    typeOfIntercom: "Тип интерфейса",
+  type_of_intercom: {
+    name: "Тип интерфейса",
     option: [
       {
         value: "IP",
@@ -87,57 +91,9 @@ export const CALLING_PANEL: ICallingPanel = {
       },
     ],
   },
-  videoSignalFormat: {
-    videoSignalFormat: "Формат видеосигнала",
-    option: [
-      {
-        value: "NTSC",
-        label: "NTSC",
-      },
-      {
-        value: "PAL",
-        label: "PAL",
-      },
-      {
-        value: "SECAM",
-        label: "SECAM",
-      },
-      {
-        value: "HDMI",
-        label: "HDMI",
-      },
-      {
-        value: "VGA",
-        label: "VGA",
-      },
-      {
-        value: "DVI",
-        label: "DVI",
-      },
-      {
-        value: "SDI",
-        label: "SDI",
-      },
-      {
-        value: "Component",
-        label: "Component",
-      },
-      {
-        value: "YCbCr",
-        label: "YCbCr",
-      },
-      {
-        value: "eDP",
-        label: "eDP",
-      },
-      {
-        value: "DisplayPort",
-        label: "DisplayPort",
-      },
-    ],
-  },
-  wiFi: {
-    wiFi: "Доступ со смартфона (Wi-Fi)",
+
+  wi_fi: {
+    name: "Доступ со смартфона (Wi-Fi)",
     option: [
       {
         value: false,
@@ -149,8 +105,8 @@ export const CALLING_PANEL: ICallingPanel = {
       },
     ],
   },
-  supportFullHD: {
-    supportFullHD: "Поддержка Full HD",
+  support_full_hd: {
+    name: "Поддержка Full HD",
     option: [
       {
         value: false,
@@ -162,8 +118,8 @@ export const CALLING_PANEL: ICallingPanel = {
       },
     ],
   },
-  managementButtons: {
-    managementButtons: "Кнопка вызова панели",
+  management_buttons: {
+    name: "Кнопка вызова панели",
     option: [
       {
         value: "sensory",
@@ -179,8 +135,8 @@ export const CALLING_PANEL: ICallingPanel = {
       },
     ],
   },
-  angleOfView: {
-    angleOfView: "Угол обзора",
+  angle_of_view: {
+    name: "Угол обзора",
     option: [
       {
         value: 70,
@@ -212,8 +168,8 @@ export const CALLING_PANEL: ICallingPanel = {
       },
     ],
   },
-  iKIllumination: {
-    iKIllumination: "ИК-подсветка",
+  ik_illumination: {
+    name: "ИК-подсветка",
     option: [
       {
         value: false,
@@ -225,8 +181,8 @@ export const CALLING_PANEL: ICallingPanel = {
       },
     ],
   },
-  hdFormatSwitcher: {
-    hdFormatSwitcher: "Переключатель форматов AHD/аналог на корпусе",
+  hd_format_switcher: {
+    name: "Переключатель форматов AHD/аналог на корпусе",
     option: [
       {
         value: false,
@@ -239,7 +195,7 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   power: {
-    power: "Питание",
+    name: "Питание",
     option: [
       {
         value: null,
@@ -248,11 +204,11 @@ export const CALLING_PANEL: ICallingPanel = {
     ],
   },
   consumption: {
-    consumption: "Потребление",
+    name: "Потребление",
     option: [{ value: null, label: "" }],
   },
   street: {
-    street: "Возможность ставить на улице",
+    name: "Возможность ставить на улице",
     option: [
       {
         value: true,
@@ -263,5 +219,13 @@ export const CALLING_PANEL: ICallingPanel = {
         label: "Нет",
       },
     ],
+  },
+  image: {
+    name: "Картинка",
+    option: [{ value: null, label: "" }],
+  },
+  price: {
+    name: "Цена",
+    option: [{ value: null, label: "" }],
   },
 };

@@ -30,7 +30,8 @@
     "components/Main/Main.tsx",
     "components/Main/RadioBtn.tsx",
     "components/Main/AddProducts/AddProduct.tsx",
-    "components/CardProductForm.jsx"
+    "components/CardProductForm.jsx",
+    "components/layout/Main/AddProduct/ReadExcelForm/ReadExcelInput/index.еsx"
   ],
   "exclude": ["node_modules"]
 }
