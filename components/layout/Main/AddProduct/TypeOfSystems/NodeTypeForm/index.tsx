@@ -4,7 +4,7 @@ import { useTypeStore } from "../../store";
 import { FormDataSubmit } from "./interface";
 import ListOption from "./ListOption";
 import { transformationOfProductThroughForm } from "@/lib/helpers/transformationOfProductThroughForm";
-import { setNodeProperties } from "@/lib/helpers/setNodeProperties";
+import { getNodeProperties } from "@/lib/helpers/getNodeProperties";
 import Button from "@/components/uikit/Button";
 import { error, success } from "@/lib/helpers/toastifyFunctions";
 
@@ -14,7 +14,7 @@ function NodeTypeForm() {
   const { handleSubmit, reset } = methods;
   const typeNode = useTypeStore((store) => store.typeNode);
 
-  const nodeProperties = setNodeProperties(typeNode);
+  const nodeProperties = getNodeProperties(typeNode);
 
   const onSubmit = async (data: FormDataSubmit) => {
     let imageUrl: string = "";

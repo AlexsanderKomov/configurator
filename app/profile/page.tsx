@@ -7,15 +7,14 @@ import { IUser, useProfile } from "@/components/auth/store";
 import Button from "@/components/uikit/Button";
 import EditProfileModal from "@/components/auth/EditProfileModal";
 import { createPortal } from "react-dom";
-import ChangeProductsModal from "@/components/uikit/ChangeProductsModal";
 
 function ProfilePage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [isModalOpenProfile, setIsModalOpenProfile] = useState<boolean>(false);
-  const [isModalOpenChange, setIsModalOpenChange] = useState<boolean>(false);
   const { updateRole, role, updateUser, user } = useProfile((state) => state);
 
   const router = useRouter();
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -29,7 +28,7 @@ function ProfilePage() {
         if (response.status === 401) {
           // Если пользователь не авторизован, очищаем localStorage
           localStorage.removeItem("userData");
-          error("Вы не афторизовались");
+          error("Вы не авторизовались");
           router.push("/login");
         } else if (data && data.length > 0) {
           updateRole(data[0].role);
@@ -86,19 +85,13 @@ function ProfilePage() {
       <p className="col-span-3">Ваш номер: {user.phone_number}</p>
       <p className="col-span-2">Ваша роль: {role}</p>
       {role === "admin" && (
-        <div className="col-span-2 col-start-11 row-span-2 flex flex-col gap-2">
+        <div className="col-span-2 col-start-11 row-span-1 flex flex-col gap-2">
           <Link
             href={"/add_product"}
             className="text-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Добавить продукт
           </Link>
-          <Button
-            text="Изменить продукт"
-            onClick={() => {
-              setIsModalOpenChange(true);
-            }}
-          />
         </div>
       )}
       <Button
@@ -106,15 +99,6 @@ function ProfilePage() {
         onClick={() => setIsModalOpenProfile(true)}
         className="col-span-2 col-start-11"
       />
-
-      {isModalOpenChange &&
-        createPortal(
-          <ChangeProductsModal
-            isOpen={isModalOpenChange}
-            onClose={() => setIsModalOpenChange(false)}
-          />,
-          document.getElementById("modal-root") as HTMLElement
-        )}
 
       {isModalOpenProfile &&
         createPortal(

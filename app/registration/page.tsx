@@ -1,57 +1,68 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation"; // Импортируем useRouter
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { error, success } from "@/lib/helpers/toastifyFunctions";
 import InputForm from "@/components/auth/components/InputForm";
 import Button from "@/components/uikit/Button";
 
-const DEFAULT_VALUES = {
-  first_name: "",
-  last_name: "",
-  middle_name: "",
-  phone_number: "",
-  email: "",
-  company: "",
-  password: "",
-  confirm_password: "",
-};
+interface IRegistrationForm {
+  first_name: string;
+  last_name: string;
+  middle_name?: string;
+  phone_number: string;
+  email: string;
+  company?: string;
+  password: string;
+  confirm_password: string;
+}
 
 const RegistrationPage = () => {
-  const [formData, setFormData] = useState(DEFAULT_VALUES);
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting },
+    reset,
+    setError,
+  } = useForm<IRegistrationForm>();
 
-  const router = useRouter(); // Инициализируем useRouter
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const onSubmit = async (data: IRegistrationForm) => {
     // Проверка совпадения паролей
-    if (formData.password !== formData.confirm_password) {
-      error("Пароли не совпадают");
+    if (data.password !== data.confirm_password) {
+      setError("confirm_password", {
+        type: "manual",
+        message: "Пароли не совпадают",
+      });
       return;
     }
 
-    const response = await fetch("/api/registration", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const response = await fetch("/api/registration", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    if (response.ok) {
-      success("Регистрация успешна");
-      router.push("/login"); // Перенаправляем на страницу /login
-    } else {
-      error("Пользователь с таким Email уже существует");
+      if (response.ok) {
+        success("Регистрация успешна");
+        reset();
+        router.push("/login");
+      } else {
+        const errorData = await response.json();
+        error(errorData.message || "Ошибка регистрации");
+        if (response.status === 409) {
+          setError("email", {
+            type: "manual",
+            message: "Пользователь с таким Email уже существует",
+          });
+        }
+      }
+    } catch {
+      error("Произошла ошибка при регистрации");
     }
   };
 
@@ -59,79 +70,92 @@ const RegistrationPage = () => {
     <div>
       <h1>Регистрация</h1>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-2 max-w-[400px] my-0 mx-auto"
       >
         {/* Имя */}
         <InputForm
-          name="first_name"
+          {...register("first_name", { required: "Имя обязательно" })}
           placeholder="Введите имя"
-          value={formData.first_name}
-          onChange={handleChange}
+          error={errors.first_name?.message}
         />
 
         {/* Фамилия */}
         <InputForm
-          name="last_name"
+          {...register("last_name", { required: "Фамилия обязательна" })}
           placeholder="Введите фамилию"
-          value={formData.last_name}
-          onChange={handleChange}
+          error={errors.last_name?.message}
         />
 
-        {/* Отчество (опционально) */}
+        {/* Отчество */}
         <InputForm
-          name="middle_name"
+          {...register("middle_name")}
           placeholder="Введите отчество"
-          value={formData.middle_name}
-          onChange={handleChange}
         />
 
         {/* Номер телефона */}
         <InputForm
           type="tel"
-          name="phone_number"
+          {...register("phone_number", {
+            required: "Номер телефона обязателен",
+            pattern: {
+              value: /^\+?[0-9]{11}$/,
+              message: "Введите корректный номер телефона",
+            },
+          })}
           placeholder="Введите номер телефона"
-          value={formData.phone_number}
-          onChange={handleChange}
+          error={errors.phone_number?.message}
         />
 
         {/* Почта */}
         <InputForm
           type="email"
-          name="email"
+          {...register("email", {
+            required: "Email обязателен",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Введите корректный email",
+            },
+          })}
           placeholder="Введите почту"
-          value={formData.email}
-          onChange={handleChange}
+          error={errors.email?.message}
         />
 
         {/* Компания */}
-        <InputForm
-          name="company"
-          placeholder="Введите компанию"
-          value={formData.company}
-          onChange={handleChange}
-        />
+        <InputForm {...register("company")} placeholder="Введите компанию" />
 
         {/* Пароль */}
         <InputForm
           type="password"
-          name="password"
+          {...register("password", {
+            required: "Пароль обязателен",
+            minLength: {
+              value: 6,
+              message: "Пароль должен содержать минимум 6 символов",
+            },
+          })}
           placeholder="Введите пароль"
-          value={formData.password}
-          onChange={handleChange}
+          error={errors.password?.message}
         />
 
         {/* Подтверждение пароля */}
         <InputForm
           type="password"
-          name="confirm_password"
+          {...register("confirm_password", {
+            required: "Подтверждение пароля обязательно",
+            validate: (value) =>
+              value === watch("password") || "Пароли не совпадают",
+          })}
           placeholder="Подтвердите пароль"
-          value={formData.confirm_password}
-          onChange={handleChange}
+          error={errors.confirm_password?.message}
         />
 
         {/* Кнопка отправки */}
-        <Button type="submit" text="Зарегистрироваться" />
+        <Button
+          type="submit"
+          text="Зарегистрироваться"
+          disabled={isSubmitting}
+        />
       </form>
     </div>
   );

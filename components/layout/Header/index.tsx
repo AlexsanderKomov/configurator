@@ -5,7 +5,8 @@ import Link from "next/link";
 import delc from "@/public/image/Logo-01.svg";
 import { useProfile } from "@/components/auth/store";
 import ProfileHeader from "@/components/auth/ProfileHeader";
-import LinkStyled from "@/components/uikit/LinkStyled";
+import Login from "./components/Login";
+import Registration from "./components/Registration";
 
 function Header() {
   const { role } = useProfile((state) => state);
@@ -18,8 +19,11 @@ function Header() {
 
       <div className="flex space-x-4">
         {role && <ProfileHeader />}
-        {!role && <LinkStyled href="/login">Вход</LinkStyled>}
-        {!role && <LinkStyled href="/registration">Регистрация</LinkStyled>}
+        {!role && (
+          <>
+            <Login /> <Registration />
+          </>
+        )}
       </div>
     </div>
   );

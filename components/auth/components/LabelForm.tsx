@@ -1,5 +1,3 @@
-import React from "react";
-
 interface ILabelForm {
   children: React.ReactNode;
   label: string;

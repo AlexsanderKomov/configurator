@@ -1,30 +1,35 @@
-import React, { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, forwardRef } from "react";
+import { FieldError } from "react-hook-form";
 
 interface IInputForm extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
+  error?: FieldError | string;
 }
 
-function InputForm(props: IInputForm) {
-  const {
-    type = "text",
-    name,
-    placeholder,
-    value,
-    onChange,
-    className,
-  } = props;
+const InputForm = forwardRef<HTMLInputElement, IInputForm>(
+  ({ type = "text", className = "", error, ...props }, ref) => {
+    return (
+      <div>
+        <input
+          type={type}
+          ref={ref}
+          {...props}
+          className={`w-full p-2 border rounded${
+            error
+              ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+              : ""
+          }${className}`}
+        />
+        {error && (
+          <p className="text-red-500 text-sm mt-1">
+            {typeof error === "string" ? error : error.message}
+          </p>
+        )}
+      </div>
+    );
+  }
+);
 
-  return (
-    <input
-      type={type}
-      name={name}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      required
-      className={className}
-    />
-  );
-}
+InputForm.displayName = "InputForm";
 
 export default InputForm;

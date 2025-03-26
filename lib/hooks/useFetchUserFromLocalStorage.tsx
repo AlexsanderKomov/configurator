@@ -1,12 +1,11 @@
-import { IUser } from "@/components/auth/store";
+import { IUser, useProfile } from "@/components/auth/store";
 import { useEffect } from "react";
 
 // Кастомный хук
 function useFetchUserFromLocalStorage(
-  key: string, // Ключ для localStorage
-  updateUser: (newuser: IUser) => void, // Функция для обновления данных пользователя
-  updateRole: (role: string) => void // Функция для обновления роли
+  key: string // Ключ для localStorage
 ) {
+  const { updateRole, updateUser } = useProfile((state) => state);
   useEffect(() => {
     const savedData = localStorage.getItem(key); // Получаем данные из localStorage
     if (savedData) {

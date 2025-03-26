@@ -4,7 +4,7 @@ import { LOCK } from "@/shared/constants/select_options/lock";
 import { MONITOR } from "@/shared/constants/select_options/monitor";
 import { POWER } from "@/shared/constants/select_options/power";
 
-export function setNodeProperties(typeNode: string) {
+export function getNodeProperties(typeNode: string) {
   let nodeProperties: INodeProperties = MONITOR;
 
   switch (typeNode) {

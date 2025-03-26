@@ -1,7 +1,8 @@
 // components/EditProfileModal.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 import { IUser } from "./store";
 import Button from "../uikit/Button";
 import InputForm from "./components/InputForm";
@@ -20,54 +21,24 @@ const EditProfileModal = ({
   onClose,
   onSave,
 }: IEditProfileModalProps) => {
-  const [formData, setFormData] = useState<IUser>(user);
-  const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
-  const [phoneError, setPhoneError] = useState<string | null>(null);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isDirty },
+  } = useForm<IUser>({
+    defaultValues: user,
+  });
 
-  // Регулярное выражение для проверки номера телефона
-  const phoneRegex = /^\+?[0-9]{11}$/; // Пример: +79991234567 или 79991234567
+  const phoneRegex = /^\+?[0-9]{11}$/;
 
-  // Сравниваем formData и user при каждом изменении formData
-  useEffect(() => {
-    const isChanged =
-      formData.first_name !== user.first_name ||
-      formData.last_name !== user.last_name ||
-      formData.company !== user.company ||
-      formData.phone_number !== user.phone_number;
-    setIsFormChanged(isChanged);
-  }, [formData, user]);
+  React.useEffect(() => {
+    reset(user);
+  }, [user, reset, isOpen]);
 
-  // Валидация номера телефона
-  const validatePhone = (phone: string) => {
-    if (!phoneRegex.test(phone)) {
-      setPhoneError(
-        "Номер телефона должен содержать 11 цифр и может начинаться с +"
-      );
-      return false;
-    }
-    setPhoneError(null);
-    return true;
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-
-    // Валидация номера телефона при изменении
-    if (name === "phone_number") {
-      validatePhone(value);
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Проверяем валидность номера телефона перед отправкой
-    if (!validatePhone(formData.phone_number)) {
-      return; // Останавливаем отправку, если номер невалиден
-    }
-
-    onSave(formData); // Передаем обновленные данные в родительский компонент
-    onClose(); // Закрываем модальное окно после сохранения
+  const onSubmit = (data: IUser) => {
+    onSave(data);
+    onClose();
   };
 
   if (!isOpen) return null;
@@ -76,46 +47,39 @@ const EditProfileModal = ({
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-4 rounded-lg w-96">
         <h2 className="text-xl font-bold mb-4">Редактирование профиля</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <LabelForm label="Имя:">
               <InputForm
-                name="first_name"
-                value={formData.first_name}
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
+                {...register("first_name", { required: "Имя обязательно" })}
+                error={errors.first_name?.message}
               />
             </LabelForm>
           </div>
           <div className="mb-4">
             <LabelForm label="Фамилия:">
               <InputForm
-                name="last_name"
-                value={formData.last_name}
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
+                {...register("last_name", { required: "Фамилия обязательна" })}
+                error={errors.last_name?.message}
               />
             </LabelForm>
           </div>
           <div className="mb-4">
             <LabelForm label="Компания:">
-              <InputForm
-                name="company"
-                value={formData.company}
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-              />
+              <InputForm {...register("company")} />
             </LabelForm>
           </div>
           <div className="mb-4">
             <LabelForm label="Номер телефона:">
               <InputForm
-                name="phone_number"
-                value={formData.phone_number}
-                onChange={handleChange}
-                className={`w-full p-2 border rounded ${
-                  phoneError ? "border-red-500" : ""
-                }`}
+                {...register("phone_number", {
+                  required: "Номер телефона обязателен",
+                  pattern: {
+                    value: phoneRegex,
+                    message: "Формат: 11 цифр, можно с +",
+                  },
+                })}
+                error={errors.phone_number?.message}
               />
             </LabelForm>
           </div>
@@ -128,7 +92,7 @@ const EditProfileModal = ({
             <Button
               text="Сохранить"
               type="submit"
-              error={!isFormChanged || Boolean(phoneError)}
+              disabled={!isDirty || Object.keys(errors).length > 0}
             />
           </div>
         </form>
