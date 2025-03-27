@@ -12,11 +12,12 @@ import { error, success } from "@/lib/helpers/toastifyFunctions";
 function NodeTypeForm() {
   const methods = useForm<FormDataSubmit>();
   const { handleSubmit, reset } = methods;
-  const typeNode = useTypeStore((store) => store.typeNode);
+  const { typeNode } = useTypeStore((store) => store);
 
   const nodeProperties = getNodeProperties(typeNode);
 
   const onSubmit = async (data: FormDataSubmit) => {
+    console.log(data);
     let imageUrl: string = "";
     // Если есть изображение, отправляем его на сервер
     if (data.image?.value && data.image.value[0]) {

@@ -8,6 +8,7 @@ export const uploadImageToServer = async (blob: Blob): Promise<string> => {
   });
 
   if (!response.ok) {
+    console.log(response);
     throw new Error("Ошибка при загрузке изображения");
   }
 

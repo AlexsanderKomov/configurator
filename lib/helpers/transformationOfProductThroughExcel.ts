@@ -2,8 +2,8 @@ import { IArrayTranslate, IProductData } from "./interface";
 import { Type, TypeEquipment, Image } from "./enum";
 import { MONITOR } from "@/shared/constants/select_options/monitor";
 import { IConstants } from "@/shared/constants/select_options/interface";
-import { transformValue } from "./transformValue";
 import { CALLING_PANEL } from "@/shared/constants/select_options/calling_panel";
+import { TRANSLATION_DICT } from "./transformListLoaded";
 
 /**
  * Функция для преобразования значения Excel.
@@ -27,7 +27,7 @@ function transformValueExcel(
           currentConstant[current].name === Image.image
             ? imageUrls[index]
             : item[key] === "Да" || item[key] === "Нет"
-            ? transformValue(item[key])
+            ? TRANSLATION_DICT[item[key]]
             : item[key];
       }
     }
@@ -47,7 +47,7 @@ export function transformationOfProductThroughExcel(
   const productDataArr: IProductData[] = [];
 
   arr.forEach((item, index) => {
-    const productData: IProductData = {};
+    const productData: IProductData = { image: "" };
 
     switch (item[Type.typeEquipment]) {
       case TypeEquipment.monitor:

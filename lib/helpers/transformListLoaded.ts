@@ -2,9 +2,19 @@ import { MONITOR } from "@/shared/constants/select_options/monitor/index";
 import { CALLING_PANEL } from "@/shared/constants/select_options/calling_panel";
 import { IConstants } from "@/shared/constants/select_options/interface";
 import { Image, TypeEquipment } from "./enum";
-import { transformValue } from "./transformValue";
 import { IArrayTranslate } from "./interface";
 import { TYPE_EQUIPMENT } from "@/shared/constants/type_equipment";
+
+export const TRANSLATION_DICT: Record<string, string | boolean> = {
+  Да: true,
+  Нет: false,
+  Аналоговый: "analog",
+  Сенсорные: "sensory",
+  Механические: "mechanical",
+  "Только экранное управление": "touch",
+  Серый: "grey",
+  Коричневый: "brown",
+};
 
 /**
  * Преобразует список загруженных данных из файла Excel в вид, соответствующий интерфейсу IConstants.
@@ -44,7 +54,7 @@ export function transformListLoaded(arr: IArrayTranslate[], image: string[]) {
                   value:
                     current[currentKey].name === Image.image
                       ? image[index]
-                      : transformValue(item[key]),
+                      : TRANSLATION_DICT[item[key]],
                   label:
                     current[currentKey].name === Image.image
                       ? image[index]
@@ -56,6 +66,8 @@ export function transformListLoaded(arr: IArrayTranslate[], image: string[]) {
         }
       }
     });
+
+    console.log(newItem);
 
     return newItem;
   });

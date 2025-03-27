@@ -109,23 +109,23 @@ export const MONITOR: IConstants = {
     name: "Поддержка SD карты",
     option: [
       {
-        value: false,
+        value: "no",
         label: "Нет",
       },
       {
-        value: 32,
+        value: "32",
         label: "32 Гб",
       },
       {
-        value: 64,
+        value: "64",
         label: "64 Гб",
       },
       {
-        value: 128,
+        value: "128",
         label: "128 Гб",
       },
       {
-        value: 256,
+        value: "256",
         label: "256 Гб",
       },
     ],

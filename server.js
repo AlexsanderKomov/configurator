@@ -275,44 +275,63 @@ app.put("/api/profile", async (req, res) => {
 app.post("/api/add_product", async (req, res) => {
   const productData = req.body;
 
+  // Проверяем, что productData является массивом
+  if (!Array.isArray(productData)) {
+    return res.status(400).json({ error: "Ожидается массив товаров" });
+  }
+
   try {
-    // Проверяем каждый товар в массиве на наличие дубликатов по артикулу
-    for (const product of productData) {
-      const { data: existingProduct, error: fetchError } = await supabaseService
-        .from("products")
-        .select("*")
-        .eq("article", product.article); // Предполагаем, что артикул хранится в поле "article"
+    // 1. Собираем все артикулы для проверки
+    const articles = productData.map((p) => p.article);
 
-      if (fetchError) {
-        return res.status(500).json({ error: "Ошибка при проверке товара" });
-      }
+    // 2. Одним запросом проверяем все дубликаты
+    const { data: existingProducts, error: fetchError } = await supabaseService
+      .from("products")
+      .select("article")
+      .in("article", articles);
 
-      // Если товар с таким артикулом уже существует, возвращаем ошибку
-      if (existingProduct && existingProduct.length > 0) {
-        return res.status(400).json({
-          message: `Товар с артикулом ${product.article} уже существует`,
-        });
-      }
+    if (fetchError) {
+      console.error("Ошибка при проверке товаров:", fetchError);
+      return res.status(500).json({ error: "Ошибка при проверке товаров" });
     }
 
-    // Если дубликатов нет, добавляем все товары в базу данных
+    // 3. Находим дубликаты
+    const duplicateArticles = existingProducts.map((p) => p.article);
+    const duplicates = productData.filter((p) =>
+      duplicateArticles.includes(p.article)
+    );
+
+    if (duplicates.length > 0) {
+      return res.status(400).json({
+        message: "Найдены дубликаты товаров",
+        duplicates: duplicates.map((d) => d.article),
+      });
+    }
+
+    // 4. Вставляем все товары одной операцией
     const { data: insertData, error: insertError } = await supabaseService
       .from("products")
       .insert(productData);
 
     if (insertError) {
-      return res.status(400).json({ error: insertError.message });
+      console.error("Ошибка при вставке товаров:", insertError);
+      return res.status(400).json({
+        error: "Ошибка при добавлении товаров",
+        details: insertError.message,
+      });
     }
 
-    // Отправляем успешный ответ
+    // 5. Успешный ответ
     return res.status(201).json({
       message: "Товары успешно добавлены",
+      count: productData.length,
       data: insertData,
     });
   } catch (error) {
+    console.error("Необработанная ошибка:", error);
     return res.status(500).json({
       error: "Ошибка сервера",
-      message: `Ошибка при добавлении товаров: ${error}`,
+      message: error.message,
     });
   }
 });

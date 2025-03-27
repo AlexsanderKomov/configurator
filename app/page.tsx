@@ -15,6 +15,7 @@ export default function Home() {
     resetLocalStorageData();
     resetValue();
   }, [resetLocalStorageData, resetValue]);
+
   // Получаем данные пользователя из хранилища для определения авторизован ли пользователь
   useFetchUserFromLocalStorage("userData");
 

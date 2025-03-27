@@ -131,7 +131,7 @@ export const CALLING_PANEL: IConstants = {
       },
       {
         value: "touch",
-        label: "Только экранное утравление",
+        label: "Только экранное управление",
       },
     ],
   },
