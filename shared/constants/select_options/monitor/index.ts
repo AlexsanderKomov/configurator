@@ -40,12 +40,12 @@ export const MONITOR: IConstants = {
     name: "Размер экрана",
     option: [
       {
-        value: 4,
-        label: "4 дюйма",
-      },
-      {
         value: 7,
         label: "7 дюймов",
+      },
+      {
+        value: 4,
+        label: "4 дюйма",
       },
       {
         value: 10,
@@ -63,6 +63,32 @@ export const MONITOR: IConstants = {
       {
         value: "CVBS",
         label: "CVBS",
+      },
+    ],
+  },
+  support_full_hd: {
+    name: "Поддержка Full HD",
+    option: [
+      {
+        value: false,
+        label: "Нет",
+      },
+      {
+        value: true,
+        label: "Да",
+      },
+    ],
+  },
+  type_of_intercom: {
+    name: "Тип интерфейса",
+    option: [
+      {
+        value: "analog",
+        label: "Аналоговый",
+      },
+      {
+        value: "IP",
+        label: "IP",
       },
     ],
   },
@@ -186,19 +212,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  type_of_intercom: {
-    name: "Тип интерфейса",
-    option: [
-      {
-        value: "IP",
-        label: "IP",
-      },
-      {
-        value: "analog",
-        label: "Аналоговый",
-      },
-    ],
-  },
+
   the_number_of_monitors_in_the_max_system: {
     name: "Макс количество мониторов в системе",
     option: [
@@ -242,19 +256,7 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-  support_full_hd: {
-    name: "Поддержка Full HD",
-    option: [
-      {
-        value: false,
-        label: "Нет",
-      },
-      {
-        value: true,
-        label: "Да",
-      },
-    ],
-  },
+
   conjugation_with_an_access_intercom: {
     name: "Возможность сопряжения с подъездным домофоном",
     option: [

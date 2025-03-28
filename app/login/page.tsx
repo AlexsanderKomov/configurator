@@ -37,7 +37,7 @@ const LoginPage = () => {
         setError("root", { message: responseData.message });
         return;
       }
-
+      console.log(responseData);
       // Сохраняем данные пользователя
       localStorage.setItem("userData", JSON.stringify(responseData.user));
       success(responseData.message);

@@ -41,14 +41,15 @@ function RenderStage() {
         <ReadySelection />
       );
     case Stage.seven:
-      return <AdditionalEquipment />;
+      return <EquimpmentList equimpment="lock" />;
     case Stage.eight:
+      return <AdditionalEquipment />;
+    case Stage.nine:
       return selectedOption === "yes" ? (
         <p>дополнительное оборудование</p>
       ) : (
         <ReadySelection />
       );
-
     default:
       return null;
   }

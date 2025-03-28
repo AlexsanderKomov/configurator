@@ -63,7 +63,29 @@ export const CALLING_PANEL: IConstants = {
   },
   video_signal_format: {
     name: "Формат видеосигнала",
-    option: [{ value: null, label: "" }],
+    option: [
+      {
+        value: "CVBS",
+        label: "CVBS",
+      },
+      {
+        value: "AHD",
+        label: "AHD",
+      },
+    ],
+  },
+  type_of_intercom: {
+    name: "Тип интерфейса",
+    option: [
+      {
+        value: "analog",
+        label: "Аналоговый",
+      },
+      {
+        value: "IP",
+        label: "IP",
+      },
+    ],
   },
   permission: {
     name: "Разрешение камеры",
@@ -78,20 +100,6 @@ export const CALLING_PANEL: IConstants = {
       },
     ],
   },
-  type_of_intercom: {
-    name: "Тип интерфейса",
-    option: [
-      {
-        value: "IP",
-        label: "IP",
-      },
-      {
-        value: "analog",
-        label: "Аналоговый",
-      },
-    ],
-  },
-
   wi_fi: {
     name: "Доступ со смартфона (Wi-Fi)",
     option: [
@@ -122,13 +130,14 @@ export const CALLING_PANEL: IConstants = {
     name: "Кнопка вызова панели",
     option: [
       {
-        value: "sensory",
-        label: "Сенсорные",
-      },
-      {
         value: "mechanical",
         label: "Механические",
       },
+      {
+        value: "sensory",
+        label: "Сенсорные",
+      },
+
       {
         value: "touch",
         label: "Только экранное управление",
@@ -198,8 +207,8 @@ export const CALLING_PANEL: IConstants = {
     name: "Питание",
     option: [
       {
-        value: null,
-        label: "",
+        value: "12",
+        label: "12В",
       },
     ],
   },
