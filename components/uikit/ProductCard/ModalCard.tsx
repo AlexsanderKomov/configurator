@@ -5,14 +5,16 @@ import { IData } from "@/components/configurator/store";
 interface IModalCard {
   item: IData;
   onClose: (status: boolean) => void;
+  onSelect: () => void;
 }
 
 function ModalCard(props: IModalCard) {
-  const { item, onClose } = props;
+  const { item, onClose, onSelect } = props;
   const { name, manufacturer } = item;
 
   const handleClick = () => {
     onClose(false);
+    onSelect();
   };
 
   return (
@@ -21,6 +23,7 @@ function ModalCard(props: IModalCard) {
         <h2 className="font-bold text-xl mb-4">{name}</h2>
         <p className="text-gray-700 text-base mb-4">{manufacturer}</p>
         <Button text="Закрыть" onClick={handleClick} />
+        <Button text="Выбрать" onClick={onSelect} />
       </div>
     </div>
   );

@@ -88,7 +88,8 @@ function ProfilePage() {
         <div className="col-span-2 col-start-11 row-span-1 flex flex-col gap-2">
           <Link
             href={"/add_product"}
-            className="text-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="text-center px-4 py-2 text-white rounded text-base font-medium
+        bg-gradient-to-r from-[#30ebff] to-[#2563eb] hover:opacity-60 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:#2563eb focus:ring-offset-2"
           >
             Добавить продукт
           </Link>

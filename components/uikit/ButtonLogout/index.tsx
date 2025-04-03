@@ -31,7 +31,7 @@ function ButtonLogout() {
     <Button
       onClick={handleLogout}
       text="Выйти"
-      className="bg-red-500 hover:bg-red-600 focus:bg-red-500"
+      className="bg-gradient-to-r from-[#f1a1a1] to-[#dc2626] hover:bg-red-600 bg-red focus:bg-red-500"
     />
   );
 }

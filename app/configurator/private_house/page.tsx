@@ -23,21 +23,20 @@ function PrivateHousePage() {
   };
 
   return (
-    <div className="container flex flex-col items-center gap-5">
-      {<RenderStage />}
+    <div className="container flex flex-col items-center gap-5 relative">
       {stage !== Stage.one && (
-        <div className="flex gap-5">
-          <Button
-            text="В начало"
-            onClick={() => {
-              updateStage(1);
-              resetValue();
-              localStorage.removeItem("selectedItems");
-            }}
-          />
-          <Button text="Назад" onClick={handleSubmit} />
-        </div>
+        <Button
+          className="absolute left-0"
+          text="В начало"
+          onClick={() => {
+            updateStage(1);
+            resetValue();
+            localStorage.removeItem("selectedItems");
+          }}
+        />
       )}
+      {<RenderStage />}
+      {stage !== Stage.one && <Button text="Назад" onClick={handleSubmit} />}
     </div>
   );
 }

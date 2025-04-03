@@ -1,25 +1,33 @@
 import Link from "next/link";
 import { useProfile } from "./store";
-import { RefObject, useRef, useState } from "react";
-import { useOnClickOutside } from "usehooks-ts";
+import { useRef, useState } from "react";
 import ButtonLogout from "../uikit/ButtonLogout";
 
 function ProfileHeader() {
-  const [isHovered, setIsHovered] = useState(false); // Состояние для управления видимостью popover
+  const [isHovered, setIsHovered] = useState(false);
   const { user } = useProfile((state) => state);
 
-  const popoverRef = useRef<null>(null);
+  // Таймер для плавного исчезновения (чтобы было время навести курсор на popover)
+  const hoverTimer = useRef<NodeJS.Timeout | null>(null);
 
-  // Закрыть popover при клике вне его области
-  useOnClickOutside(popoverRef as unknown as RefObject<HTMLElement>, () =>
-    setIsHovered(false)
-  );
+  const handleMouseEnter = () => {
+    if (hoverTimer.current) {
+      clearTimeout(hoverTimer.current);
+    }
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    hoverTimer.current = setTimeout(() => {
+      setIsHovered(false);
+    }, 300); // Небольшая задержка перед закрытием
+  };
 
   return (
     <div
-      ref={popoverRef}
       className="relative"
-      onMouseEnter={() => setIsHovered(true)} // Показываем popover при наведении
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Ссылка */}
       <Link
@@ -32,8 +40,14 @@ function ProfileHeader() {
 
       {/* Popover */}
       {isHovered && (
-        <div className="absolute top-12 right-0 bg-white border rounded-lg shadow-lg p-2">
-          <Link href={"/profile"}>Профиль</Link>
+        <div
+          className="absolute top-12 right-0 bg-white border rounded-lg shadow-lg p-2 w-[180px]"
+          onMouseEnter={handleMouseEnter} // Чтобы popover не закрывался при наведении на него
+          onMouseLeave={handleMouseLeave}
+        >
+          <Link href={"/profile"} className="block py-1 px-2 hover:bg-gray-100">
+            Профиль
+          </Link>
           <ButtonLogout />
         </div>
       )}

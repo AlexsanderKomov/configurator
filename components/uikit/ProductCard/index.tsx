@@ -55,7 +55,7 @@ const ProductCard = ({ item }: IProductCardProps) => {
           <p className="text-gray-700 text-sm">Артикул: {article}</p>
 
           {/* Кнопки внизу карточки */}
-          <div className="mt-auto pt-4 pb-6 flex gap-5">
+          <div className="mt-auto pt-4 flex gap-5 justify-center">
             <Button text="Описание" onClick={handleOpenModal} />
             <Button text="Выбрать" onClick={handleSelect} />
           </div>
@@ -65,7 +65,11 @@ const ProductCard = ({ item }: IProductCardProps) => {
       {/* Модальное окно */}
       {isModalOpen &&
         createPortal(
-          <ModalCard item={item} onClose={handleCloseModal} />,
+          <ModalCard
+            item={item}
+            onClose={handleCloseModal}
+            onSelect={handleSelect}
+          />,
           document.getElementById("modal-root") as HTMLElement
         )}
     </>

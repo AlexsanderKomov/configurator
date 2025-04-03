@@ -17,7 +17,8 @@ function ButtonStage(props: IButtonStage) {
   return (
     <button
       onClick={handleClick}
-      className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      className="px-4 py-2 text-white rounded text-base font-medium
+        bg-gradient-to-r from-[#30ebff] to-[#2563eb] hover:opacity-60 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:#2563eb focus:ring-offset-2"
     >
       {step}
     </button>
