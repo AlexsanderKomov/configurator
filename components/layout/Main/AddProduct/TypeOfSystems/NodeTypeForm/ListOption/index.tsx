@@ -2,18 +2,31 @@
 
 import { getOptionName } from "@/lib/helpers/getOptionName";
 import { ISelectCardProductProps } from "./interface";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import SelectForm from "@/components/uikit/SelectForm";
 
 /** Селект */
 function ListOption({ options }: ISelectCardProductProps) {
   const [nameOption, option, firstKeyArr] = getOptionName(options);
 
-  const { register } = useFormContext();
+  const { register, control } = useFormContext();
+
+  const lockType = useWatch({
+    name: "electromagnetic_lock",
+    control,
+    defaultValue: "electromagnetic_lock",
+  });
+
+  const shouldHideKeyOption = lockType === "Элетромагнитный замок";
 
   return (
     <ul className="mb-5">
       {firstKeyArr.map((name, index) => {
+        console.log(lockType);
+        if (shouldHideKeyOption && nameOption[index] === "Наличие ключа") {
+          return null;
+        }
+
         const key = `name_option_${index}`;
 
         // Проверяем, есть ли изображение в option[index]
@@ -46,7 +59,6 @@ function ListOption({ options }: ISelectCardProductProps) {
                 options={option[index]}
               />
             )}
-            {/* Если есть изображение, добавляем input для загрузки изображения */}
           </li>
         );
       })}

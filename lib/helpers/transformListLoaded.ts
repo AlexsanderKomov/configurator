@@ -67,8 +67,6 @@ export function transformListLoaded(arr: IArrayTranslate[], image: string[]) {
       }
     });
 
-    console.log(newItem);
-
     return newItem;
   });
 }

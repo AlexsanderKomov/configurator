@@ -7,8 +7,10 @@ import { useProfile } from "@/components/auth/store";
 import ProfileHeader from "@/components/auth/ProfileHeader";
 import Login from "./components/Login";
 import Registration from "./components/Registration";
+import useFetchUserFromLocalStorage from "@/lib/hooks/useFetchUserFromLocalStorage";
 
 function Header() {
+  useFetchUserFromLocalStorage("userData");
   const { role } = useProfile((state) => state);
 
   return (

@@ -14,7 +14,6 @@ function ModalCard(props: IModalCard) {
 
   const handleClick = () => {
     onClose(false);
-    onSelect();
   };
 
   return (
@@ -22,8 +21,10 @@ function ModalCard(props: IModalCard) {
       <div className="bg-white p-6 rounded-lg max-w-lg w-full mx-4">
         <h2 className="font-bold text-xl mb-4">{name}</h2>
         <p className="text-gray-700 text-base mb-4">{manufacturer}</p>
-        <Button text="Закрыть" onClick={handleClick} />
-        <Button text="Выбрать" onClick={onSelect} />
+        <div className="flex gap-5">
+          <Button text="Закрыть" onClick={handleClick} />
+          <Button text="Выбрать" onClick={onSelect} />
+        </div>
       </div>
     </div>
   );

@@ -1,2 +1,2 @@
-export const MONITOR_LENGTH_COLUMN = 27;
+export const MONITOR_LENGTH_COLUMN = 25;
 export const CALLING_PANEL_LENGTH_COLUMN = 18;

@@ -58,12 +58,12 @@ export const LOCK: IConstants = {
     name: "Угол монтажный",
     option: [
       {
-        value: true,
-        label: "Да",
-      },
-      {
         value: false,
         label: "Нет",
+      },
+      {
+        value: true,
+        label: "Да",
       },
     ],
   },
@@ -71,12 +71,25 @@ export const LOCK: IConstants = {
     name: "Наличие геркона",
     option: [
       {
+        value: false,
+        label: "Нет",
+      },
+      {
         value: true,
         label: "Да",
       },
+    ],
+  },
+  presence_of_a_key: {
+    name: "Наличие ключа",
+    option: [
       {
         value: false,
         label: "Нет",
+      },
+      {
+        value: true,
+        label: "Да",
       },
     ],
   },
@@ -114,12 +127,12 @@ export const LOCK: IConstants = {
       },
     ],
   },
-  image: {
-    name: "Картинка",
-    option: [{ value: null, label: "" }],
-  },
   price: {
     name: "Цена",
+    option: [{ value: null, label: "" }],
+  },
+  image: {
+    name: "Картинка",
     option: [{ value: null, label: "" }],
   },
 };

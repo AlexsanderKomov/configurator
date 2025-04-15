@@ -212,7 +212,6 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-
   the_number_of_monitors_in_the_max_system: {
     name: "Макс количество мониторов в системе",
     option: [
@@ -256,7 +255,6 @@ export const MONITOR: IConstants = {
       },
     ],
   },
-
   conjugation_with_an_access_intercom: {
     name: "Возможность сопряжения с подъездным домофоном",
     option: [
@@ -296,12 +294,12 @@ export const MONITOR: IConstants = {
     name: "Потребление",
     option: [{ value: null, label: "" }],
   },
-  image: {
-    name: "Картинка",
-    option: [{ value: null, label: "" }],
-  },
   price: {
     name: "Цена",
+    option: [{ value: null, label: "" }],
+  },
+  image: {
+    name: "Картинка",
     option: [{ value: null, label: "" }],
   },
 };

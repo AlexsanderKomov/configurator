@@ -140,7 +140,8 @@ app.post("/api/login", async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 дней
+      path: "/",
+      maxAge: 86400000 * 30, // 30 дней
     });
 
     res.json({ message: "Авторизация выполнена успешно" });
@@ -163,8 +164,7 @@ app.post("/api/logout", async (req, res) => {
 
 app.get("/api/profile", async (req, res) => {
   const token = req.cookies.auth_token;
-
-  if (!token) {
+  if (typeof token !== "string" || token.trim().length === 0) {
     return res.status(401).json({ error: "Не авторизован" });
   }
 
@@ -184,7 +184,6 @@ app.get("/api/profile", async (req, res) => {
     if (refreshError) {
       return res.status(401).json({ error: "Неверный токен" });
     }
-
     // Обновляем токен в куках
     res.cookie("auth_token", session.access_token, {
       httpOnly: true,
@@ -373,6 +372,64 @@ app.get("/api/products", async (req, res) => {
     return res.status(500).json({ error: "Ошибка сервера" });
   }
 });
+
+// Роут для удаления товаров
+app.delete("/api/products", async (req, res) => {
+  const { products } = req.body; // Теперь получаем массив объектов
+
+  try {
+    // Извлекаем ID товаров для удаления из БД
+    const productIds = products.map((p) => p.id);
+
+    // Извлекаем изображения для удаления
+    const imagesToDelete = products
+      .map((p) => p.image)
+      .filter((image) => image); // Удаляем undefined
+
+    // Удаляем товары из базы данных
+    const { error: dbError } = await supabaseService
+      .from("products")
+      .delete()
+      .in("id", productIds);
+
+    if (dbError) throw dbError;
+
+    // Удаляем связанные изображения
+    if (imagesToDelete.length > 0) {
+      await deleteProductImages(imagesToDelete);
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Ошибка при удалении:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Функция для удаления изображений
+async function deleteProductImages(imageUrls) {
+  const deletePromises = imageUrls.map((url) => {
+    if (!url) return Promise.resolve();
+
+    // Извлекаем имя файла из URL
+    const filename = url.split("/").pop();
+    const filePath = path.join(__dirname, "uploads", filename);
+
+    return new Promise((resolve, reject) => {
+      fs.unlink(filePath, (err) => {
+        if (err && err.code !== "ENOENT") {
+          // Игнорируем ошибку "файл не найден"
+          console.error(`Ошибка удаления файла ${filename}:`, err);
+          reject(err);
+        } else {
+          resolve(null);
+        }
+      });
+    });
+  });
+
+  return Promise.all(deletePromises);
+}
 
 // Запуск сервера
 app.listen(port, () => {

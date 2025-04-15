@@ -28,7 +28,6 @@ export const DEUTER: IConstants = {
       },
     ],
   },
-
   color: {
     name: "Цвет",
     option: [
@@ -110,12 +109,12 @@ export const DEUTER: IConstants = {
       },
     ],
   },
-  image: {
-    name: "Картинка",
-    option: [{ value: null, label: "" }],
-  },
   price: {
     name: "Цена",
+    option: [{ value: null, label: "" }],
+  },
+  image: {
+    name: "Картинка",
     option: [{ value: null, label: "" }],
   },
 };

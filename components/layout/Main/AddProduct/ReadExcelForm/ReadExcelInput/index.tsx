@@ -11,7 +11,6 @@ import { base64ToBlob } from "@/lib/helpers/base64ToBlob";
 import { validationFileLoaded } from "@/lib/helpers/validationFileLoaded";
 import { useTypeStore } from "../../store";
 import { IArrayTranslate } from "@/lib/helpers/interface";
-// ... другие импорты
 
 const ReadExcelInput = () => {
   const [value, setValue] = useState<string>("");
@@ -27,27 +26,51 @@ const ReadExcelInput = () => {
   const extractImagesFromExcel = async (file: File): Promise<string[]> => {
     const workbook = new ExcelJS.Workbook();
     const buffer = await file.arrayBuffer();
-
     try {
       await workbook.xlsx.load(buffer);
       const images: string[] = [];
 
-      workbook.eachSheet((sheet) => {
-        sheet.getImages().forEach((image) => {
+      const imageTypeMap: Record<string, string> = {
+        png: "image/png",
+        jpeg: "image/jpeg",
+        jpg: "image/jpeg",
+        gif: "image/gif",
+        bmp: "image/bmp",
+        webp: "image/webp",
+      };
+
+      for (const sheet of workbook.worksheets) {
+        const sheetImages = sheet.getImages();
+
+        for (let i = 0; i < sheetImages.length; i++) {
+          const image = sheetImages[i];
           const imageId = parseInt(image.imageId, 10);
+
           if (!isNaN(imageId)) {
             const imageFile = workbook.getImage(imageId);
             if (imageFile?.buffer) {
-              // Исправленный способ конвертации в base64 для браузера
-              const base64 = btoa(
-                String.fromCharCode(...new Uint8Array(imageFile.buffer))
-              );
-              images.push(`data:image/png;base64,${base64}`);
+              const extension = imageFile.extension?.toLowerCase() || "png";
+              const mimeType = imageTypeMap[extension] || "image/png";
+
+              const uint8Array = new Uint8Array(imageFile.buffer);
+              let binary = "";
+              const chunkSize = 8192;
+
+              for (let j = 0; j < uint8Array.length; j += chunkSize) {
+                const chunk = uint8Array.subarray(j, j + chunkSize);
+                // Исправление: приводим chunk к number[] вместо any
+                binary += String.fromCharCode.apply(
+                  null,
+                  Array.from(chunk) as number[]
+                );
+              }
+
+              const base64 = btoa(binary);
+              images.push(`data:${mimeType};base64,${base64}`);
             }
           }
-        });
-      });
-
+        }
+      }
       return images;
     } catch (err) {
       console.error("Ошибка при извлечении изображений:", err);
@@ -82,7 +105,8 @@ const ReadExcelInput = () => {
       const images = await extractImagesFromExcel(file);
       const blobs = images.map((base64) => base64ToBlob(base64, "image/png"));
       const imageUrls = await Promise.all(blobs.map(uploadImageToServer));
-
+      console.log(images);
+      console.log(imageUrls);
       // 3. Обновление состояния
       const transformedData = transformListLoaded(firstSheetData, imageUrls);
       updateDataExcel(

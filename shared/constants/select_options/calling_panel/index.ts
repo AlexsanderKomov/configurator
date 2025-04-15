@@ -229,12 +229,12 @@ export const CALLING_PANEL: IConstants = {
       },
     ],
   },
-  image: {
-    name: "Картинка",
-    option: [{ value: null, label: "" }],
-  },
   price: {
     name: "Цена",
+    option: [{ value: null, label: "" }],
+  },
+  image: {
+    name: "Картинка",
     option: [{ value: null, label: "" }],
   },
 };
